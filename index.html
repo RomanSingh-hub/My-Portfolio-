@@ -11,14 +11,14 @@
         .typing-animation {
             animation-delay: 1.5s;
         }
-        /* Image animation */
-        .float-fade {
-            animation: floatFade 4s ease-in-out infinite alternate;
+
+        /* Smooth floating + slight zoom animation */
+        .float-zoom {
+            animation: floatZoom 6s ease-in-out infinite;
         }
-        @keyframes floatFade {
-            0%   { opacity: 0; transform: translateY(20px); }
-            40%  { opacity: 1; transform: translateY(0); }
-            100% { opacity: 1; transform: translateY(-10px); }
+        @keyframes floatZoom {
+            0%, 100% { transform: translateY(0) scale(1); }
+            50%      { transform: translateY(-10px) scale(1.02); }
         }
     </style>
 </head>
@@ -57,23 +57,22 @@
         <div class="absolute inset-0 parallax-bg opacity-10"></div>
         
         <!-- Left Content -->
-       <div class="text-left z-10 w-full md:w-1/2 max-w-xl mt-40 ml-20">
-    <h1 class="text-6xl md:text-8xl font-black mb-4 neon-text bounce-text leading-tight">
-        DIGITAL CREATOR
-    </h1>
-    <p class="typing-animation text-xl md:text-2xl text-gray-300 mb-8 block leading-relaxed">
-        Multimedia Artist • Visual Storyteller • Creative Innovator
-    </p>
-    <a href="#works" class="px-8 py-4 bg-gradient-to-r from-cyan-500 to-pink-500 rounded-full font-semibold neon-glow inline-block">
-        EXPLORE WORKS
-    </a>
-    </div>
-
+        <div class="text-left z-10 w-full md:w-1/2 max-w-xl">
+            <h1 class="text-6xl md:text-8xl font-black mb-4 neon-text bounce-text leading-tight">
+                DIGITAL CREATOR
+            </h1>
+            <p class="typing-animation text-xl md:text-2xl text-gray-300 mb-8 block leading-relaxed">
+                Multimedia Artist • Visual Storyteller • Creative Innovator
+            </p>
+            <a href="#works" class="px-8 py-4 bg-gradient-to-r from-cyan-500 to-pink-500 rounded-full font-semibold neon-glow inline-block">
+                EXPLORE WORKS
+            </a>
+        </div>
 
         <!-- Right Image -->
         <div class="w-full md:w-1/2 flex justify-center md:justify-end">
             <img src="assets/1000046000(1).jpg" alt="Creative Portrait"
-                 class="rounded-2xl shadow-lg w-full max-w-md object-cover float" />
+                 class="rounded-2xl shadow-lg w-full max-w-md object-cover float-zoom" />
         </div>
     </section>
 
@@ -144,3 +143,4 @@
     <script src="script.js"></script>
 </body>
 </html>
+
