@@ -11,6 +11,15 @@
         .typing-animation {
             animation-delay: 1.5s;
         }
+        /* Image animation */
+        .float-fade {
+            animation: floatFade 4s ease-in-out infinite alternate;
+        }
+        @keyframes floatFade {
+            0%   { opacity: 0; transform: translateY(20px); }
+            40%  { opacity: 1; transform: translateY(0); }
+            100% { opacity: 1; transform: translateY(-10px); }
+        }
     </style>
 </head>
 <body class="overflow-x-hidden">
@@ -24,7 +33,7 @@
             <div class="text-2xl font-bold neon-text">
                 <span class="text-cyan-400">RORO-</span><span class="text-pink-400">LAB</span>
             </div>
-            <div class="hidden md:flex space-x-8">
+            <div class="hidden md:flex space-x-10 pr-6">
                 <a href="#home" class="hover:text-cyan-400">HOME</a>
                 <a href="#about" class="hover:text-cyan-400">ABOUT</a>
                 <a href="#works" class="hover:text-cyan-400">WORKS</a>
@@ -44,26 +53,26 @@
     </nav>
 
     <!-- Hero -->
-    <section id="home" class="min-h-screen flex flex-col md:flex-row items-center justify-between relative pt-20 px-6 max-w-7xl mx-auto">
+    <section id="home" class="min-h-screen flex flex-col md:flex-row items-center justify-between relative pt-20 px-6 max-w-7xl mx-auto gap-10">
         <div class="absolute inset-0 parallax-bg opacity-10"></div>
         
         <!-- Left Content -->
-        <div class="text-left z-10 w-full md:w-1/2">
-            <h1 class="text-6xl md:text-8xl font-black mb-4 neon-text bounce-text">
+        <div class="text-left z-10 w-full md:w-1/2 max-w-xl">
+            <h1 class="text-6xl md:text-8xl font-black mb-4 neon-text bounce-text leading-tight">
                 DIGITAL CREATOR
             </h1>
-            <p class="typing-animation text-xl md:text-2xl text-gray-300 mb-8 block">
+            <p class="typing-animation text-xl md:text-2xl text-gray-300 mb-8 block leading-relaxed">
                 Multimedia Artist • Visual Storyteller • Creative Innovator
             </p>
-            <a href="#works" class="px-8 py-4 bg-gradient-to-r from-cyan-500 to-pink-500 rounded-full font-semibold neon-glow">
+            <a href="#works" class="px-8 py-4 bg-gradient-to-r from-cyan-500 to-pink-500 rounded-full font-semibold neon-glow inline-block">
                 EXPLORE WORKS
             </a>
         </div>
 
         <!-- Right Image -->
-        <div class="w-full md:w-1/2 flex justify-center mt-10 md:mt-0">
-            <img src="assets/1000046000 (1).jpg" alt="Creative Portrait" 
-                 class="rounded-2xl shadow-lg max-h-[500px] object-cover" />
+        <div class="w-full md:w-1/2 flex justify-center md:justify-end">
+            <img src="assets/1000046000 (1).jpg" alt="Creative Portrait"
+                 class="rounded-2xl shadow-lg w-full max-w-md object-cover float-fade" />
         </div>
     </section>
 
@@ -134,4 +143,3 @@
     <script src="script.js"></script>
 </body>
 </html>
-
