@@ -1,26 +1,14 @@
-document.querySelectorAll('.nav-links a, .btn.primary').forEach(link => {
-  link.addEventListener('click', e => {
-    e.preventDefault();
+// Mobile menu
+document.getElementById('mobile-nav-toggle').addEventListener('click', () => {
+    document.getElementById('mobile-nav').classList.toggle('hidden');
+});
 
-    // Hide all sections
-    document.querySelectorAll('section').forEach(sec => {
-      sec.classList.remove('active', 'fade-in');
+// Smooth scrolling
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', e => {
+        e.preventDefault();
+        const target = document.querySelector(anchor.getAttribute('href'));
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        document.getElementById('mobile-nav').classList.add('hidden');
     });
-
-    const page = e.target.dataset.page;
-    const targetSection = document.getElementById(page);
-
-    if (targetSection) {
-      targetSection.classList.add('active', 'fade-in');
-    }
-
-    // Reset Home animation
-    if (page === 'home') {
-      document.querySelector('.hero-left').classList.remove('fade-in-left');
-      document.querySelector('.hero-right').classList.remove('fade-in-right');
-      void document.querySelector('.hero-left').offsetWidth; // reflow
-      document.querySelector('.hero-left').classList.add('fade-in-left');
-      document.querySelector('.hero-right').classList.add('fade-in-right');
-    }
-  });
 });
