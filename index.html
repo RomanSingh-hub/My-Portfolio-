@@ -7,7 +7,7 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="style.css" />
 </head>
-<body class="overflow-x-hidden">
+<body class="flex flex-col min-h-screen overflow-x-hidden">
 
   <!-- Background Grid -->
   <div class="fixed inset-0 grid-bg opacity-20 pointer-events-none"></div>
@@ -41,7 +41,7 @@
   <section id="home" class="min-h-screen flex flex-col md:flex-row items-center justify-between relative pt-20 px-6 max-w-7xl mx-auto gap-10">
     <div class="absolute inset-0 parallax-bg opacity-10"></div>
     <div class="text-left z-10 w-full md:w-1/2 max-w-xl">
-      <h1 class="text-6xl md:text-8xl font-black mb-4 neon-text bounce-text leading-tight">
+      <h1 class="text-6xl md:text-8xl font-black mb-4 neon-text bounce-text leading-tight ml-8">
         DIGITAL CREATOR
       </h1>
       <p class="text-xl md:text-2xl text-gray-300 mb-8 block leading-relaxed">
@@ -199,5 +199,14 @@
       VIEW ALL STORIES →
     </button>
   </div>
+
+  <!-- Footer -->
+  <footer class="mt-auto py-12 border-t border-gray-800 text-center">
+    <div class="text-2xl font-bold mb-4">
+      <span class="text-cyan-400">RORO</span><span class="text-pink-400"> LAB</span>
+    </div>
+    <p class="text-gray-400 mb-4">Pushing the boundaries of digital creativity</p>
+    <p class="text-gray-600">&copy; 2024 Roro Lab. All rights reserved.</p>
+  </footer>
 </body>
 </html>
