@@ -176,3 +176,227 @@
 </body>
 </html>
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Creative Portfolio V2 - Multimedia Artist</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="overflow-x-hidden">
+
+  <!-- Background Grid -->
+  <div class="fixed inset-0 grid-bg opacity-20 pointer-events-none"></div>
+
+  <!-- Navigation -->
+  <nav class="fixed top-0 w-full z-50 glass-effect">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+      <div class="text-2xl font-bold neon-text">
+        <span class="text-cyan-400">RORO</span><span class="text-pink-400"> LAB</span>
+      </div>
+      <div class="hidden md:flex space-x-12 pr-20">
+        <a href="#home" class="hover:text-cyan-400 active">HOME</a>
+        <a href="#about" class="hover:text-cyan-400">ABOUT</a>
+        <a href="#works" class="hover:text-cyan-400">WORKS</a>
+      </div>
+      <button id="mobile-nav-toggle" class="md:hidden text-cyan-400">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+      </button>
+    </div>
+    <div id="mobile-nav" class="md:hidden hidden glass-effect border-t border-white/10 px-6 py-4 space-y-4">
+      <a href="#home" class="block hover:text-cyan-400">HOME</a>
+      <a href="#about" class="block hover:text-cyan-400">ABOUT</a>
+      <a href="#works" class="block hover:text-cyan-400">WORKS</a>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section id="home" class="min-h-screen flex flex-col md:flex-row items-center justify-between relative pt-20 px-6 max-w-7xl mx-auto gap-10">
+    <div class="absolute inset-0 parallax-bg opacity-10"></div>
+    <div class="text-left z-10 w-full md:w-1/2 max-w-xl">
+      <h1 class="text-6xl md:text-8xl font-black mb-4 neon-text bounce-text leading-tight">
+        DIGITAL CREATOR
+      </h1>
+      <p class="text-xl md:text-2xl text-gray-300 mb-8 block leading-relaxed">
+        Multimedia Artist • Visual Storyteller • Creative Innovator
+      </p>
+      <a href="#works" class="px-8 py-4 bg-gradient-to-r from-cyan-500 to-pink-500 rounded-full font-semibold neon-glow inline-block">
+        EXPLORE WORKS
+      </a>
+    </div>
+    <div class="w-full md:w-1/2 flex justify-center md:justify-end">
+      <img src="assets/ROMAN_PAINTING.jpg" alt="Creative Portrait"
+           class="rounded-2xl shadow-lg w-full max-w-lg object-cover float-zoom" />
+    </div>
+  </section>
+
+  <!-- About -->
+  <section id="about" class="py-20 relative max-w-7xl mx-auto px-6">
+    <div class="text-center mb-16">
+      <h2 class="text-5xl font-bold mb-6 neon-text">ABOUT THE ARTIST</h2>
+      <p class="text-xl text-gray-300 max-w-3xl mx-auto">
+        I'm a multimedia content creator who transforms ideas into stunning visual experiences 
+        across digital and traditional mediums.
+      </p>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+      <div class="glass-effect rounded-2xl p-8 text-center work-card">
+        <div class="text-6xl mb-4">🎨</div>
+        <h3 class="text-xl font-bold mb-4 text-cyan-400">DIGITAL ART</h3>
+        <p class="text-gray-300">Creating stunning digital paintings and illustrations</p>
+      </div>
+      <div class="glass-effect rounded-2xl p-8 text-center work-card">
+        <div class="text-6xl mb-4">📸</div>
+        <h3 class="text-xl font-bold mb-4 text-pink-400">PHOTOGRAPHY</h3>
+        <p class="text-gray-300">Capturing moments through the lens of artistic vision</p>
+      </div>
+      <div class="glass-effect rounded-2xl p-8 text-center work-card">
+        <div class="text-6xl mb-4">✍️</div>
+        <h3 class="text-xl font-bold mb-4 text-purple-400">CONTENT WRITING</h3>
+        <p class="text-gray-300">Crafting compelling narratives across platforms</p>
+      </div>
+      <div class="glass-effect rounded-2xl p-8 text-center work-card">
+        <div class="text-6xl mb-4">🎬</div>
+        <h3 class="text-xl font-bold mb-4 text-green-400">ANIMATION</h3>
+        <p class="text-gray-300">Bringing designs to life with motion graphics</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Works -->
+  <section id="works" class="py-20 relative max-w-7xl mx-auto px-6">
+    <div class="text-center mb-16">
+      <h2 class="text-5xl font-bold mb-6 neon-text">FEATURED WORKS</h2>
+      <p class="text-xl text-gray-300">Explore my blogs, articles, artworks, photography, and projects</p>
+    </div>
+
+    <!-- Category Filters -->
+    <div class="flex flex-wrap justify-center gap-4 mb-12">
+      <button class="category-tab px-6 py-3 rounded-full glass-effect border border-cyan-400 text-cyan-400 font-semibold active-filter" data-filter="all">ALL</button>
+      <button class="category-tab px-6 py-3 rounded-full glass-effect border border-pink-400 text-pink-400 font-semibold" data-filter="blogs">BLOGS</button>
+      <button class="category-tab px-6 py-3 rounded-full glass-effect border border-purple-400 text-purple-400 font-semibold" data-filter="articles">ARTICLES</button>
+      <button class="category-tab px-6 py-3 rounded-full glass-effect border border-green-400 text-green-400 font-semibold" data-filter="photography">PHOTOGRAPHY</button>
+      <button class="category-tab px-6 py-3 rounded-full glass-effect border border-yellow-400 text-yellow-400 font-semibold" data-filter="artworks">ARTWORKS</button>
+      <button class="category-tab px-6 py-3 rounded-full glass-effect border border-red-400 text-red-400 font-semibold" data-filter="projects">PROJECTS</button>
+    </div>
+
+    <!-- Portfolio Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="works-grid">
+      <!-- Existing Painting -->
+      <div class="work-item glass-effect rounded-2xl overflow-hidden work-card pulse-glow" data-category="artworks">
+        <div class="h-64 bg-gradient-to-br from-red-500 via-pink-500 to-purple-600 flex items-center justify-center relative">
+          <div class="absolute inset-0 bg-black/20"></div>
+          <svg class="w-24 h-24 text-white z-10" fill="currentColor" viewBox="0 0 20 20">
+            <path d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z"/>
+          </svg>
+        </div>
+        <div class="p-6">
+          <h3 class="text-2xl font-bold mb-2 text-cyan-400">NEON DREAMS</h3>
+          <p class="text-gray-300 mb-4">Abstract digital painting exploring cyberpunk aesthetics</p>
+          <button class="text-pink-400 hover:text-pink-300 font-semibold transition-colors"
+            onclick="openWorkModal('NEON DREAMS','Abstract digital painting exploring cyberpunk aesthetics and futuristic themes.')">VIEW PROJECT →</button>
+        </div>
+      </div>
+
+      <!-- Blogs -->
+      <div class="work-item glass-effect rounded-2xl overflow-hidden work-card pulse-glow" data-category="blogs">
+        <div class="h-64 bg-gradient-to-br from-pink-500 via-purple-500 to-indigo-500 flex items-center justify-center relative">
+          <div class="absolute inset-0 bg-black/20"></div>
+          <svg class="w-24 h-24 text-white z-10" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M3 5a2 2 0 012-2h14a2 2 0 012 2v14l-4-4H5a2 2 0 01-2-2V5z"/>
+          </svg>
+        </div>
+        <div class="p-6">
+          <h3 class="text-2xl font-bold mb-2 text-cyan-400">BLOGS</h3>
+          <p class="text-gray-300 mb-4">Insights and thoughts on creativity and design.</p>
+          <button class="text-pink-400 hover:text-pink-300 font-semibold transition-colors"
+            onclick="openWorkModal('BLOGS','A collection of blogs sharing behind-the-scenes thoughts and creative processes.')">VIEW PROJECT →</button>
+        </div>
+      </div>
+
+      <!-- Articles -->
+      <div class="work-item glass-effect rounded-2xl overflow-hidden work-card pulse-glow" data-category="articles">
+        <div class="h-64 bg-gradient-to-br from-blue-500 via-cyan-500 to-teal-500 flex items-center justify-center relative">
+          <div class="absolute inset-0 bg-black/20"></div>
+          <svg class="w-24 h-24 text-white z-10" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M19 3H5a2 2 0 00-2 2v14l4-4h12a2 2 0 002-2V5a2 2 0 00-2-2z"/>
+          </svg>
+        </div>
+        <div class="p-6">
+          <h3 class="text-2xl font-bold mb-2 text-cyan-400">ARTICLES</h3>
+          <p class="text-gray-300 mb-4">Featured publications and professional write-ups.</p>
+          <button class="text-pink-400 hover:text-pink-300 font-semibold transition-colors"
+            onclick="openWorkModal('ARTICLES','Professional articles published on various platforms covering creative media topics.')">VIEW PROJECT →</button>
+        </div>
+      </div>
+
+      <!-- Photography -->
+      <div class="work-item glass-effect rounded-2xl overflow-hidden work-card pulse-glow" data-category="photography">
+        <div class="h-64 bg-gradient-to-br from-green-500 via-emerald-500 to-cyan-600 flex items-center justify-center relative">
+          <div class="absolute inset-0 bg-black/20"></div>
+          <svg class="w-24 h-24 text-white z-10" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M4 5a2 2 0 00-2 2v8a2 2 0 002 2h12a2 2 0 002-2V7a2 2 0 00-2-2h-1.586a1 1 0 01-.707-.293l-1.121-1.121A2 2 0 0011.172 3H8.828a2 2 0 00-1.414.586L6.293 4.707A1 1 0 015.586 5H4zm6 9a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd"/>
+          </svg>
+        </div>
+        <div class="p-6">
+          <h3 class="text-2xl font-bold mb-2 text-cyan-400">PHOTOGRAPHY</h3>
+          <p class="text-gray-300 mb-4">Capturing creative moments and visual storytelling.</p>
+          <button class="text-pink-400 hover:text-pink-300 font-semibold transition-colors"
+            onclick="openWorkModal('PHOTOGRAPHY','Capturing creative moments and unique perspectives in photography.')">VIEW PROJECT →</button>
+        </div>
+      </div>
+
+      <!-- Projects -->
+      <div class="work-item glass-effect rounded-2xl overflow-hidden work-card pulse-glow" data-category="projects">
+        <div class="h-64 bg-gradient-to-br from-yellow-500 via-orange-500 to-red-500 flex items-center justify-center relative">
+          <div class="absolute inset-0 bg-black/20"></div>
+          <svg class="w-24 h-24 text-white z-10" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M12 2l4 4h-3v4h-2V6H8l4-4zM12 22l-4-4h3v-4h2v4h3l-4 4z"/>
+          </svg>
+        </div>
+        <div class="p-6">
+          <h3 class="text-2xl font-bold mb-2 text-cyan-400">PROJECTS</h3>
+          <p class="text-gray-300 mb-4">Special multimedia and design initiatives.</p>
+          <button class="text-pink-400 hover:text-pink-300 font-semibold transition-colors"
+            onclick="openWorkModal('PROJECTS','Special multimedia and design initiatives created for clients and personal growth.')">VIEW PROJECT →</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="py-12 border-t border-gray-800">
+    <div class="max-w-7xl mx-auto px-6 text-center">
+      <div class="text-2xl font-bold mb-4">
+        <span class="text-cyan-400">RORO</span><span class="text-pink-400"> LAB</span>
+      </div>
+      <p class="text-gray-400 mb-4">Pushing the boundaries of digital creativity</p>
+      <p class="text-gray-600">&copy; 2024 Roro Lab. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- Work Modal -->
+  <div id="work-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm hidden items-center justify-center z-50 p-4">
+    <div class="glass-effect rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+      <div class="p-8">
+        <div class="flex justify-between items-center mb-6">
+          <h3 id="modal-work-title" class="text-3xl font-bold neon-text"></h3>
+          <button id="close-work-modal" class="text-gray-400 hover:text-white transition-colors">
+            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+            </svg>
+          </button>
+        </div>
+        <p id="modal-work-content" class="text-gray-300 leading-relaxed text-lg"></p>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
