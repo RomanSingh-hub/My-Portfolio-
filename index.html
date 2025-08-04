@@ -1,150 +1,137 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Portfolio - Roman Singh</title>
-  
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
-  
-  <link rel="stylesheet" href="style.css" />
-  <script defer src="script.js"></script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Creative Portfolio V2 - Multimedia Artist</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css" />
+    <style>
+        /* Delay typing animation start */
+        .typing-animation {
+            animation-delay: 1.5s;
+        }
+    </style>
 </head>
-<body>
-  <!-- Navigation -->
-  <header>
-    <nav class="navbar">
-      <div class="logo">Roman Singh</div>
-      <ul class="nav-links">
-        <li><a href="#" data-page="home">Home</a></li>
-        <li><a href="#" data-page="portfolio">Portfolio</a></li>
+<body class="overflow-x-hidden">
 
-        <!-- Articles Dropdown -->
-        <li class="dropdown">
-          <a href="#" data-page="articles">Articles ▾</a>
-          <ul class="dropdown-menu">
-            <li><a href="#" data-page="articles">Articles</a></li>
-            <li><a href="#" data-page="blogs">Blogs</a></li>
-            <li><a href="#" data-page="stories">Stories</a></li>
-            <li><a href="#" data-page="published">Published</a></li>
-          </ul>
-        </li>
+    <!-- Background Grid -->
+    <div class="fixed inset-0 grid-bg opacity-20 pointer-events-none"></div>
 
-        <!-- Designs Dropdown -->
-        <li class="dropdown">
-          <a href="#" data-page="designs">Designs ▾</a>
-          <ul class="dropdown-menu">
-            <li><a href="#" data-page="newspapers">Newspapers</a></li>
-            <li><a href="#" data-page="brochures">Brochures</a></li>
-            <li><a href="#" data-page="advertisements">Advertisements</a></li>
-          </ul>
-        </li>
-
-        <li><a href="#" data-page="photography">Photography</a></li>
-        <li><a href="#" data-page="contact">Contact</a></li>
-      </ul>
-    </nav>
-  </header>
-
-  <main>
-    <!-- Home -->
-    <section id="home" class="active hero-section">
-      <div class="hero-left fade-in-left">
-        <img src="your-photo.jpg" alt="Roman Singh" />
-      </div>
-      <div class="hero-right fade-in-right">
-        <h1>My <span>Portfolio</span></h1>
-        <p>I am a multi-media content creator passionate about design, storytelling, and video production.</p>
-        <div class="hero-buttons">
-          <a href="#" class="btn primary" data-page="articles">Explore Now</a>
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 glass-effect">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="text-2xl font-bold neon-text">
+                <span class="text-cyan-400">RORO-</span><span class="text-pink-400">LAB</span>
+            </div>
+            <div class="hidden md:flex space-x-8">
+                <a href="#home" class="hover:text-cyan-400">HOME</a>
+                <a href="#about" class="hover:text-cyan-400">ABOUT</a>
+                <a href="#works" class="hover:text-cyan-400">WORKS</a>
+            </div>
+            <button id="mobile-nav-toggle" class="md:hidden text-cyan-400">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+            </button>
         </div>
-      </div>
+        <div id="mobile-nav" class="md:hidden hidden glass-effect border-t border-white/10 px-6 py-4 space-y-4">
+            <a href="#home" class="block hover:text-cyan-400">HOME</a>
+            <a href="#about" class="block hover:text-cyan-400">ABOUT</a>
+            <a href="#works" class="block hover:text-cyan-400">WORKS</a>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section id="home" class="min-h-screen flex flex-col md:flex-row items-center justify-between relative pt-20 px-6 max-w-7xl mx-auto">
+        <div class="absolute inset-0 parallax-bg opacity-10"></div>
+        
+        <!-- Left Content -->
+        <div class="text-left z-10 w-full md:w-1/2">
+            <h1 class="text-6xl md:text-8xl font-black mb-4 neon-text bounce-text">
+                DIGITAL CREATOR
+            </h1>
+            <p class="typing-animation text-xl md:text-2xl text-gray-300 mb-8 block">
+                Multimedia Artist • Visual Storyteller • Creative Innovator
+            </p>
+            <a href="#works" class="px-8 py-4 bg-gradient-to-r from-cyan-500 to-pink-500 rounded-full font-semibold neon-glow">
+                EXPLORE WORKS
+            </a>
+        </div>
+
+        <!-- Right Image -->
+        <div class="w-full md:w-1/2 flex justify-center mt-10 md:mt-0">
+            <img src="1000046000 (1).jpg" alt="Creative Portrait" 
+                 class="rounded-2xl shadow-lg max-h-[500px] object-cover" />
+        </div>
     </section>
 
-    <!-- Portfolio -->
-    <section id="portfolio">
-      <h1>My Work</h1>
-      <div class="video-gallery">
-        <video controls>
-          <source src="sample.mp4" type="video/mp4" />
-        </video>
-        <iframe width="560" height="315" 
-          src="https://www.youtube.com/embed/YOUR_VIDEO_ID" 
-          frameborder="0" allowfullscreen></iframe>
-      </div>
+    <!-- About -->
+    <section id="about" class="py-20 relative max-w-7xl mx-auto px-6">
+        <div class="text-center mb-16">
+            <h2 class="text-5xl font-bold mb-6 neon-text">ABOUT THE ARTIST</h2>
+            <p class="text-xl text-gray-300 max-w-3xl mx-auto">
+                I'm a multimedia content creator who transforms ideas into stunning visual experiences 
+                across digital and traditional mediums.
+            </p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div class="glass-effect rounded-2xl p-8 text-center work-card">
+                <div class="text-6xl mb-4">🎨</div>
+                <h3 class="text-xl font-bold mb-4 text-cyan-400">DIGITAL ART</h3>
+                <p class="text-gray-300">Creating stunning digital paintings and illustrations</p>
+            </div>
+            <div class="glass-effect rounded-2xl p-8 text-center work-card">
+                <div class="text-6xl mb-4">📸</div>
+                <h3 class="text-xl font-bold mb-4 text-pink-400">PHOTOGRAPHY</h3>
+                <p class="text-gray-300">Capturing moments through the lens of artistic vision</p>
+            </div>
+            <div class="glass-effect rounded-2xl p-8 text-center work-card">
+                <div class="text-6xl mb-4">✍️</div>
+                <h3 class="text-xl font-bold mb-4 text-purple-400">CONTENT WRITING</h3>
+                <p class="text-gray-300">Crafting compelling narratives across platforms</p>
+            </div>
+            <div class="glass-effect rounded-2xl p-8 text-center work-card">
+                <div class="text-6xl mb-4">🎬</div>
+                <h3 class="text-xl font-bold mb-4 text-green-400">ANIMATION</h3>
+                <p class="text-gray-300">Bringing designs to life with motion graphics</p>
+            </div>
+        </div>
     </section>
 
-    <!-- Articles -->
-    <section id="articles">
-      <h1>Articles</h1>
-      <p>Articles about creativity, media, and storytelling.</p>
+    <!-- Works -->
+    <section id="works" class="py-20 relative max-w-7xl mx-auto px-6">
+        <div class="text-center mb-16">
+            <h2 class="text-5xl font-bold mb-6 neon-text">FEATURED WORKS</h2>
+            <p class="text-xl text-gray-300">Explore my diverse portfolio of creative projects</p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="works-grid">
+            <!-- Example Work -->
+            <div class="work-item glass-effect rounded-2xl overflow-hidden work-card pulse-glow">
+                <div class="h-64 bg-gradient-to-br from-red-500 via-pink-500 to-purple-600 flex items-center justify-center relative">
+                    <svg class="w-24 h-24 text-white z-10" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z"/>
+                    </svg>
+                </div>
+                <div class="p-6">
+                    <h3 class="text-2xl font-bold mb-2 text-cyan-400">NEON DREAMS</h3>
+                    <p class="text-gray-300 mb-4">Abstract digital painting exploring cyberpunk aesthetics</p>
+                </div>
+            </div>
+        </div>
     </section>
 
-    <!-- Blogs (PDF Viewers) -->
-    <section id="blogs">
-      <h1>Vlogs (PDF Viewer)</h1>
-      <div class="pdf-viewer">
-        <iframe src="assets/pdfs/Crisps of Fall.pdf" title="Crisps of Fall" frameborder="0"></iframe>
-        <iframe src="assets/pdfs/Fly Alway.pdf" title="Fly Alway" frameborder="0"></iframe>
-        <iframe src="assets/pdfs/its my thing.pdf" title="its my thing" frameborder="0"></iframe>
-        <iframe src="assets/pdfs/Plank's Prank.pdf title="Plank's Prank" frameborder="0"></iframe>
-        <iframe src="assets/pdfs/wall Of dreams.pdf" title="wall Of dreams" frameborder="0"></iframe>
-      </div>
-    </section>
+    <!-- Footer -->
+    <footer class="py-12 border-t border-gray-800 text-center">
+        <div class="text-2xl font-bold mb-4">
+            <span class="text-cyan-400">CREATIVE</span><span class="text-pink-400">LAB</span>
+        </div>
+        <p class="text-gray-400 mb-4">Pushing the boundaries of digital creativity</p>
+        <p class="text-gray-600">&copy; 2024 CreativeLab. All rights reserved.</p>
+    </footer>
 
-    <!-- Stories -->
-    <section id="stories">
-      <h1>Stories</h1>
-      <p>Collection of fictional and non-fictional stories.</p>
-    </section>
-
-    <!-- Published -->
-    <section id="published">
-      <h1>Published Work</h1>
-      <p>Published pieces and featured works.</p>
-    </section>
-
-    <!-- Designs -->
-    <section id="designs">
-      <h1>Designs</h1>
-      <p>Creative design works and campaigns.</p>
-    </section>
-
-    <!-- Newspapers -->
-    <section id="newspapers">
-      <h1>Newspaper Designs</h1>
-      <p>Examples of newspaper layouts and designs.</p>
-    </section>
-
-    <!-- Brochures -->
-    <section id="brochures">
-      <h1>Brochures</h1>
-      <p>Creative brochure designs and marketing materials.</p>
-    </section>
-
-    <!-- Advertisements -->
-    <section id="advertisements">
-      <h1>Advertisements</h1>
-      <p>Advertisement campaigns and creative concepts.</p>
-    </section>
-
-    <!-- Photography -->
-    <section id="photography">
-      <h1>Photography</h1>
-      <p>Collection of photographs, portraits, and landscape shots.</p>
-    </section>
-
-    <!-- Contact -->
-    <section id="contact">
-      <h1>Contact Me</h1>
-      <p>Email: <a href="mailto:yourname@email.com">yourname@email.com</a></p>
-    </section>
-  </main>
-
-  <footer>
-    <p>&copy; 2025 Roman Singh. All Rights Reserved.</p>
-  </footer>
+    <script src="script.js"></script>
 </body>
 </html>
 
