@@ -1,49 +1,65 @@
-// Mobile menu
+// Mobile navigation toggle
 document.getElementById('mobile-nav-toggle').addEventListener('click', () => {
-    document.getElementById('mobile-nav').classList.toggle('hidden');
+  document.getElementById('mobile-nav').classList.toggle('hidden');
 });
 
 // Smooth scrolling
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', e => {
-        e.preventDefault();
-        const target = document.querySelector(anchor.getAttribute('href'));
-        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        document.getElementById('mobile-nav').classList.add('hidden');
-    });
-});
-// Mobile navigation toggle
-const mobileNavToggle = document.getElementById('mobile-nav-toggle');
-const mobileNav = document.getElementById('mobile-nav');
-
-mobileNavToggle.addEventListener('click', () => {
-    mobileNav.classList.toggle('hidden');
+  anchor.addEventListener('click', e => {
+    e.preventDefault();
+    const target = document.querySelector(anchor.getAttribute('href'));
+    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    document.getElementById('mobile-nav').classList.add('hidden');
+  });
 });
 
-// Active link highlighting (already in index.html but can move here)
-const sections = document.querySelectorAll("section[id]");
-const navLinks = document.querySelectorAll("nav a[href^='#']");
+// Portfolio filtering
+const filterButtons = document.querySelectorAll('[data-filter]');
+const workItems = document.querySelectorAll('.work-item');
+filterButtons.forEach(button => {
+  button.addEventListener('click', () => {
+    const filter = button.getAttribute('data-filter');
+    filterButtons.forEach(btn => btn.classList.remove('active-filter'));
+    button.classList.add('active-filter');
 
-function setActiveLink() {
-    let scrollY = window.scrollY + 150;
-    sections.forEach(sec => {
-        const top = sec.offsetTop;
-        const height = sec.offsetHeight;
-        const id = sec.getAttribute("id");
-        if (scrollY >= top && scrollY < top + height) {
-            navLinks.forEach(link => link.classList.remove("active"));
-            document.querySelector(`nav a[href="#${id}"]`).classList.add("active");
-        }
+    workItems.forEach(item => {
+      const category = item.getAttribute('data-category');
+      if (filter === 'all' || category === filter) {
+        item.style.display = 'block';
+        setTimeout(() => {
+          item.style.opacity = '1';
+          item.style.transform = 'scale(1)';
+        }, 100);
+      } else {
+        item.style.opacity = '0';
+        item.style.transform = 'scale(0.8)';
+        setTimeout(() => { item.style.display = 'none'; }, 300);
+      }
     });
+  });
+});
+
+// Modal functionality
+const workModal = document.getElementById('work-modal');
+const modalWorkTitle = document.getElementById('modal-work-title');
+const modalWorkContent = document.getElementById('modal-work-content');
+const closeWorkModal = document.getElementById('close-work-modal');
+
+function openWorkModal(title, content) {
+  modalWorkTitle.textContent = title;
+  modalWorkContent.textContent = content;
+  workModal.classList.remove('hidden');
+  workModal.classList.add('flex');
 }
-window.addEventListener("scroll", setActiveLink);
 
-// Optional: Navbar background color change on scroll
-const navbar = document.querySelector('nav');
-window.addEventListener('scroll', () => {
-    if (window.scrollY > 50) {
-        navbar.classList.add('scrolled');
-    } else {
-        navbar.classList.remove('scrolled');
-    }
+closeWorkModal.addEventListener('click', () => {
+  workModal.classList.add('hidden');
+  workModal.classList.remove('flex');
 });
+workModal.addEventListener('click', (e) => {
+  if (e.target === workModal) {
+    workModal.classList.add('hidden');
+    workModal.classList.remove('flex');
+  }
+});
+
