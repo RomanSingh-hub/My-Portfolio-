@@ -1,33 +1,65 @@
-<!-- Projects -->
-<div class="work-item glass-effect rounded-2xl overflow-hidden work-card pulse-glow" data-category="projects">
-  <!-- Card Header -->
-  <div class="h-64 bg-gradient-to-br from-yellow-500 via-orange-500 to-red-500 flex items-center justify-center relative">
-    <div class="absolute inset-0 bg-black/20"></div>
-    <svg class="w-24 h-24 text-white z-10" fill="currentColor" viewBox="0 0 24 24">
-      <path d="M12 2l4 4h-3v4h-2V6H8l4-4zM12 22l-4-4h3v-4h2v4h3l-4 4z"/>
-    </svg>
-  </div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Projects - RORO LAB</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="overflow-x-hidden">
 
-  <!-- Content -->
-  <div class="p-6">
-    <h3 class="text-2xl font-bold mb-2 text-cyan-400">PROJECTS</h3>
-    <p class="text-gray-300 mb-4">
-      Special multimedia and design initiatives.
+  <!-- NAVIGATION -->
+  <nav class="fixed top-0 w-full z-50 glass-effect">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+      <div class="text-2xl font-bold neon-text">
+        <span class="text-cyan-400">RORO</span><span class="text-pink-400"> LAB</span>
+      </div>
+      <div class="hidden md:flex space-x-12 pr-20">
+        <a href="index.html#home" class="hover:text-cyan-400">HOME</a>
+        <a href="index.html#about" class="hover:text-cyan-400">ABOUT</a>
+        <a href="index.html#works" class="hover:text-cyan-400">WORKS</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HEADER -->
+  <section class="pt-32 pb-12 text-center">
+    <h1 class="text-5xl font-bold neon-text mb-4">My Creative Projects</h1>
+    <p class="text-xl text-gray-300 max-w-3xl mx-auto">
+      Explore multimedia work, video storytelling, design experiments, and creative initiatives.
     </p>
+  </section>
 
-    <!-- New Project Description -->
-    <div class="text-gray-400 text-sm mb-4">
-      <strong>A Cat Owner's Journey:</strong> A heartfelt video about a cat owner's emotions, experiences, and the adorable routines and personalities of his cats.
+  <!-- PROJECTS SECTION -->
+  <section class="max-w-6xl mx-auto px-6 space-y-12 pb-20">
+
+    <!-- Project 1: Cat Owner's Journey -->
+    <div class="glass-effect rounded-2xl p-6 work-card">
+      <h2 class="text-3xl font-bold mb-4 text-cyan-400">A Cat Owner's Journey</h2>
+
+      <div class="aspect-w-16 aspect-h-9 mb-4">
+        <iframe class="w-full h-96 rounded-xl" src="https://www.youtube.com/watch?v=9Yp4kHlaYyw" title="Cat Project" frameborder="0" allowfullscreen></iframe>
+      </div>
+
+      <p class="text-gray-300">
+        A cat owner's journey with some adorable cats, talking about his emotions and experience,
+        as well as the cats' daily routine and unique personalities.
+      </p>
     </div>
 
-    <!-- YouTube Video Embed -->
-    <div class="aspect-w-16 aspect-h-9">
-      <iframe class="rounded-lg w-full h-64"
-              src="https://www.youtube.com/watch?v=9Yp4kHlaYyw"
-              title="A Cat Owner's Journey"
-              frameborder="0"
-              allowfullscreen>
-      </iframe>
+    <!-- Add more project blocks below this if needed -->
+
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="py-12 border-t border-gray-800 text-center">
+    <div class="text-2xl font-bold mb-4">
+      <span class="text-cyan-400">RORO</span><span class="text-pink-400"> LAB</span>
     </div>
-  </div>
-</div>
+    <p class="text-gray-400 mb-4">Pushing the boundaries of digital creativity</p>
+    <p class="text-gray-600">&copy; 2024 Roro Lab. All rights reserved.</p>
+  </footer>
+
+</body>
+</html>
