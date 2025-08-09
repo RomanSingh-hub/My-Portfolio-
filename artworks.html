@@ -5,7 +5,24 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" /> 
   <title>Artworks - RORO LAB</title> 
   <script src="https://cdn.tailwindcss.com"></script> 
-  <link rel="stylesheet" href="style.css" /> 
+  <link rel="stylesheet" href="style.css" />
+
+  <style>
+    /* === CUSTOM VIDEO POSITION ADJUSTMENT ===
+       This class moves the video content slightly downward
+       so that the top part of the video (e.g., text like "Roman's") 
+       is fully visible and not clipped. 
+       
+       object-position: 
+         - First value = horizontal alignment (center)
+         - Second value = vertical offset percentage
+           → Lower values move the video UP
+           → Higher values move the video DOWN
+    */
+    .video-shift-down {
+      object-position: center 15%; /* Adjust 15% to change how much it moves down */
+    }
+  </style>
 </head>
 <body class="min-h-screen flex flex-col overflow-x-hidden bg-black text-white">
 
@@ -34,7 +51,7 @@
       <div class="w-full h-[180px] rounded-xl overflow-hidden shadow-lg relative">
         <video
           id="video-neon"
-          class="absolute inset-0 w-full h-full object-cover"
+          class="absolute inset-0 w-full h-full object-cover video-shift-down" <!-- Added shift class -->
           src="final_pdf/artwork/heading.mp4"
           preload="auto"
           autoplay
@@ -61,7 +78,7 @@
       <div class="w-full h-[180px] rounded-xl overflow-hidden shadow-lg relative">
         <video
           id="video-title"
-          class="absolute inset-0 w-full h-full object-cover"
+          class="absolute inset-0 w-full h-full object-cover video-shift-down" <!-- Added shift class -->
           src="final_pdf/artwork/roro_insta.mp4"
           preload="auto"
           autoplay
@@ -127,4 +144,3 @@
 
 </body>
 </html>
-
