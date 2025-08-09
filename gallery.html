@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Gallery – RORO LAB</title>
+  <title>Art Gallery – RORO LAB</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style.css"/>
 </head>
 <body class="min-h-screen flex flex-col overflow-x-hidden bg-black text-white">
 
@@ -16,7 +16,7 @@
         <span class="text-cyan-400">RORO</span><span class="text-pink-400"> LAB</span>
       </div>
       <div class="hidden md:flex space-x-12 pr-20">
-        <a href="index.html#home"  class="hover:text-cyan-400">HOME</a>
+        <a href="index.html#home" class="hover:text-cyan-400">HOME</a>
         <a href="index.html#about" class="hover:text-cyan-400">ABOUT</a>
         <a href="index.html#works" class="hover:text-cyan-400">WORKS</a>
       </div>
@@ -24,59 +24,27 @@
   </nav>
 
   <!-- Header -->
-  <header class="max-w-7xl mx-auto px-6 pt-32 pb-8 text-center">
-    <h1 class="text-5xl font-bold neon-text mb-4">Paintings & Drawings</h1>
-    <p class="text-xl text-gray-300 max-w-3xl mx-auto">
-      A curated collection of traditional and digital artworks.
-    </p>
+  <header class="pt-32 pb-8 text-center">
+    <h1 class="text-5xl font-bold neon-text mb-3">Gallery</h1>
+    <p class="text-gray-300 max-w-3xl mx-auto">Selected paintings & drawings.</p>
   </header>
 
   <!-- Grid -->
-  <main class="max-w-6xl mx-auto px-6 pb-24">
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+  <main class="max-w-7xl mx-auto px-6 pb-24">
+    <div id="galleryGrid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5"></div>
 
-      <!-- Item -->
-      <a href="assets/gallery/butterfly-hand.jpg" target="_blank"
-         class="group glass-effect rounded-2xl overflow-hidden block">
-        <img src="assets/gallery/butterfly-hand.jpg"
-             alt="Skeleton hand with butterfly"
-             class="w-full h-56 object-cover group-hover:scale-[1.03] transition-transform duration-300"
-             loading="lazy" />
-        <div class="p-4">
-          <h3 class="font-semibold text-cyan-300">Butterfly & Bones</h3>
-          <p class="text-sm text-gray-300">Ink & marker on paper</p>
-        </div>
-      </a>
-
-      <!-- Duplicate this “Item” block for each artwork -->
-      <a href="assets/gallery/artwork-02.jpg" target="_blank"
-         class="group glass-effect rounded-2xl overflow-hidden block">
-        <img src="assets/gallery/artwork-02.jpg"
-             alt="Artwork 02"
-             class="w-full h-56 object-cover group-hover:scale-[1.03] transition-transform duration-300"
-             loading="lazy" />
-        <div class="p-4">
-          <h3 class="font-semibold text-cyan-300">Title / Medium</h3>
-          <p class="text-sm text-gray-300">Short description</p>
-        </div>
-      </a>
-
-      <a href="assets/gallery/artwork-03.jpg" target="_blank"
-         class="group glass-effect rounded-2xl overflow-hidden block">
-        <img src="assets/gallery/artwork-03.jpg"
-             alt="Artwork 03"
-             class="w-full h-56 object-cover group-hover:scale-[1.03] transition-transform duration-300"
-             loading="lazy" />
-        <div class="p-4">
-          <h3 class="font-semibold text-cyan-300">Title / Medium</h3>
-          <p class="text-sm text-gray-300">Short description</p>
-        </div>
-      </a>
-
-      <!-- Add more items as needed -->
-
-    </div>
+    <!-- Pagination (optional) -->
+    <div id="pager" class="flex justify-center gap-2 mt-10"></div>
   </main>
+
+  <!-- Lightbox -->
+  <div id="lightbox" class="fixed inset-0 bg-black/90 z-[60] hidden">
+    <button id="lbClose" class="absolute top-5 right-5 text-white/70 hover:text-white text-3xl">✕</button>
+    <button id="lbPrev"  class="absolute left-4 top-1/2 -translate-y-1/2 text-white/70 hover:text-white text-3xl">❮</button>
+    <button id="lbNext"  class="absolute right-4 top-1/2 -translate-y-1/2 text-white/70 hover:text-white text-3xl">❯</button>
+    <img id="lbImg" alt="" class="max-h-[88vh] max-w-[92vw] mx-auto mt-16 rounded-xl shadow-2xl object-contain"/>
+    <div id="lbCap" class="text-center text-gray-300 mt-4 px-4"></div>
+  </div>
 
   <!-- Footer -->
   <footer class="mt-auto py-12 border-t border-gray-800 text-center">
@@ -86,5 +54,120 @@
     <p class="text-gray-400 mb-4">Pushing the boundaries of digital creativity</p>
     <p class="text-gray-600">&copy; 2024 Roro Lab. All rights reserved.</p>
   </footer>
+
+  <script>
+    // ===== CONFIG =====
+    const MANIFEST_URL = 'assets/gallery/manifest.json';
+    const BASE = 'assets/gallery/';
+    const PAGE_SIZE = 20; // show 20 per page (41 will be 3 pages)
+
+    // ===== STATE =====
+    let files = [];        // all filenames
+    let page = 1;          // current page
+    let currentIndex = 0;  // index within 'files' for lightbox
+
+    // ===== DOM =====
+    const grid = document.getElementById('galleryGrid');
+    const pager = document.getElementById('pager');
+    const lightbox = document.getElementById('lightbox');
+    const lbImg = document.getElementById('lbImg');
+    const lbCap = document.getElementById('lbCap');
+
+    // Build caption from filename
+    const captionFrom = (fn) =>
+      fn.replace(/\.[^.]+$/, '').replace(/[-_]+/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
+
+    // Render current page
+    function render() {
+      grid.innerHTML = '';
+      const start = (page - 1) * PAGE_SIZE;
+      const slice = files.slice(start, start + PAGE_SIZE);
+
+      slice.forEach((name, i) => {
+        const idx = start + i;
+        const card = document.createElement('a');
+        card.href = '#';
+        card.className = 'block group rounded-xl overflow-hidden glass-effect hover:scale-[1.01] transition';
+        card.innerHTML = `
+          <img
+            src="${BASE + name}"
+            alt="${captionFrom(name)}"
+            loading="lazy"
+            class="w-full h-48 md:h-56 object-cover"
+          />
+          <div class="p-3">
+            <h3 class="text-sm text-gray-300 group-hover:text-white">${captionFrom(name)}</h3>
+          </div>
+        `;
+        card.addEventListener('click', (e) => {
+          e.preventDefault();
+          openLightbox(idx);
+        });
+        grid.appendChild(card);
+      });
+
+      renderPager();
+    }
+
+    function renderPager() {
+      pager.innerHTML = '';
+      const pages = Math.ceil(files.length / PAGE_SIZE);
+      if (pages <= 1) return;
+
+      for (let p = 1; p <= pages; p++) {
+        const btn = document.createElement('button');
+        btn.textContent = p;
+        btn.className =
+          'px-3 py-1 rounded-md border border-white/10 ' +
+          (p === page ? 'bg-white/10 text-white' : 'text-gray-300 hover:text-white');
+        btn.addEventListener('click', () => { page = p; render(); });
+        pager.appendChild(btn);
+      }
+    }
+
+    function openLightbox(idx) {
+      currentIndex = idx;
+      const name = files[idx];
+      lbImg.src = BASE + name;
+      lbImg.alt = captionFrom(name);
+      lbCap.textContent = captionFrom(name);
+      lightbox.classList.remove('hidden');
+    }
+
+    function closeLightbox() {
+      lightbox.classList.add('hidden');
+      lbImg.src = '';
+    }
+
+    function next() {
+      currentIndex = (currentIndex + 1) % files.length;
+      openLightbox(currentIndex);
+    }
+
+    function prev() {
+      currentIndex = (currentIndex - 1 + files.length) % files.length;
+      openLightbox(currentIndex);
+    }
+
+    // Controls
+    document.getElementById('lbClose').onclick = closeLightbox;
+    document.getElementById('lbNext').onclick = next;
+    document.getElementById('lbPrev').onclick = prev;
+    window.addEventListener('keydown', (e) => {
+      if (lightbox.classList.contains('hidden')) return;
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowRight') next();
+      if (e.key === 'ArrowLeft') prev();
+    });
+
+    // Bootstrap
+    fetch(MANIFEST_URL)
+      .then(r => r.json())
+      .then(list => { files = list; render(); })
+      .catch(() => {
+        grid.innerHTML = '<p class="text-gray-400">Could not load gallery manifest.</p>';
+      });
+  </script>
 </body>
 </html>
+
