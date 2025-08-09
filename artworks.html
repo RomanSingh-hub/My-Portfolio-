@@ -33,24 +33,61 @@
   <!-- ================= ARTWORKS SECTION ================= -->
   <section class="max-w-5xl mx-auto px-6 space-y-10 pb-20"> <!-- space-y-10 = spacing between cards -->
 
-    <!-- ===== Artwork 1 - VIDEO inside card ===== -->
-    <div class="glass-effect rounded-2xl p-6 work-card"> <!-- Card container -->
-      <h3 class="text-3xl font-bold text-cyan-400 mb-2">Neon Mirage</h3> <!-- Card title -->
-      <p class="text-gray-300 mb-4">
-        A digital painting exploring neon color harmony and futuristic cityscapes.
-      </p>
-      <!-- Video container -->
-      <div class="w-full h-[180px] rounded-xl overflow-hidden shadow-lg"> <!-- h-[180px] sets custom height -->
-        <video
-          src="final_pdf/artwork/heading.mp4" <!-- Path to your video file -->
-          class="w-full h-full object-cover" <!-- Makes video fill the box -->
-          controls <!-- Shows play/pause controls -->
-          muted <!-- Mutes audio (required for autoplay on mobile) -->
-          playsinline <!-- Ensures inline playback on mobile -->
-          loop <!-- Repeats video -->
-        ></video>
+    <!-- ===== Artwork 1 - VIDEO inside card (short height + robust loading) ===== -->
+<div class="glass-effect rounded-2xl p-6 work-card">
+  <h3 class="text-3xl font-bold text-cyan-400 mb-2">Neon Mirage</h3>
+  <p class="text-gray-300 mb-4">
+    A digital painting exploring neon color harmony and futuristic cityscapes.
+  </p>
+
+  <!-- Fixed-height container for a compact card -->
+  <div class="w-full h-[160px] rounded-xl overflow-hidden shadow-lg relative">
+    <!-- The video element -->
+    <video
+      id="video-neon"
+      class="absolute inset-0 w-full h-full object-cover"
+      controls                <!-- show play/pause controls -->
+      playsinline             <!-- play inline on mobile -->
+      muted                   <!-- keeps autoplay possible if you later add it -->
+      preload="metadata"      <!-- quicker first frame -->
+      poster="assets/art_neon_mirage.jpg"  <!-- thumbnail before play -->
+    >
+      <!-- Prefer H.264/AAC MP4 first (best cross-browser support) -->
+      <source src="assets/heading.mp4" type="video/mp4">
+      <!-- Optional WEBM fallback if you have it -->
+      <source src="assets/heading.webm" type="video/webm">
+      <!-- Fallback text if nothing works -->
+      Your browser does not support HTML5 video.
+    </video>
+
+    <!-- Error/notice banner (hidden by default) -->
+        <div id="video-neon-error"
+             class="hidden absolute inset-0 flex items-center justify-center bg-black/70 text-sm text-gray-200 px-4 text-center">
+          Video couldn’t load. Check the file path/format or
+          <a href="assets/heading.mp4" class="ml-1 underline text-cyan-400">open the file directly</a>.
+        </div>
       </div>
     </div>
+    
+    <script>
+      // Graceful error handling: if the video can't load, show a message.
+      (function () {
+        const v = document.getElementById('video-neon');
+        const banner = document.getElementById('video-neon-error');
+    
+        function showError() {
+          if (banner) banner.classList.remove('hidden');
+        }
+    
+        if (v) {
+          v.addEventListener('error', showError);
+          v.addEventListener('stalled', showError);
+          v.addEventListener('abort', showError);
+          // If the <source> 404s, 'error' fires on <video>; this covers that.
+        }
+      })();
+    </script>
+
 
     <!-- ===== Artwork 2 - GIF ===== -->
     <div class="glass-effect rounded-2xl p-6 work-card">
