@@ -8,35 +8,38 @@
   <link rel="stylesheet" href="style.css" />
 
   <style>
-    /* ================================
-       VIDEO CROPPING (per‑clip tuning)
-       2nd value (%) nudges frame vertically.
-       Lower % = move image UP | Higher % = move image DOWN
-    ================================= */
-    .video-shift-heading { object-position: center 15%; } /* show more of top text */
-    .video-shift-title   { object-position: center 8%;  }  /* center phone frame */
+    /* =========================================
+       VIDEO CROPPING (per‑clip)
+       2nd value (%) nudges the frame vertically:
+       Lower % => move UP | Higher % => move DOWN
+    ========================================== */
+    .video-shift-heading { object-position: center 15%; } /* shows more top text */
+    .video-shift-title   { object-position: center 8%;  }  /* centers phone frame */
 
-    /* ================================
-       CARD MEDIA HEIGHT (responsive)
-       - clamp(min, preferred, max) keeps it balanced
-       - Adjust the middle value (vw) for how “full” the page feels
-    ================================= */
-    .card-media { height: clamp(200px, 28vw, 420px); }
+    /* =========================================
+       CARD MEDIA HEIGHT
+       clamp(min, preferred, max) = responsive & consistent
+       • Increase 30vw to make the page feel “fuller”
+       • Decrease 30vw to make cards shorter
+    ========================================== */
+    .card-media { height: clamp(220px, 30vw, 420px); }
 
-    /* Keep grid tight but not crowded */
-    .grid-gap { gap: 1.25rem; }        /* ~20px */
+    /* Subtle card hover for interactivity */
+    .work-card { transition: transform .25s ease, box-shadow .25s ease; }
+    .work-card:hover { transform: translateY(-2px); }
+
+    /* Global grid gap tuned for compact look */
+    .grid-gap { gap: 1.25rem; }          /* ~20px */
     @media (min-width: 1024px) {
-      .grid-gap { gap: 1.5rem; }       /* ~24px on large screens */
+      .grid-gap { gap: 1.5rem; }         /* ~24px on lg+ */
     }
   </style>
 </head>
 
 <body class="min-h-screen flex flex-col overflow-x-hidden bg-black text-white">
-
-  <!-- ================= NAVIGATION =================
-       Wider container so header aligns with content -->
+  <!-- ================= NAVIGATION ================= -->
   <nav class="fixed top-0 w-full z-50 glass-effect">
-    <div class="max-w-6xl mx-auto px-5 py-4 flex justify-between items-center">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
       <div class="text-2xl font-bold neon-text">
         <span class="text-cyan-400">RORO</span><span class="text-pink-400"> LAB</span>
       </div>
@@ -49,17 +52,17 @@
   </nav>
 
   <!-- Spacer so content clears the fixed nav -->
-  <header class="max-w-6xl mx-auto px-5 pt-28 pb-4"></header>
+  <header class="max-w-7xl mx-auto px-6 pt-28 pb-2"></header>
 
-  <!-- ================ CONTENT ================
-       Layout: 1 col on mobile, 2 cols on md, 3 cols on lg.
-       The first two cards span 2 columns to feel “hero-like”. -->
-  <section class="max-w-6xl mx-auto px-5 pb-24">
-    <div class="grid grid-gap grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+  <!-- ================ CONTENT =================
+       • 1 column on mobile, 2 columns on md+
+       • Every card uses the same media height for balance -->
+  <section class="max-w-7xl mx-auto px-6 pb-20">
+    <div class="grid grid-cols-1 md:grid-cols-2 grid-gap">
 
-      <!-- ===== Card 1: Header Clip (spans 2 cols on md+) ===== -->
-      <div class="glass-effect rounded-2xl p-5 work-card md:col-span-2">
-        <h3 class="text-xl font-semibold text-cyan-300 mb-3">Header Clip</h3>
+      <!-- ===== Header Clip ===== -->
+      <div class="glass-effect rounded-2xl p-5 work-card">
+        <h3 class="text-lg font-semibold text-cyan-300 mb-3">Header Clip</h3>
         <div class="w-full rounded-xl overflow-hidden shadow-lg relative card-media">
           <video
             id="video-neon"
@@ -68,7 +71,7 @@
             preload="auto" autoplay muted playsinline loop
           ></video>
 
-          <!-- Only shows if the file fails to load -->
+          <!-- Shown only if video fails -->
           <div id="video-neon-error"
                class="hidden absolute inset-0 flex items-center justify-center bg-black/70 text-sm text-gray-200 px-4 text-center">
             Video couldn’t load. Please check the file path/format, or
@@ -77,12 +80,12 @@
         </div>
       </div>
 
-      <!-- ===== Card 2: Rorochibi (spans 2 cols on md+) ===== -->
-      <div class="glass-effect rounded-2xl p-5 work-card md:col-span-2">
+      <!-- ===== Rorochibi (clickable to Instagram) ===== -->
+      <div class="glass-effect rounded-2xl p-5 work-card">
         <h3 class="text-3xl font-bold text-cyan-400 mb-2">Rorochibi</h3>
         <p class="text-gray-300 mb-4">Welcome to the sweet life of RORO…</p>
 
-        <!-- Whole media area links to Instagram -->
+        <!-- Whole media links to Instagram -->
         <a href="https://www.instagram.com/rorochibi?igsh=OHUyMTR4dmpwMjZz" target="_blank" rel="noopener">
           <div class="w-full rounded-xl overflow-hidden shadow-lg relative card-media">
             <video
@@ -94,7 +97,7 @@
               onerror="this.style.display='none';document.getElementById('video-title-fallback').style.display='block';"
             ></video>
 
-            <!-- Fallback still (only if video fails) -->
+            <!-- Fallback still (only shows if video errors) -->
             <img
               id="video-title-fallback"
               src="final_pdf/artwork/title_sequence_thumbnail.jpg"
@@ -106,7 +109,7 @@
         </a>
       </div>
 
-      <!-- ===== Gallery Card A ===== -->
+      <!-- ===== Gallery A ===== -->
       <a href="gallery.html" class="block glass-effect rounded-2xl p-5 work-card hover:scale-[1.01] transition-transform">
         <h3 class="text-2xl font-bold text-cyan-400 mb-2">Gallery</h3>
         <p class="text-gray-300 mb-4">Paintings & drawings. Tap to view the full collection.</p>
@@ -120,7 +123,7 @@
         </div>
       </a>
 
-      <!-- ===== Gallery Card B (duplicate; swap image later) ===== -->
+      <!-- ===== Gallery B (swap image later) ===== -->
       <a href="gallery.html" class="block glass-effect rounded-2xl p-5 work-card hover:scale-[1.01] transition-transform">
         <h3 class="text-2xl font-bold text-cyan-400 mb-2">Gallery</h3>
         <p class="text-gray-300 mb-4">Paintings & drawings. Tap to view the full collection.</p>
@@ -146,7 +149,7 @@
     <p class="text-gray-600">&copy; 2024 Roro Lab. All rights reserved.</p>
   </footer>
 
-  <!-- ============== JS: Autoplay & graceful errors ============== -->
+  <!-- ===== JS: Autoplay & graceful errors ===== -->
   <script>
     (function () {
       const vids = [
@@ -159,9 +162,10 @@
         v.addEventListener('error', showErr);
         v.addEventListener('stalled', showErr);
         v.addEventListener('abort', showErr);
-        v.play().catch(() => { /* ignore if a browser blocks autoplay */ });
+        v.play().catch(() => {}); // muted + playsinline should allow autoplay
       });
     })();
   </script>
 </body>
 </html>
+
