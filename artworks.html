@@ -9,7 +9,7 @@
 
   <style>
     /* === INDIVIDUAL VIDEO POSITION ADJUSTMENTS ===
-       Tweak the second value (the %) per video to nudge framing.
+       Tweak the second value (%) per video to nudge framing.
        Lower % = move image UP, Higher % = move image DOWN.
     */
 
@@ -68,42 +68,42 @@
       </div>
     </div>
 
-  <div class="glass-effect rounded-2xl p-6 work-card">
-  <h3 class="text-3xl font-bold text-cyan-400 mb-2">Title Sequence</h3>
-  <p class="text-gray-300 mb-4">
-    Welcome to the sweet life of roro.
-  </p>
+    <!-- ===== Title Sequence - Larger, clickable to Instagram ===== -->
+    <div class="glass-effect rounded-2xl p-6 work-card">
+      <h3 class="text-3xl font-bold text-cyan-400 mb-2">Title Sequence</h3>
+      <p class="text-gray-300 mb-4">
+        Welcome to the sweet life of RORO....
+      </p>
 
-  <!-- Link wraps both video and fallback -->
-  <a href="https://www.instagram.com/rorochibi?igsh=OHUyMTR4dmpwMjZz" target="_blank" rel="noopener">
-    <!-- Increased height just for this video -->
-    <div class="w-full h-[360px] rounded-xl overflow-hidden shadow-lg relative">
-      <!-- Autoplay video -->
-      <video
-        id="video-title"
-        class="absolute inset-0 w-full h-full object-cover video-shift-title"
-        src="final_pdf/artwork/roro_insta.mp4"
-        preload="auto"
-        autoplay
-        muted
-        playsinline
-        loop
-        style="cursor:pointer"
-        onerror="this.style.display='none';document.getElementById('video-title-fallback').style.display='block';"
-      ></video>
+      <!-- Link wraps both video and fallback -->
+      <a href="https://www.instagram.com/rorochibi?igsh=OHUyMTR4dmpwMjZz" target="_blank" rel="noopener">
+        <!-- Responsive height: smaller on mobile, bigger on desktop -->
+        <div class="w-full h-[230px] md:h-[360px] rounded-xl overflow-hidden shadow-lg relative">
+          <!-- Autoplay video -->
+          <video
+            id="video-title"
+            class="absolute inset-0 w-full h-full object-cover video-shift-title"
+            src="final_pdf/artwork/roro_insta.mp4"
+            preload="auto"
+            autoplay
+            muted
+            playsinline
+            loop
+            style="cursor:pointer"
+            onerror="this.style.display='none';document.getElementById('video-title-fallback').style.display='block';"
+          ></video>
 
-      <!-- Fallback image -->
-      <img
-        id="video-title-fallback"
-        src="final_pdf/artwork/title_sequence_thumbnail.jpg"
-        alt="RoroChibhi - Click to watch on Instagram"
-        class="absolute inset-0 w-full h-full object-cover"
-        style="display:none; cursor:pointer;"
-      />
+          <!-- Fallback image -->
+          <img
+            id="video-title-fallback"
+            src="final_pdf/artwork/title_sequence_thumbnail.jpg"
+            alt="Roro Chibi - Click to watch on Instagram"
+            class="absolute inset-0 w-full h-full object-cover"
+            style="display:none; cursor:pointer;"
+          />
+        </div>
+      </a>
     </div>
-  </a>
-</div>
-
 
     <!-- ===== Gallery Card ===== -->
     <a href="gallery.html" class="block glass-effect rounded-2xl p-6 work-card hover:scale-[1.01] transition-transform">
@@ -137,6 +137,7 @@
     (function () {
       const vids = [
         { v: document.getElementById('video-neon'),  err: document.getElementById('video-neon-error') },
+        // title has a thumbnail fallback instead of an error overlay; err can be null
         { v: document.getElementById('video-title'), err: document.getElementById('video-title-error') }
       ];
 
@@ -153,4 +154,3 @@
 
 </body>
 </html>
-
