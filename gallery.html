@@ -5,9 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Art Gallery – RORO LAB</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="style.css"/>
+  <style>
+    .glass-effect{background:rgba(255,255,255,.03);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.08);border-radius:16px;box-shadow:0 10px 40px rgba(0,0,0,.35)}
+    .neon-text{text-shadow:0 0 6px rgba(0,255,255,.8),0 0 18px rgba(0,255,255,.4)}
+    body{background:#0b0b0b;color:#eaeaea}
+    img{display:block}
+  </style>
 </head>
-<body class="min-h-screen flex flex-col overflow-x-hidden bg-black text-white">
+<body class="min-h-screen flex flex-col overflow-x-hidden">
+
   <!-- Nav -->
   <nav class="fixed top-0 w-full z-50 glass-effect">
     <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
@@ -43,33 +49,33 @@
     <div id="lbCap" class="text-center text-gray-300 mt-4 px-4"></div>
   </div>
 
-  <!-- Footer -->
-  <footer class="mt-auto py-12 border-t border-gray-800 text-center">
+  <footer class="mt-auto py-12 border-t border-white/10 text-center">
     <div class="text-2xl font-bold mb-4">
       <span class="text-cyan-400">RORO</span><span class="text-pink-400"> LAB</span>
     </div>
     <p class="text-gray-400 mb-4">Pushing the boundaries of digital creativity</p>
-    <p class="text-gray-600">&copy; 2024 Roro Lab. All rights reserved.</p>
+    <p class="text-gray-600">&copy; 2025 Roro Lab. All rights reserved.</p>
   </footer>
 
   <script>
-    /* ---------- PATHS THAT MATCH YOUR REPO ---------- */
-    const MANIFEST_URL = 'manifest.json';           // root-level manifest
-    const BASE = 'final_pdf/gallery/';              // images folder
+    // ===== CONFIG (paths updated to your repo layout) =====
+    const MANIFEST_URL = 'manifest.json';          // root
+    const BASE = 'final_pdf/gallery/';             // images folder
     const PAGE_SIZE = 20;
 
-    /* ---------- STATE ---------- */
+    // ===== STATE =====
     let files = [];
     let page = 1;
     let currentIndex = 0;
 
-    /* ---------- DOM ---------- */
+    // ===== DOM =====
     const grid = document.getElementById('galleryGrid');
     const pager = document.getElementById('pager');
     const lightbox = document.getElementById('lightbox');
     const lbImg = document.getElementById('lbImg');
     const lbCap = document.getElementById('lbCap');
 
+    // Helpers
     const captionFrom = (fn) =>
       fn.replace(/\.[^.]+$/, '').replace(/[-_]+/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
 
@@ -80,75 +86,70 @@
 
       slice.forEach((name, i) => {
         const idx = start + i;
-        const card = document.createElement('a');
-        card.href = '#';
-        card.className = 'block group rounded-xl overflow-hidden glass-effect hover:scale-[1.01] transition';
-        card.innerHTML = `
-          <img src="${BASE + name}" alt="${captionFrom(name)}" loading="lazy"
+        const a = document.createElement('a');
+        a.href = '#';
+        a.className = 'block group rounded-xl overflow-hidden glass-effect hover:scale-[1.01] transition';
+        a.innerHTML = `
+          <img src="${BASE + encodeURIComponent(name)}"
+               alt="${captionFrom(name)}"
+               loading="lazy"
                class="w-full h-48 md:h-56 object-cover"/>
           <div class="p-3">
             <h3 class="text-sm text-gray-300 group-hover:text-white">${captionFrom(name)}</h3>
-          </div>
-        `;
-        card.addEventListener('click', (e) => { e.preventDefault(); openLightbox(idx); });
-        grid.appendChild(card);
+          </div>`;
+        a.addEventListener('click', (e)=>{ e.preventDefault(); openLightbox(idx); });
+        grid.appendChild(a);
       });
 
       renderPager();
     }
 
-    function renderPager() {
+    function renderPager(){
       pager.innerHTML = '';
       const pages = Math.ceil(files.length / PAGE_SIZE);
       if (pages <= 1) return;
-      for (let p = 1; p <= pages; p++) {
-        const btn = document.createElement('button');
-        btn.textContent = p;
-        btn.className =
-          'px-3 py-1 rounded-md border border-white/10 ' +
-          (p === page ? 'bg-white/10 text-white' : 'text-gray-300 hover:text-white');
-        btn.addEventListener('click', () => { page = p; render(); });
-        pager.appendChild(btn);
+      for (let p = 1; p <= pages; p++){
+        const b = document.createElement('button');
+        b.textContent = p;
+        b.className = 'px-3 py-1 rounded-md border border-white/10 ' +
+                      (p === page ? 'bg-white/10 text-white' : 'text-gray-300 hover:text-white');
+        b.onclick = ()=>{ page = p; render(); };
+        pager.appendChild(b);
       }
     }
 
-    function openLightbox(idx) {
+    function openLightbox(idx){
       currentIndex = idx;
       const name = files[idx];
-      lbImg.src = BASE + name;
+      lbImg.src = BASE + encodeURIComponent(name);
       lbImg.alt = captionFrom(name);
       lbCap.textContent = captionFrom(name);
       lightbox.classList.remove('hidden');
     }
-
-    function closeLightbox() { lightbox.classList.add('hidden'); lbImg.src = ''; }
-    function next() { currentIndex = (currentIndex + 1) % files.length; openLightbox(currentIndex); }
-    function prev() { currentIndex = (currentIndex - 1 + files.length) % files.length; openLightbox(currentIndex); }
+    function closeLightbox(){ lightbox.classList.add('hidden'); lbImg.src = ''; }
+    function next(){ currentIndex = (currentIndex + 1) % files.length; openLightbox(currentIndex); }
+    function prev(){ currentIndex = (currentIndex - 1 + files.length) % files.length; openLightbox(currentIndex); }
 
     document.getElementById('lbClose').onclick = closeLightbox;
     document.getElementById('lbNext').onclick = next;
     document.getElementById('lbPrev').onclick = prev;
-    window.addEventListener('keydown', (e) => {
+    window.addEventListener('keydown', (e)=>{
       if (lightbox.classList.contains('hidden')) return;
       if (e.key === 'Escape') closeLightbox();
       if (e.key === 'ArrowRight') next();
       if (e.key === 'ArrowLeft') prev();
     });
 
-    /* ---------- LOAD MANIFEST ---------- */
-    fetch(MANIFEST_URL)
-      .then(r => {
-        if (!r.ok) throw new Error(`HTTP ${r.status}`);
-        return r.json();
-      })
-      .then(list => { files = list; render(); })
+    // Fetch manifest (must be a JSON array of filenames, e.g. ["20250809_001123.jpg", ...])
+    fetch(MANIFEST_URL, {cache: 'no-store'})
+      .then(r => r.json())
+      .then(list => { files = Array.isArray(list) ? list : []; render(); })
       .catch(err => {
-        console.error('Manifest load failed:', err);
+        console.error('Manifest load error:', err);
         grid.innerHTML = '<p class="text-gray-400">Could not load gallery manifest.</p>';
       });
   </script>
 </body>
 </html>
-
 
 
