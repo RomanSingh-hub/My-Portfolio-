@@ -8,19 +8,19 @@
   <link rel="stylesheet" href="style.css" />
 
   <style>
-    /* === CUSTOM VIDEO POSITION ADJUSTMENT ===
-       This class moves the video content slightly downward
-       so that the top part of the video (e.g., text like "Roman's") 
-       is fully visible and not clipped. 
-       
-       object-position: 
-         - First value = horizontal alignment (center)
-         - Second value = vertical offset percentage
-           → Lower values move the video UP
-           → Higher values move the video DOWN
+    /* === INDIVIDUAL VIDEO POSITION ADJUSTMENTS ===
+       Tweak the second value (the %) per video to nudge framing.
+       Lower % = move image UP, Higher % = move image DOWN.
     */
-    .video-shift-down {
-      object-position: center 15%; /* Adjust 15% to change how much it moves down */
+
+    /* Artwork 1: Heading video */
+    .video-shift-heading {
+      object-position: center 15%; /* show more top area (e.g., “Roman’s”) */
+    }
+
+    /* Artwork 2: Title Sequence video */
+    .video-shift-title {
+      object-position: center 8%; /* adjust separately for this clip */
     }
   </style>
 </head>
@@ -51,7 +51,7 @@
       <div class="w-full h-[180px] rounded-xl overflow-hidden shadow-lg relative">
         <video
           id="video-neon"
-          class="absolute inset-0 w-full h-full object-cover video-shift-down" <!-- Added shift class -->
+          class="absolute inset-0 w-full h-full object-cover video-shift-heading"
           src="final_pdf/artwork/heading.mp4"
           preload="auto"
           autoplay
@@ -78,7 +78,7 @@
       <div class="w-full h-[180px] rounded-xl overflow-hidden shadow-lg relative">
         <video
           id="video-title"
-          class="absolute inset-0 w-full h-full object-cover video-shift-down" <!-- Added shift class -->
+          class="absolute inset-0 w-full h-full object-cover video-shift-title"
           src="final_pdf/artwork/roro_insta.mp4"
           preload="auto"
           autoplay
@@ -122,11 +122,11 @@
     <p class="text-gray-600">&copy; 2024 Roro Lab. All rights reserved.</p>
   </footer>
 
-  <!-- Simplified JS: Autoplay + Error Handling -->
+  <!-- Simple JS: try autoplay + show error if needed -->
   <script>
     (function () {
       const vids = [
-        { v: document.getElementById('video-neon'), err: document.getElementById('video-neon-error') },
+        { v: document.getElementById('video-neon'),  err: document.getElementById('video-neon-error') },
         { v: document.getElementById('video-title'), err: document.getElementById('video-title-error') }
       ];
 
@@ -136,11 +136,11 @@
         v.addEventListener('error', showErr);
         v.addEventListener('stalled', showErr);
         v.addEventListener('abort', showErr);
-        // Try playing immediately
-        v.play().catch(() => { /* autoplay may fail if browser policy blocks it */ });
+        v.play().catch(() => { /* muted+autoplay should pass; ignore if blocked */ });
       });
     })();
   </script>
 
 </body>
 </html>
+
