@@ -1,141 +1,144 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" /> 
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" /> 
-  <title>Artworks - RORO LAB</title> 
-  <script src="https://cdn.tailwindcss.com"></script> 
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Artworks - RORO LAB</title>
+  <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="style.css" />
 
   <style>
-    /* === INDIVIDUAL VIDEO POSITION ADJUSTMENTS ===
-       Tweak the second value (%) per video to nudge framing.
-       Lower % = move image UP, Higher % = move image DOWN.
-    */
-
-    /* Artwork 1: Heading video */
-    .video-shift-heading {
-      object-position: center 15%; /* show more top area (e.g., “Roman’s”) */
-    }
-
-    /* Artwork 2: Title Sequence video */
-    .video-shift-title {
-      object-position: center 8%; /* adjust separately for this clip */
-    }
+    /* ================================
+       INDIVIDUAL VIDEO CROP OFFSETS
+       - Adjust the 2nd percentage to nudge the video frame vertically.
+       - Lower % => move image UP | Higher % => move image DOWN
+       ================================= */
+    .video-shift-heading { object-position: center 15%; } /* shows more of the top text */
+    .video-shift-title   { object-position: center 8%;  } /* fine-tuned for phone frame */
   </style>
 </head>
-<body class="min-h-screen flex flex-col overflow-x-hidden bg-black text-white">
 
-  <!-- ================= NAVIGATION BAR ================= -->
+<body class="min-h-screen flex flex-col overflow-x-hidden bg-black text-white">
+  <!-- ================= NAVIGATION =================
+       fixed at the top; increase top padding below to avoid overlap -->
   <nav class="fixed top-0 w-full z-50 glass-effect">
-    <div class="max-w-5xl mx-auto px-6 py-4 flex justify-between items-center">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
       <div class="text-2xl font-bold neon-text">
         <span class="text-cyan-400">RORO</span><span class="text-pink-400"> LAB</span>
       </div>
       <div class="hidden md:flex space-x-12 pr-20">
-        <a href="index.html#home" class="hover:text-cyan-400">HOME</a>
+        <a href="index.html#home"  class="hover:text-cyan-400">HOME</a>
         <a href="index.html#about" class="hover:text-cyan-400">ABOUT</a>
         <a href="index.html#works" class="hover:text-cyan-400">WORKS</a>
       </div>
     </div>
   </nav>
 
-  <!-- ================= PAGE HEADING ================= -->
-  <header class="max-w-7xl mx-auto px-6 pt-28 pb-6"></header>
+  <!-- Spacer so content clears the fixed nav -->
+  <header class="max-w-7xl mx-auto px-6 pt-28 pb-2"></header>
 
-  <!-- ================= ARTWORKS SECTION ================= -->
-  <section class="max-w-5xl mx-auto px-6 space-y-10 pb-20">
-
-    <!-- ===== Artwork 1 - VIDEO ===== -->
-    <div class="glass-effect rounded-2xl p-6 work-card">
-      <div class="w-full h-[180px] rounded-xl overflow-hidden shadow-lg relative">
-        <video
-          id="video-neon"
-          class="absolute inset-0 w-full h-full object-cover video-shift-heading"
-          src="final_pdf/artwork/heading.mp4"
-          preload="auto"
-          autoplay
-          muted
-          playsinline
-          loop
-        ></video>
-
-        <div id="video-neon-error"
-          class="hidden absolute inset-0 flex items-center justify-center bg-black/70 text-sm text-gray-200 px-4 text-center">
-          Video couldn’t load. Please check the file path/format, or
-          <a href="assets/artwork/heading.mp4" class="ml-1 underline text-cyan-400">open directly</a>.
-        </div>
-      </div>
-    </div>
-
-    <!-- ===== Title Sequence - Larger, clickable to Instagram ===== -->
-    <div class="glass-effect rounded-2xl p-6 work-card">
-      <h3 class="text-3xl font-bold text-cyan-400 mb-2">Rorochibi</h3>
-      <p class="text-gray-300 mb-4">
-        Welcome to the sweet life of RORO....
-      </p>
-
-      <!-- Link wraps both video and fallback -->
-      <a href="https://www.instagram.com/rorochibi?igsh=OHUyMTR4dmpwMjZz" target="_blank" rel="noopener">
-        <!-- Responsive height: smaller on mobile, bigger on desktop -->
-        <div class="w-full h-[230px] md:h-[360px] rounded-xl overflow-hidden shadow-lg relative">
-          <!-- Autoplay video -->
+  <!-- ================ ARTWORKS CONTENT ================
+       - Wider container (max-w-7xl) so the page looks “full”
+       - Grid: 1 column on mobile, 2 columns on md+ for a fuller layout -->
+  <section class="max-w-7xl mx-auto px-6 pb-24">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      
+      <!-- ===== Card 1: Header clip (kept compact) ===== -->
+      <div class="glass-effect rounded-2xl p-6 work-card">
+        <!-- Title for context; remove if you want a cleaner card -->
+        <h3 class="text-xl font-semibold text-cyan-300 mb-3">Header Clip</h3>
+        <!-- Taller than before so it fills space better -->
+        <div class="w-full h-[220px] rounded-xl overflow-hidden shadow-lg relative">
           <video
-            id="video-title"
-            class="absolute inset-0 w-full h-full object-cover video-shift-title"
-            src="final_pdf/artwork/roro_insta.mp4"
+            id="video-neon"
+            class="absolute inset-0 w-full h-full object-cover video-shift-heading"
+            src="final_pdf/artwork/heading.mp4"
             preload="auto"
             autoplay
             muted
             playsinline
             loop
-            style="cursor:pointer"
-            onerror="this.style.display='none';document.getElementById('video-title-fallback').style.display='block';"
           ></video>
 
-          <!-- Fallback image -->
+          <!-- Error overlay (shown only if loading fails) -->
+          <div id="video-neon-error"
+               class="hidden absolute inset-0 flex items-center justify-center bg-black/70 text-sm text-gray-200 px-4 text-center">
+            Video couldn’t load. Please check the file path/format, or
+            <a href="final_pdf/artwork/heading.mp4" class="ml-1 underline text-cyan-400">open directly</a>.
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== Card 2: Rorochibi (bigger) =====
+           - md:col-span-1 keeps it in the grid
+           - height grows on larger screens so it feels cinematic -->
+      <div class="glass-effect rounded-2xl p-6 work-card">
+        <h3 class="text-3xl font-bold text-cyan-400 mb-2">Rorochibi</h3>
+        <p class="text-gray-300 mb-4">Welcome to the sweet life of RORO…</p>
+
+        <!-- Entire media is clickable to Instagram -->
+        <a href="https://www.instagram.com/rorochibi?igsh=OHUyMTR4dmpwMjZz" target="_blank" rel="noopener">
+          <div class="w-full h-[260px] md:h-[420px] rounded-xl overflow-hidden shadow-lg relative">
+            <!-- Autoplay video -->
+            <video
+              id="video-title"
+              class="absolute inset-0 w-full h-full object-cover video-shift-title"
+              src="final_pdf/artwork/roro_insta.mp4"
+              preload="auto"
+              autoplay
+              muted
+              playsinline
+              loop
+              style="cursor:pointer"
+              onerror="this.style.display='none';document.getElementById('video-title-fallback').style.display='block';"
+            ></video>
+
+            <!-- Fallback image (shows only if video fails) -->
+            <img
+              id="video-title-fallback"
+              src="final_pdf/artwork/title_sequence_thumbnail.jpg"
+              alt="Roro Chibi — Click to watch on Instagram"
+              class="absolute inset-0 w-full h-full object-cover"
+              style="display:none; cursor:pointer;"
+            />
+          </div>
+        </a>
+      </div>
+
+      <!-- ===== Card 3: Gallery (thumb) ===== -->
+      <a href="gallery.html" class="block glass-effect rounded-2xl p-6 work-card hover:scale-[1.01] transition-transform">
+        <h3 class="text-2xl font-bold text-cyan-400 mb-2">Gallery</h3>
+        <p class="text-gray-300 mb-4">Paintings & drawings. Tap to view the full collection.</p>
+        <div class="w-full h-[220px] md:h-[260px] rounded-xl overflow-hidden shadow-lg">
           <img
-            id="video-title-fallback"
-            src="final_pdf/artwork/title_sequence_thumbnail.jpg"
-            alt="Roro Chibi - Click to watch on Instagram"
-            class="absolute inset-0 w-full h-full object-cover"
-            style="display:none; cursor:pointer;"
+            src="final_pdf/artwork/20250809_012123.jpg"
+            alt="Skeleton hand with butterfly — gallery cover"
+            class="w-full h-full object-cover"
+            loading="lazy"
           />
         </div>
       </a>
+
+      <!-- ===== Card 4: Gallery (second) =====
+           duplicate card so the grid looks full; change image/copy later -->
+      <a href="gallery.html" class="block glass-effect rounded-2xl p-6 work-card hover:scale-[1.01] transition-transform">
+        <h3 class="text-2xl font-bold text-cyan-400 mb-2">Gallery</h3>
+        <p class="text-gray-300 mb-4">Paintings & drawings. Tap to view the full collection.</p>
+        <div class="w-full h-[220px] md:h-[260px] rounded-xl overflow-hidden shadow-lg">
+          <img
+            src="final_pdf/artwork/20250809_012123.jpg"
+            alt="Skeleton hand with butterfly — gallery cover"
+            class="w-full h-full object-cover"
+            loading="lazy"
+          />
+        </div>
+      </a>
+
+      <!-- ===== (Optional) Card 5: spacer to keep rhythm =====
+           Remove this if you add more real cards. -->
+      <!-- <div class="hidden md:block"></div> -->
+
     </div>
-
-    <!-- ===== Gallery Card ===== -->
-    <a href="gallery.html" class="block glass-effect rounded-2xl p-6 work-card hover:scale-[1.01] transition-transform">
-      <h3 class="text-3xl font-bold text-cyan-400 mb-2">Gallery</h3>
-      <p class="text-gray-300 mb-4">
-        Paintings & drawings. Tap to view the full collection.
-      </p>
-      <div class="w-full h-[180px] rounded-xl overflow-hidden shadow-lg">
-        <img
-          src="final_pdf/artwork/20250809_012123.jpg"
-          alt="Skeleton hand with butterfly — gallery cover"
-          class="w-full h-full object-cover"
-          loading="lazy"
-        />
-      </div>
-    </a>
-
-    <!-- ===== Gallery Card ===== -->
-    <a href="gallery.html" class="block glass-effect rounded-2xl p-6 work-card hover:scale-[1.01] transition-transform">
-      <h3 class="text-3xl font-bold text-cyan-400 mb-2">Gallery</h3>
-      <p class="text-gray-300 mb-4">
-        Paintings & drawings. Tap to view the full collection.
-      </p>
-      <div class="w-full h-[180px] rounded-xl overflow-hidden shadow-lg">
-        <img
-          src="final_pdf/artwork/20250809_012123.jpg"
-          alt="Skeleton hand with butterfly — gallery cover"
-          class="w-full h-full object-cover"
-          loading="lazy"
-        />
-      </div>
-    </a>
   </section>
 
   <!-- ================= FOOTER ================= -->
@@ -147,13 +150,15 @@
     <p class="text-gray-600">&copy; 2024 Roro Lab. All rights reserved.</p>
   </footer>
 
-  <!-- Simple JS: try autoplay + show error if needed -->
+  <!-- ============== JS: Autoplay & graceful errors ==============
+       - Tries to play both videos immediately (muted allows autoplay).
+       - Shows the error overlay only for the header clip.
+       - The Rorochibi card already swaps to an image if video fails. -->
   <script>
     (function () {
       const vids = [
         { v: document.getElementById('video-neon'),  err: document.getElementById('video-neon-error') },
-        // title has a thumbnail fallback instead of an error overlay; err can be null
-        { v: document.getElementById('video-title'), err: document.getElementById('video-title-error') }
+        { v: document.getElementById('video-title'), err: null } // uses image fallback instead
       ];
 
       vids.forEach(({ v, err }) => {
@@ -162,10 +167,9 @@
         v.addEventListener('error', showErr);
         v.addEventListener('stalled', showErr);
         v.addEventListener('abort', showErr);
-        v.play().catch(() => { /* muted+autoplay should pass; ignore if blocked */ });
+        v.play().catch(() => { /* ignore if a browser blocks autoplay */ });
       });
     })();
   </script>
-
 </body>
 </html>
