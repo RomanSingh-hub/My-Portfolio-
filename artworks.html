@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -24,19 +23,29 @@
     </div>
   </nav>
 
-  <!-- ARTWORKS -->
-  <a href="artworks.html" class="block glass-effect rounded-2xl overflow-hidden work-card pulse-glow hover:scale-[1.02] transition-transform" data-category="artworks">
-    <div class="h-64 bg-gradient-to-br from-red-500 via-pink-500 to-purple-600 flex items-center justify-center relative">
-      <div class="absolute inset-0 bg-black/20"></div>
-      <svg class="w-24 h-24 text-white z-10" fill="currentColor" viewBox="0 0 20 20">
-        <path d="M4 3h16v2H4V3zM4 7h16v2H4V7zM4 11h10v2H4v-2z"/>
-      </svg>
-    </div>
-   
-  </a>
+  <!-- Hero Video (right under nav, no overlay text) -->
+  <section class="relative h-[38vh] md:h-[45vh] pt-20 overflow-hidden">
+    <video
+      class="absolute inset-0 w-full h-full object-cover"
+      src="final_pdf/artwork/heading.mp4"
+      poster="assets/artworks_poster.jpg"
+      autoplay
+      muted
+      loop
+      playsinline
+    ></video>
+    <!-- subtle fade to content -->
+    <div class="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-black to-transparent pointer-events-none"></div>
+  </section>
+
+  <!-- Page heading (separate from video) -->
+  <header class="max-w-7xl mx-auto px-6 py-8">
+    <h1 class="text-4xl md:text-6xl font-black neon-text">ARTWORKS</h1>
+    <p class="text-gray-300 mt-3">Digital art, animations, and visual experiments.</p>
+  </header>
 
   <!-- Artworks Section -->
-  <section class="max-w-5xl mx-auto px-6 space-y-16 py-16">
+  <section class="max-w-5xl mx-auto px-6 space-y-16 pb-20">
 
     <!-- Artwork 1 - Image -->
     <div class="glass-effect rounded-2xl p-8 work-card">
