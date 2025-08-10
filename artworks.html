@@ -2,36 +2,25 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Artworks - RORO LAB</title>
-
-  <!-- Tailwind for fast layout utilities -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Artworks – RORO LAB</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <!-- Your site styles (keep if you already have glass-effect, neon-text, etc.) -->
-  <link rel="stylesheet" href="style.css" />
 
   <style>
-    /* ================================
-       VIDEO CROP (per‑clip)
-       Lower % => moves image UP | Higher % => moves DOWN
-    ================================= */
-    .video-shift-heading { object-position: center 15%; } /* show more top text */
-    .video-shift-title   { object-position: center 8%;  } /* center the phone frame */
-
-    /* Optional: subtle card hover */
-    .work-card { transition: transform .25s ease, box-shadow .25s ease; }
-    .work-card:hover { transform: translateY(-2px); }
+    /* Optional: nudge the visible area inside each video (you asked for this earlier) */
+    .video-shift-heading { object-position: center 15%; } /* show a bit more of the top (Roman’s) */
+    .video-shift-title   { object-position: center 8%;  } /* separate tweak just for Rorochibi */
   </style>
 </head>
+<body class="min-h-screen bg-black text-white">
 
-<body class="min-h-screen flex flex-col overflow-x-hidden bg-black text-white">
-  <!-- ================= NAV BAR ================= -->
-  <nav class="fixed top-0 w-full z-50 glass-effect">
-    <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-      <div class="text-2xl font-bold neon-text">
+  <!-- NAV -->
+  <nav class="fixed top-0 left-0 right-0 z-50 bg-black/60 backdrop-blur border-b border-neutral-800">
+    <div class="max-w-4xl mx-auto px-5 h-14 flex items-center justify-between">
+      <div class="font-extrabold tracking-wider">
         <span class="text-cyan-400">RORO</span><span class="text-pink-400"> LAB</span>
       </div>
-      <div class="hidden md:flex space-x-10">
+      <div class="hidden sm:flex gap-8 text-sm">
         <a href="index.html#home"  class="hover:text-cyan-400">HOME</a>
         <a href="index.html#about" class="hover:text-cyan-400">ABOUT</a>
         <a href="index.html#works" class="hover:text-cyan-400">WORKS</a>
@@ -39,119 +28,101 @@
     </div>
   </nav>
 
-  <!-- Spacer so content clears the fixed nav -->
-  <header class="max-w-7xl mx-auto px-6 pt-28 pb-2"></header>
+  <!-- Spacer so content doesn’t hide under the fixed nav -->
+  <div class="h-14"></div>
 
-  <!-- =============== ARTWORKS CONTENT ===============
-       • Single column, tall cinematic cards (like your sketch)
-       • Change h-[300px]/md:h-[420px–500px] to taste
-  =================================================== -->
-  <section class="max-w-7xl mx-auto px-6 space-y-12 pb-24">
+  <!-- PAGE: single column stack -->
+  <main class="max-w-4xl mx-auto px-5 py-8 space-y-8">
 
-    <!-- ===== Card 1: Header Clip (no controls, auto/loop) ===== -->
-    <div class="glass-effect rounded-2xl p-6 work-card">
-      <h3 class="text-lg font-semibold text-cyan-300 mb-3">Header Clip</h3>
+    <!-- ==== CARD 1: Header Clip (big) ==== -->
+    <section class="rounded-2xl border border-neutral-800 bg-neutral-900/40 shadow-lg">
+      <header class="px-5 pt-5">
+        <h2 class="text-sm font-semibold text-neutral-300">Header Clip</h2>
+      </header>
 
-      <!-- Tall media area -->
-      <div class="w-full h-[300px] md:h-[420px] rounded-xl overflow-hidden shadow-lg relative">
-        <video
-          id="video-neon"
-          class="absolute inset-0 w-full h-full object-cover video-shift-heading"
-          src="final_pdf/artwork/heading.mp4"
-          preload="auto"
-          autoplay
-          muted
-          playsinline
-          loop
-        ></video>
-
-        <!-- Error overlay (only shows if file fails to load) -->
-        <div id="video-neon-error"
-             class="hidden absolute inset-0 flex items-center justify-center bg-black/70 text-sm text-gray-200 px-4 text-center">
-          Video couldn’t load. Please check the file path/format, or
-          <a href="final_pdf/artwork/heading.mp4" class="ml-1 underline text-cyan-400">open directly</a>.
-        </div>
-      </div>
-    </div>
-
-    <!-- ===== Card 2: Rorochibi (clickable to Instagram) ===== -->
-    <div class="glass-effect rounded-2xl p-6 work-card">
-      <h3 class="text-3xl font-bold text-cyan-400 mb-2">Rorochibi</h3>
-      <p class="text-gray-300 mb-4">Welcome to the sweet life of RORO…</p>
-
-      <!-- Whole media area links to Instagram -->
-      <a href="https://www.instagram.com/rorochibi?igsh=OHUyMTR4dmpwMjZz" target="_blank" rel="noopener">
-        <div class="w-full h-[300px] md:h-[500px] rounded-xl overflow-hidden shadow-lg relative">
+      <!-- Tall, full‑bleed video inside the card -->
+      <div class="relative mt-4 rounded-b-2xl overflow-hidden">
+        <div class="w-full h-[240px] sm:h-[300px] md:h-[360px]">
           <video
-            id="video-title"
-            class="absolute inset-0 w-full h-full object-cover video-shift-title"
-            src="final_pdf/artwork/roro_insta.mp4"
+            class="absolute inset-0 w-full h-full object-cover video-shift-heading"
+            src="final_pdf/artwork/heading.mp4"
             preload="auto"
             autoplay
             muted
             playsinline
             loop
-            style="cursor:pointer"
-            onerror="this.style.display='none';document.getElementById('video-title-fallback').style.display='block';"
           ></video>
+        </div>
+      </div>
+    </section>
 
-          <!-- Image fallback if video errors -->
-          <img
-            id="video-title-fallback"
-            src="final_pdf/artwork/title_sequence_thumbnail.jpg"
-            alt="Rorochibi — Click to watch on Instagram"
-            class="absolute inset-0 w-full h-full object-cover"
-            style="display:none; cursor:pointer;"
-          />
+    <!-- ==== CARD 2: Rorochibi + full view video (clickable to Instagram) ==== -->
+    <section class="rounded-2xl border border-neutral-800 bg-neutral-900/40 shadow-lg">
+      <header class="p-5 pb-0">
+        <h2 class="text-2xl sm:text-3xl font-extrabold text-cyan-400">Rorochibi</h2>
+        <p class="text-neutral-300 mt-1 mb-4">
+          Welcome to the sweet life of RORO…
+        </p>
+      </header>
+
+      <!-- Full‑width, tall video block; wraps in a link to Instagram -->
+      <a href="https://www.instagram.com/rorochibi?igsh=OHUyMTR4dmpwMjZz" target="_blank" rel="noopener"
+         class="block group">
+        <div class="relative rounded-b-2xl overflow-hidden">
+          <!-- make this one taller so it feels “full view” -->
+          <div class="w-full h-[280px] sm:h-[360px] md:h-[440px] lg:h-[520px]">
+            <video
+              id="video-title"
+              class="absolute inset-0 w-full h-full object-cover video-shift-title transition-transform duration-300 group-hover:scale-[1.01]"
+              src="final_pdf/artwork/roro_insta.mp4"
+              preload="auto"
+              autoplay
+              muted
+              playsinline
+              loop
+            ></video>
+          </div>
         </div>
       </a>
-    </div>
+    </section>
 
-    <!-- ===== Card 3: Gallery ===== -->
-    <a href="gallery.html" class="block glass-effect rounded-2xl p-6 work-card hover:scale-[1.01] transition-transform">
-      <h3 class="text-3xl font-bold text-cyan-400 mb-2">Gallery</h3>
-      <p class="text-gray-300 mb-4">Paintings & drawings. Tap to view the full collection.</p>
+    <!-- ==== CARD 3: Gallery ==== -->
+    <section class="rounded-2xl border border-neutral-800 bg-neutral-900/40 shadow-lg">
+      <header class="p-5 pb-0">
+        <h2 class="text-2xl sm:text-3xl font-extrabold text-cyan-400">Gallery</h2>
+        <p class="text-neutral-300 mt-1 mb-4">Paintings & drawings. Tap to view the full collection.</p>
+      </header>
 
-      <div class="w-full h-[300px] md:h-[420px] rounded-xl overflow-hidden shadow-lg">
-        <img
-          src="final_pdf/artwork/20250809_012123.jpg"
-          alt="Skeleton hand with butterfly — gallery cover"
-          class="w-full h-full object-cover"
-          loading="lazy"
-        />
-      </div>
-    </a>
+      <a href="gallery.html" class="block">
+        <div class="relative rounded-b-2xl overflow-hidden">
+          <div class="w-full h-[200px] sm:h-[240px] md:h-[300px]">
+            <img
+              src="final_pdf/artwork/20250809_012123.jpg"
+              alt="Skeleton hand with butterfly — gallery cover"
+              class="absolute inset-0 w-full h-full object-cover transition-transform duration-300 hover:scale-[1.02]"
+              loading="lazy"
+            />
+          </div>
+        </div>
+      </a>
+    </section>
 
-  </section>
+  </main>
 
-  <!-- ================= FOOTER ================= -->
-  <footer class="mt-auto py-12 border-t border-gray-800 text-center">
-    <div class="text-2xl font-bold mb-4">
+  <!-- FOOTER -->
+  <footer class="max-w-4xl mx-auto px-5 py-10 text-center text-neutral-400">
+    <div class="font-extrabold text-lg mb-1">
       <span class="text-cyan-400">RORO</span><span class="text-pink-400"> LAB</span>
     </div>
-    <p class="text-gray-400 mb-4">Pushing the boundaries of digital creativity</p>
-    <p class="text-gray-600">&copy; 2024 Roro Lab. All rights reserved.</p>
+    <p class="text-sm">Pushing the boundaries of digital creativity</p>
+    <p class="text-xs text-neutral-500 mt-2">&copy; 2024 Roro Lab. All rights reserved.</p>
   </footer>
 
-  <!-- ===== Autoplay & graceful errors =====
-       - Tries to play videos immediately (muted + playsinline enables autoplay on mobile)
-       - Shows error overlay for header only; Rorochibi swaps to thumbnail on error -->
+  <!-- Small helper: try to play videos on load (muted + playsinline = usually OK) -->
   <script>
-    (function () {
-      const vids = [
-        { v: document.getElementById('video-neon'),  err: document.getElementById('video-neon-error') },
-        { v: document.getElementById('video-title'), err: null } // image fallback handles errors
-      ];
-
-      vids.forEach(({ v, err }) => {
-        if (!v) return;
-        const showErr = () => err && err.classList.remove('hidden');
-        v.addEventListener('error', showErr);
-        v.addEventListener('stalled', showErr);
-        v.addEventListener('abort', showErr);
-        v.play().catch(() => { /* ignore if browser blocks autoplay */ });
-      });
-    })();
+    document.querySelectorAll('video[autoplay]').forEach(v=>{
+      v.play().catch(()=>{/* ignore autoplay block on some browsers */});
+    });
   </script>
 </body>
 </html>
