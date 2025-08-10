@@ -2,215 +2,255 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Creative Portfolio V2 - Multimedia Artist</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>RORO LAB — Creative Portfolio</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="style.css" />
+
+  <!-- Minimal custom polish (keeps your neon/glass/typing from reference) -->
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap');
+    :root{ --cy:#22d3ee; --pk:#f472b6; }
+    html{ scroll-behavior:smooth }
+    body{ font-family:'Poppins',sans-serif; background:#0a0a0a; color:#fff }
+
+    /* Subtle grid background */
+    .grid-bg{
+      background-image:
+        linear-gradient(rgba(34,211,238,.08) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(34,211,238,.08) 1px, transparent 1px);
+      background-size:48px 48px;
+    }
+    /* Brand effects */
+    .neon-text{ text-shadow:0 0 10px rgba(34,211,238,.75) }
+    .glass-effect{ background:rgba(255,255,255,.05); backdrop-filter:blur(10px); border:1px solid rgba(255,255,255,.1) }
+    .pulse-glow{ animation:pulseglow 2.6s ease-in-out infinite alternate }
+    @keyframes pulseglow{ from{box-shadow:0 0 22px rgba(244,114,182,.35)} to{box-shadow:0 0 36px rgba(244,114,182,.7)} }
+    .typing-animation{ border-right:2px solid var(--cy); white-space:nowrap; overflow:hidden; animation:typing 3s steps(40,end), blink .75s step-end infinite }
+    @keyframes typing{ from{width:0} to{width:100%} }
+    @keyframes blink{ 50%{border-color:transparent} }
+    /* Work card lift */
+    .work-card{ transition:transform .35s cubic-bezier(.2,.7,.2,1), box-shadow .35s }
+    .work-card:hover{ transform:translateY(-8px); box-shadow:0 18px 40px rgba(0,0,0,.35) }
+    /* Mobile menu slide */
+    .slide{ transition:max-height .35s ease }
+  </style>
 </head>
-<body class="flex flex-col min-h-screen overflow-x-hidden">
 
-  <!-- ===========================
-       BACKGROUND GRID
-  ============================ -->
-  <div class="fixed inset-0 grid-bg opacity-20 pointer-events-none"></div>
+<body class="flex flex-col min-h-screen overflow-x-hidden antialiased">
+  <!-- Background -->
+  <div class="fixed inset-0 grid-bg opacity-20 pointer-events-none -z-10"></div>
 
-  <!-- ===========================
-       NAVIGATION BAR
-  ============================ -->
+  <!-- NAV -->
   <nav class="fixed top-0 w-full z-50 glass-effect">
-    <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-      <!-- Logo -->
-      <div class="text-2xl font-bold neon-text">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex justify-between items-center">
+      <a href="#home" class="text-2xl font-extrabold neon-text tracking-tight">
         <span class="text-cyan-400">RORO</span><span class="text-pink-400"> LAB</span>
+      </a>
+
+      <!-- Desktop -->
+      <div class="hidden md:flex items-center gap-10 text-sm">
+        <a href="#home" class="hover:text-cyan-300/90">HOME</a>
+        <a href="#about" class="hover:text-cyan-300/90">ABOUT</a>
+        <a href="#works" class="hover:text-cyan-300/90">WORKS</a>
+        <a href="assets/roman_singh.pdf" target="_blank" class="hover:text-cyan-300/90">RESUME</a>
       </div>
-      <!-- Desktop Navigation -->
-      <div class="hidden md:flex space-x-12 pr-20">
-        <a href="#home" class="hover:text-cyan-400 active">HOME</a>
-        <a href="#about" class="hover:text-cyan-400">ABOUT</a>
-        <a href="#works" class="hover:text-cyan-400">WORKS</a>
-        <a href="assets/roman_singh.pdf" target="_blank" class="hover:text-cyan-400">RESUME</a>
-      </div>
-      <!-- Mobile Navigation Button -->
-      <button id="mobile-nav-toggle" class="md:hidden text-cyan-400">
-        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                d="M4 6h16M4 12h16M4 18h16" />
+
+      <!-- Mobile toggle -->
+      <button id="mobile-nav-toggle" class="md:hidden p-2 text-cyan-300 hover:text-cyan-200" aria-label="Open menu">
+        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
         </svg>
       </button>
     </div>
-    <!-- Mobile Navigation Menu -->
-    <div id="mobile-nav" class="md:hidden hidden glass-effect border-t border-white/10 px-6 py-4 space-y-4">
-      <a href="#home" class="block hover:text-cyan-400">HOME</a>
-      <a href="#about" class="block hover:text-cyan-400">ABOUT</a>
-      <a href="#works" class="block hover:text-cyan-400">WORKS</a>
-      <a href="assets/roman_singh.pdf" target="_blank" class="block hover:text-cyan-400">RESUME</a>
+
+    <!-- Mobile menu -->
+    <div id="mobile-nav" class="md:hidden overflow-hidden max-h-0 slide border-t border-white/10">
+      <div class="px-6 py-3 flex flex-col gap-2 text-base">
+        <a href="#home" class="py-2 hover:text-cyan-300/90">HOME</a>
+        <a href="#about" class="py-2 hover:text-cyan-300/90">ABOUT</a>
+        <a href="#works" class="py-2 hover:text-cyan-300/90">WORKS</a>
+        <a href="assets/roman_singh.pdf" target="_blank" class="py-2 hover:text-cyan-300/90">RESUME</a>
+      </div>
     </div>
   </nav>
 
-  <!-- ===========================
-       HERO SECTION
-  ============================ -->
-     <!-- ===========================
-     HERO SECTION
-============================ -->
-<section id="home" class="min-h-screen flex flex-col md:flex-row items-center justify-center gap-12 px-6 max-w-7xl mx-auto">
+  <!-- HERO -->
+  <section id="home" class="min-h-screen flex items-center pt-24">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 grid grid-cols-1 md:grid-cols-2 gap-10 lg:gap-12 items-center">
+      <!-- Copy -->
+      <div class="text-center md:text-left">
+        <p class="text-xs tracking-[0.22em] text-white/60 uppercase">Portfolio</p>
+        <h1 class="mt-3 text-4xl sm:text-5xl md:text-6xl xl:text-7xl font-extrabold neon-text leading-[1.05]">
+          DIGITAL <span class="text-white">CREATOR</span>
+        </h1>
+        <p class="mt-5 text-lg sm:text-xl text-white/70 max-w-xl mx-auto md:mx-0 typing-animation">
+          Multimedia Artist • Visual Storyteller • Creative Innovator
+        </p>
 
-  <!-- Left Side Text -->
-  <div class="flex flex-col justify-center w-full md:w-1/2 max-w-xl text-center md:text-left">
-    <h1 class="text-4xl sm:text-5xl md:text-7xl font-black mb-4 neon-text bounce-text leading-tight">
-      DIGITAL CREATOR
-    </h1>
-    <p class="text-lg sm:text-xl md:text-2xl text-gray-300 mb-8 leading-relaxed">
-      Multimedia Artist • Visual Storyteller • Creative Innovator
-    </p>
-
-    <div class="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center md:justify-start">
-      <a href="#works"
-         class="px-8 py-4 rounded-full font-semibold inline-block border-2 border-cyan-400 text-cyan-400 hover:bg-cyan-400 hover:text-black transition text-center">
-        EXPLORE WORKS
-      </a>
-      <a href="assets/roman_singh.pdf" target="_blank"
-         class="px-8 py-4 rounded-full font-semibold inline-block border-2 border-cyan-400 text-cyan-400 hover:bg-cyan-400 hover:text-black transition text-center">
-        VIEW RÉSUMÉ
-      </a>
-    </div>
-  </div>
-  
-  <!-- Right Side Image with Glass Effect and Pulsing Blue Glow (Smaller) -->
-  <div class="w-full md:w-1/2 flex justify-center md:justify-end">
-    <div class="relative rounded-full glass-effect border-4 border-cyan-400 p-2
-                before:content-[''] before:absolute before:inset-0 before:rounded-full
-                before:bg-cyan-500/40 before:blur-3xl before:-z-10 before:animate-pulse-slow"
-         style="max-width: 24rem;">
-      <img src="assets/ROMAN_PAINTING.jpg" alt="Creative Portrait"
-           class="rounded-full w-full object-cover" />
-    </div>
-  </div>
-
-
-
-
-</section>
-
-
-  <!-- ===========================
-       ABOUT SECTION
-  ============================ -->
-  <section id="about" class="py-20 relative max-w-7xl mx-auto px-6">
-    <div class="text-center mb-16">
-      <h2 class="text-5xl font-bold mb-6 neon-text">ABOUT THE ARTIST</h2>
-      <p class="text-xl text-gray-300 max-w-3xl mx-auto">
-        I'm a multimedia content creator who transforms ideas into stunning visual experiences 
-        across digital and traditional mediums.
-      </p>
-    </div>
-    <!-- Skills Grid -->
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-      <div class="glass-effect rounded-2xl p-8 text-center work-card">
-        <div class="text-6xl mb-4">🎨</div>
-        <h3 class="text-xl font-bold mb-4 text-cyan-400">DIGITAL ART</h3>
-        <p class="text-gray-300">Creating stunning digital paintings and illustrations</p>
+        <div class="mt-8 flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center md:justify-start">
+          <a href="#works" class="px-8 py-4 rounded-full font-semibold inline-block border-2 border-cyan-400 text-cyan-400 hover:bg-cyan-400 hover:text-black transition text-center">
+            EXPLORE WORKS
+          </a>
+          <a href="assets/roman_singh.pdf" target="_blank" class="px-8 py-4 rounded-full font-semibold inline-block border-2 border-white/20 hover:bg-white hover:text-black transition text-center">
+            VIEW RÉSUMÉ
+          </a>
+        </div>
       </div>
-      <div class="glass-effect rounded-2xl p-8 text-center work-card">
-        <div class="text-6xl mb-4">📸</div>
-        <h3 class="text-xl font-bold mb-4 text-pink-400">PHOTOGRAPHY</h3>
-        <p class="text-gray-300">Capturing moments through the lens of artistic vision</p>
-      </div>
-      <div class="glass-effect rounded-2xl p-8 text-center work-card">
-        <div class="text-6xl mb-4">✍️</div>
-        <h3 class="text-xl font-bold mb-4 text-purple-400">CONTENT WRITING</h3>
-        <p class="text-gray-300">Crafting compelling narratives across platforms</p>
-      </div>
-      <div class="glass-effect rounded-2xl p-8 text-center work-card">
-        <div class="text-6xl mb-4">🎬</div>
-        <h3 class="text-xl font-bold mb-4 text-green-400">ANIMATION</h3>
-        <p class="text-gray-300">Bringing designs to life with motion graphics</p>
+
+      <!-- Portrait -->
+      <div class="flex justify-center md:justify-end">
+        <div class="relative rounded-full glass-effect border-4 border-cyan-400 p-2 pulse-glow"
+             style="max-width:22rem">
+          <div class="absolute -inset-6 rounded-full bg-cyan-500/25 blur-2xl -z-10"></div>
+          <img src="assets/ROMAN_PAINTING.jpg" alt="Creative portrait of Roman"
+               class="rounded-full w-full h-full object-cover" />
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- ===========================
-       WORKS SECTION
-<!-- WORKS -->
-  <section id="works" class="py-20 relative max-w-7xl mx-auto px-6">
-    <div class="text-center mb-16">
-      <h2 class="text-5xl font-bold mb-6 neon-text">FEATURED WORKS</h2>
-      <p class="text-xl text-gray-300">Explore my stories, insights, artworks, photography, and projects</p>
-    </div>
+  <!-- ABOUT -->
+  <section id="about" class="py-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+      <div class="text-center mb-14 max-w-2xl mx-auto">
+        <h2 class="text-3xl sm:text-4xl font-extrabold neon-text">ABOUT THE ARTIST</h2>
+        <p class="mt-4 text-white/70">
+          I'm a multimedia content creator who turns ideas into clear, engaging visuals across digital and traditional media.
+        </p>
+      </div>
 
-    <div class="flex flex-wrap justify-center gap-4 mb-12">
-      <button class="category-tab px-6 py-3 rounded-full glass-effect border border-cyan-400 text-cyan-400 font-semibold active-filter" data-filter="all">ALL</button>
-      <button class="category-tab px-6 py-3 rounded-full glass-effect border border-pink-400 text-pink-400 font-semibold" data-filter="stories">STORIES & INSIGHTS</button>
-      <button class="category-tab px-6 py-3 rounded-full glass-effect border border-green-400 text-green-400 font-semibold" data-filter="photography">PHOTOGRAPHY</button>
-      <button class="category-tab px-6 py-3 rounded-full glass-effect border border-yellow-400 text-yellow-400 font-semibold" data-filter="artworks">ARTWORKS</button>
-      <button class="category-tab px-6 py-3 rounded-full glass-effect border border-red-400 text-red-400 font-semibold" data-filter="projects">PROJECTS</button>
-    </div>
-
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="works-grid">
-      <a href="stories.html" class="block glass-effect rounded-2xl overflow-hidden work-card pulse-glow hover:scale-[1.02] transition-transform">
-        <div class="h-64 bg-gradient-to-br from-purple-500 via-indigo-500 to-pink-500 flex items-center justify-center relative">
-          <div class="absolute inset-0 bg-black/20"></div>
-          <svg class="w-24 h-24 text-white z-10" fill="currentColor" viewBox="0 0 24 24"><path d="M4 4h16v2H4zm0 4h16v2H4zm0 4h10v2H4z"/></svg>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
+        <div class="glass-effect rounded-2xl p-8 text-center work-card">
+          <div class="text-6xl mb-4">🎨</div>
+          <h3 class="text-xl font-bold mb-2 text-cyan-300">DIGITAL ART</h3>
+          <p class="text-gray-300">Illustrations and concept art with strong form and color.</p>
         </div>
-        <div class="p-6">
-          <h3 class="text-2xl font-bold mb-2 text-cyan-400">STORIES & INSIGHTS</h3>
-          <p class="text-gray-300">Exploring creative stories, design insights, and lessons from experience</p>
+        <div class="glass-effect rounded-2xl p-8 text-center work-card">
+          <div class="text-6xl mb-4">📸</div>
+          <h3 class="text-xl font-bold mb-2 text-pink-300">PHOTOGRAPHY</h3>
+          <p class="text-gray-300">Editorial, events, and portrait storytelling.</p>
         </div>
-      </a>
-
-      <a href="photography.html" class="block glass-effect rounded-2xl overflow-hidden work-card pulse-glow hover:scale-[1.02] transition-transform" data-category="photography">
-        <div class="h-64 bg-gradient-to-br from-green-500 via-emerald-500 to-cyan-600 flex items-center justify-center relative">
-          <div class="absolute inset-0 bg-black/20"></div>
-          <svg class="w-24 h-24 text-white z-10" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M4 5a2 2 0 00-2 2v8a2 2 0 002 2h12a2 2 0 002-2V7a2 2 0 00-2-2h-1.586a1 1 0 01-.707-.293l-1.121-1.121A2 2 0 0011.172 3H8.828a2 2 0 00-1.414.586L6.293 4.707A1 1 0 015.586 5H4zm6 9a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd"/></svg>
+        <div class="glass-effect rounded-2xl p-8 text-center work-card">
+          <div class="text-6xl mb-4">✍️</div>
+          <h3 class="text-xl font-bold mb-2 text-purple-300">CONTENT WRITING</h3>
+          <p class="text-gray-300">Narratives, captions, and scripts that frame the work.</p>
         </div>
-        <div class="p-6">
-          <h3 class="text-2xl font-bold mb-2 text-cyan-400">PHOTOGRAPHY</h3>
-          <p class="text-gray-300">Capturing creative moments and visual storytelling.</p>
+        <div class="glass-effect rounded-2xl p-8 text-center work-card">
+          <div class="text-6xl mb-4">🎬</div>
+          <h3 class="text-xl font-bold mb-2 text-green-300">ANIMATION</h3>
+          <p class="text-gray-300">Motion graphics and short-form edits for campaigns.</p>
         </div>
-      </a>
-
-      <a href="artworks.html" class="block glass-effect rounded-2xl overflow-hidden work-card pulse-glow hover:scale-[1.02] transition-transform" data-category="artworks">
-        <div class="h-64 bg-gradient-to-br from-red-500 via-pink-500 to-purple-600 flex items-center justify-center relative">
-          <div class="absolute inset-0 bg-black/20"></div>
-          <svg class="w-24 h-24 text-white z-10" fill="currentColor" viewBox="0 0 20 20"><path d="M4 3h16v2H4V3zM4 7h16v2H4V7zM4 11h10v2H4v-2z"/></svg>
-        </div>
-        <div class="p-6">
-          <h3 class="text-2xl font-bold mb-2 text-cyan-400">ARTWORKS</h3>
-          <p class="text-gray-300">Digital art and creative design projects.</p>
-        </div>
-      </a>
-
-      <a href="projects.html" class="block glass-effect rounded-2xl overflow-hidden work-card pulse-glow hover:scale-[1.02] transition-transform" data-category="projects">
-        <div class="h-64 bg-gradient-to-br from-yellow-500 via-orange-500 to-red-500 flex items-center justify-center relative">
-          <div class="absolute inset-0 bg-black/20"></div>
-          <svg class="w-24 h-24 text-white z-10" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l4 4h-3v4h-2V6H8l4-4zM12 22l-4-4h3v-4h2v4h3l-4 4z"/></svg>
-        </div>
-        <div class="p-6">
-          <h3 class="text-2xl font-bold mb-2 text-cyan-400">PROJECTS</h3>
-          <p class="text-gray-300">Special multimedia and design initiatives.</p>
-        </div>
-      </a>
-
+      </div>
     </div>
   </section>
 
-  <!-- ===========================
-       FOOTER
-  ============================ -->
-  <footer class="mt-auto py-12 border-t border-gray-800 text-center">
-    <div class="text-2xl font-bold mb-4">
+  <!-- WORKS -->
+  <section id="works" class="py-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+      <div class="text-center mb-14">
+        <h2 class="text-3xl sm:text-4xl font-extrabold neon-text">FEATURED WORKS</h2>
+        <p class="mt-4 text-white/70">Explore my stories, photography, artworks, and projects.</p>
+      </div>
+
+      <!-- Category Tabs (simple highlight; links go to pages or can be wired to filter later) -->
+      <div class="flex flex-wrap justify-center gap-3 mb-10">
+        <button class="px-6 py-3 rounded-full glass-effect border border-cyan-400 text-cyan-400 font-semibold ring ring-cyan-300/50">ALL</button>
+        <button class="category-tab px-6 py-3 rounded-full glass-effect border border-pink-400 text-pink-400 font-semibold">STORIES & INSIGHTS</button>
+        <button class="category-tab px-6 py-3 rounded-full glass-effect border border-green-400 text-green-400 font-semibold">PHOTOGRAPHY</button>
+        <button class="category-tab px-6 py-3 rounded-full glass-effect border border-yellow-400 text-yellow-400 font-semibold">ARTWORKS</button>
+        <button class="category-tab px-6 py-3 rounded-full glass-effect border border-red-400 text-red-400 font-semibold">PROJECTS</button>
+      </div>
+
+      <!-- Cards -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="works-grid">
+        <!-- Stories -->
+        <a href="stories.html" class="block glass-effect rounded-2xl overflow-hidden work-card hover:scale-[1.02]">
+          <div class="h-64 bg-gradient-to-br from-purple-500 via-indigo-500 to-pink-500 flex items-center justify-center relative">
+            <div class="absolute inset-0 bg-black/20"></div>
+            <svg class="w-20 h-20 text-white z-10" viewBox="0 0 24 24" fill="currentColor"><path d="M4 4h16v2H4zm0 4h16v2H4zm0 4h10v2H4z"/></svg>
+          </div>
+          <div class="p-6">
+            <h3 class="text-xl sm:text-2xl font-bold mb-2 text-cyan-300">STORIES & INSIGHTS</h3>
+            <p class="text-gray-300">Creative process notes, lessons, and essays.</p>
+          </div>
+        </a>
+
+        <!-- Photography -->
+        <a href="photography.html" class="block glass-effect rounded-2xl overflow-hidden work-card hover:scale-[1.02]">
+          <div class="h-64 bg-gradient-to-br from-green-500 via-emerald-500 to-cyan-600 flex items-center justify-center relative">
+            <div class="absolute inset-0 bg-black/20"></div>
+            <svg class="w-20 h-20 text-white z-10" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M4 5a2 2 0 00-2 2v8a2 2 0 002 2h12a2 2 0 002-2V7a2 2 0 00-2-2h-1.586a1 1 0 01-.707-.293l-1.121-1.121A2 2 0 0011.172 3H8.828a2 2 0 00-1.414.586L6.293 4.707A1 1 0 015.586 5H4zm6 9a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd"/></svg>
+          </div>
+          <div class="p-6">
+            <h3 class="text-xl sm:text-2xl font-bold mb-2 text-cyan-300">PHOTOGRAPHY</h3>
+            <p class="text-gray-300">Editorial, events, and visual storytelling.</p>
+          </div>
+        </a>
+
+        <!-- Artworks -->
+        <a href="artworks.html" class="block glass-effect rounded-2xl overflow-hidden work-card hover:scale-[1.02]">
+          <div class="h-64 bg-gradient-to-br from-rose-600 via-pink-600 to-purple-600 flex items-center justify-center relative">
+            <div class="absolute inset-0 bg-black/20"></div>
+            <svg class="w-20 h-20 text-white z-10" viewBox="0 0 20 20" fill="currentColor"><path d="M4 3h16v2H4V3zM4 7h16v2H4V7zM4 11h10v2H4v-2z"/></svg>
+          </div>
+          <div class="p-6">
+            <h3 class="text-xl sm:text-2xl font-bold mb-2 text-cyan-300">ARTWORKS</h3>
+            <p class="text-gray-300">Digital art and focused design studies.</p>
+          </div>
+        </a>
+
+        <!-- Projects -->
+        <a href="projects.html" class="block glass-effect rounded-2xl overflow-hidden work-card hover:scale-[1.02]">
+          <div class="h-64 bg-gradient-to-br from-yellow-500 via-orange-500 to-red-500 flex items-center justify-center relative">
+            <div class="absolute inset-0 bg-black/20"></div>
+            <svg class="w-20 h-20 text-white z-10" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l4 4h-3v4h-2V6H8l4-4zM12 22l-4-4h3v-4h2v4h3l-4 4z"/></svg>
+          </div>
+          <div class="p-6">
+            <h3 class="text-xl sm:text-2xl font-bold mb-2 text-cyan-300">PROJECTS</h3>
+            <p class="text-gray-300">Selected builds and campaign pieces.</p>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="mt-auto py-12 border-t border-white/10 text-center">
+    <div class="text-2xl font-extrabold mb-3 neon-text">
       <span class="text-cyan-400">RORO</span><span class="text-pink-400"> LAB</span>
     </div>
-    <p class="text-gray-400 mb-4">Pushing the boundaries of digital creativity</p>
-    <p class="text-gray-600">&copy; 2024 Roro Lab. All rights reserved.</p>
+    <p class="text-gray-400 mb-2">Pushing the boundaries of digital creativity</p>
+    <p class="text-gray-600">&copy; 2025 Roro Lab. All rights reserved.</p>
   </footer>
 
+  <!-- JS -->
   <script>
-    // Mobile menu toggle
+    // Mobile menu toggle + auto-close on link click
     const btn = document.getElementById('mobile-nav-toggle');
     const menu = document.getElementById('mobile-nav');
-    if (btn && menu) btn.addEventListener('click', () => menu.classList.toggle('hidden'));
-  </script>
+    let open = false;
+    if (btn && menu) {
+      btn.addEventListener('click', () => {
+        open = !open;
+        menu.style.maxHeight = open ? menu.scrollHeight + 'px' : '0px';
+      });
+      menu.querySelectorAll('a').forEach(a =>
+        a.addEventListener('click', () => { open = false; menu.style.maxHeight = '0px'; })
+      );
+    }
 
+    // Optional: highlight active nav while scrolling (desktop & mobile)
+    const sections = ['home','about','works'].map(id => document.getElementById(id));
+    const links = Array.from(document.querySelectorAll('nav a[href^="#"]'));
+    const setActive = () => {
+      let current = 'home';
+      sections.forEach(sec => {
+        if (sec && window.scrollY + 120 >= sec.offsetTop) current = sec.id;
+      });
+      links.forEach(a => a.classList.toggle('text-cyan-300', a.getAttribute('href') === '#' + current));
+    };
+    window.addEventListener('scroll', setActive);
+    window.addEventListener('load', setActive);
+  </script>
 </body>
 </html>
