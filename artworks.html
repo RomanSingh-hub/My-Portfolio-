@@ -4,40 +4,28 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Artworks - RORO LAB</title>
+
+  <!-- Tailwind for fast layout utilities -->
   <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Your site styles (keep if you already have glass-effect, neon-text, etc.) -->
   <link rel="stylesheet" href="style.css" />
 
   <style>
-    /* =========================================
-       VIDEO CROPPING (per‑clip)
-       2nd value (%) nudges the frame vertically:
-       Lower % => move UP | Higher % => move DOWN
-    ========================================== */
-    .video-shift-heading { object-position: center 15%; } /* shows more top text */
-    .video-shift-title   { object-position: center 8%;  }  /* centers phone frame */
+    /* ================================
+       VIDEO CROP (per‑clip)
+       Lower % => moves image UP | Higher % => moves DOWN
+    ================================= */
+    .video-shift-heading { object-position: center 15%; } /* show more top text */
+    .video-shift-title   { object-position: center 8%;  } /* center the phone frame */
 
-    /* =========================================
-       CARD MEDIA HEIGHT
-       clamp(min, preferred, max) = responsive & consistent
-       • Increase 30vw to make the page feel “fuller”
-       • Decrease 30vw to make cards shorter
-    ========================================== */
-    .card-media { height: clamp(220px, 30vw, 420px); }
-
-    /* Subtle card hover for interactivity */
+    /* Optional: subtle card hover */
     .work-card { transition: transform .25s ease, box-shadow .25s ease; }
     .work-card:hover { transform: translateY(-2px); }
-
-    /* Global grid gap tuned for compact look */
-    .grid-gap { gap: 1.25rem; }          /* ~20px */
-    @media (min-width: 1024px) {
-      .grid-gap { gap: 1.5rem; }         /* ~24px on lg+ */
-    }
   </style>
 </head>
 
 <body class="min-h-screen flex flex-col overflow-x-hidden bg-black text-white">
-  <!-- ================= NAVIGATION ================= -->
+  <!-- ================= NAV BAR ================= -->
   <nav class="fixed top-0 w-full z-50 glass-effect">
     <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
       <div class="text-2xl font-bold neon-text">
@@ -54,90 +42,86 @@
   <!-- Spacer so content clears the fixed nav -->
   <header class="max-w-7xl mx-auto px-6 pt-28 pb-2"></header>
 
-  <!-- ================ CONTENT =================
-       • 1 column on mobile, 2 columns on md+
-       • Every card uses the same media height for balance -->
-  <section class="max-w-7xl mx-auto px-6 pb-20">
-    <div class="grid grid-cols-1 md:grid-cols-2 grid-gap">
+  <!-- =============== ARTWORKS CONTENT ===============
+       • Single column, tall cinematic cards (like your sketch)
+       • Change h-[300px]/md:h-[420px–500px] to taste
+  =================================================== -->
+  <section class="max-w-7xl mx-auto px-6 space-y-12 pb-24">
 
-      <!-- ===== Header Clip ===== -->
-      <div class="glass-effect rounded-2xl p-5 work-card">
-        <h3 class="text-lg font-semibold text-cyan-300 mb-3">Header Clip</h3>
-        <div class="w-full rounded-xl overflow-hidden shadow-lg relative card-media">
+    <!-- ===== Card 1: Header Clip (no controls, auto/loop) ===== -->
+    <div class="glass-effect rounded-2xl p-6 work-card">
+      <h3 class="text-lg font-semibold text-cyan-300 mb-3">Header Clip</h3>
+
+      <!-- Tall media area -->
+      <div class="w-full h-[300px] md:h-[420px] rounded-xl overflow-hidden shadow-lg relative">
+        <video
+          id="video-neon"
+          class="absolute inset-0 w-full h-full object-cover video-shift-heading"
+          src="final_pdf/artwork/heading.mp4"
+          preload="auto"
+          autoplay
+          muted
+          playsinline
+          loop
+        ></video>
+
+        <!-- Error overlay (only shows if file fails to load) -->
+        <div id="video-neon-error"
+             class="hidden absolute inset-0 flex items-center justify-center bg-black/70 text-sm text-gray-200 px-4 text-center">
+          Video couldn’t load. Please check the file path/format, or
+          <a href="final_pdf/artwork/heading.mp4" class="ml-1 underline text-cyan-400">open directly</a>.
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== Card 2: Rorochibi (clickable to Instagram) ===== -->
+    <div class="glass-effect rounded-2xl p-6 work-card">
+      <h3 class="text-3xl font-bold text-cyan-400 mb-2">Rorochibi</h3>
+      <p class="text-gray-300 mb-4">Welcome to the sweet life of RORO…</p>
+
+      <!-- Whole media area links to Instagram -->
+      <a href="https://www.instagram.com/rorochibi?igsh=OHUyMTR4dmpwMjZz" target="_blank" rel="noopener">
+        <div class="w-full h-[300px] md:h-[500px] rounded-xl overflow-hidden shadow-lg relative">
           <video
-            id="video-neon"
-            class="absolute inset-0 w-full h-full object-cover video-shift-heading"
-            src="final_pdf/artwork/heading.mp4"
-            preload="auto" autoplay muted playsinline loop
+            id="video-title"
+            class="absolute inset-0 w-full h-full object-cover video-shift-title"
+            src="final_pdf/artwork/roro_insta.mp4"
+            preload="auto"
+            autoplay
+            muted
+            playsinline
+            loop
+            style="cursor:pointer"
+            onerror="this.style.display='none';document.getElementById('video-title-fallback').style.display='block';"
           ></video>
 
-          <!-- Shown only if video fails -->
-          <div id="video-neon-error"
-               class="hidden absolute inset-0 flex items-center justify-center bg-black/70 text-sm text-gray-200 px-4 text-center">
-            Video couldn’t load. Please check the file path/format, or
-            <a href="final_pdf/artwork/heading.mp4" class="ml-1 underline text-cyan-400">open directly</a>.
-          </div>
-        </div>
-      </div>
-
-      <!-- ===== Rorochibi (clickable to Instagram) ===== -->
-      <div class="glass-effect rounded-2xl p-5 work-card">
-        <h3 class="text-3xl font-bold text-cyan-400 mb-2">Rorochibi</h3>
-        <p class="text-gray-300 mb-4">Welcome to the sweet life of RORO…</p>
-
-        <!-- Whole media links to Instagram -->
-        <a href="https://www.instagram.com/rorochibi?igsh=OHUyMTR4dmpwMjZz" target="_blank" rel="noopener">
-          <div class="w-full rounded-xl overflow-hidden shadow-lg relative card-media">
-            <video
-              id="video-title"
-              class="absolute inset-0 w-full h-full object-cover video-shift-title"
-              src="final_pdf/artwork/roro_insta.mp4"
-              preload="auto" autoplay muted playsinline loop
-              style="cursor:pointer"
-              onerror="this.style.display='none';document.getElementById('video-title-fallback').style.display='block';"
-            ></video>
-
-            <!-- Fallback still (only shows if video errors) -->
-            <img
-              id="video-title-fallback"
-              src="final_pdf/artwork/title_sequence_thumbnail.jpg"
-              alt="Rorochibi — Click to watch on Instagram"
-              class="absolute inset-0 w-full h-full object-cover"
-              style="display:none; cursor:pointer;"
-            />
-          </div>
-        </a>
-      </div>
-
-      <!-- ===== Gallery A ===== -->
-      <a href="gallery.html" class="block glass-effect rounded-2xl p-5 work-card hover:scale-[1.01] transition-transform">
-        <h3 class="text-2xl font-bold text-cyan-400 mb-2">Gallery</h3>
-        <p class="text-gray-300 mb-4">Paintings & drawings. Tap to view the full collection.</p>
-        <div class="w-full rounded-xl overflow-hidden shadow-lg card-media">
+          <!-- Image fallback if video errors -->
           <img
-            src="final_pdf/artwork/20250809_012123.jpg"
-            alt="Skeleton hand with butterfly — gallery cover"
-            class="w-full h-full object-cover"
-            loading="lazy"
+            id="video-title-fallback"
+            src="final_pdf/artwork/title_sequence_thumbnail.jpg"
+            alt="Rorochibi — Click to watch on Instagram"
+            class="absolute inset-0 w-full h-full object-cover"
+            style="display:none; cursor:pointer;"
           />
         </div>
       </a>
-
-      <!-- ===== Gallery B (swap image later) ===== -->
-      <a href="gallery.html" class="block glass-effect rounded-2xl p-5 work-card hover:scale-[1.01] transition-transform">
-        <h3 class="text-2xl font-bold text-cyan-400 mb-2">Gallery</h3>
-        <p class="text-gray-300 mb-4">Paintings & drawings. Tap to view the full collection.</p>
-        <div class="w-full rounded-xl overflow-hidden shadow-lg card-media">
-          <img
-            src="final_pdf/artwork/20250809_012123.jpg"
-            alt="Skeleton hand with butterfly — gallery cover"
-            class="w-full h-full object-cover"
-            loading="lazy"
-          />
-        </div>
-      </a>
-
     </div>
+
+    <!-- ===== Card 3: Gallery ===== -->
+    <a href="gallery.html" class="block glass-effect rounded-2xl p-6 work-card hover:scale-[1.01] transition-transform">
+      <h3 class="text-3xl font-bold text-cyan-400 mb-2">Gallery</h3>
+      <p class="text-gray-300 mb-4">Paintings & drawings. Tap to view the full collection.</p>
+
+      <div class="w-full h-[300px] md:h-[420px] rounded-xl overflow-hidden shadow-lg">
+        <img
+          src="final_pdf/artwork/20250809_012123.jpg"
+          alt="Skeleton hand with butterfly — gallery cover"
+          class="w-full h-full object-cover"
+          loading="lazy"
+        />
+      </div>
+    </a>
+
   </section>
 
   <!-- ================= FOOTER ================= -->
@@ -149,23 +133,25 @@
     <p class="text-gray-600">&copy; 2024 Roro Lab. All rights reserved.</p>
   </footer>
 
-  <!-- ===== JS: Autoplay & graceful errors ===== -->
+  <!-- ===== Autoplay & graceful errors =====
+       - Tries to play videos immediately (muted + playsinline enables autoplay on mobile)
+       - Shows error overlay for header only; Rorochibi swaps to thumbnail on error -->
   <script>
     (function () {
       const vids = [
         { v: document.getElementById('video-neon'),  err: document.getElementById('video-neon-error') },
-        { v: document.getElementById('video-title'), err: null } // uses image fallback instead
+        { v: document.getElementById('video-title'), err: null } // image fallback handles errors
       ];
+
       vids.forEach(({ v, err }) => {
         if (!v) return;
         const showErr = () => err && err.classList.remove('hidden');
         v.addEventListener('error', showErr);
         v.addEventListener('stalled', showErr);
         v.addEventListener('abort', showErr);
-        v.play().catch(() => {}); // muted + playsinline should allow autoplay
+        v.play().catch(() => { /* ignore if browser blocks autoplay */ });
       });
     })();
   </script>
 </body>
 </html>
-
