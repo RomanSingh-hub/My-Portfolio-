@@ -9,22 +9,28 @@
 </head>
 <body class="flex flex-col min-h-screen overflow-x-hidden">
 
-  <!-- Background Grid -->
+  <!-- ===========================
+       BACKGROUND GRID
+  ============================ -->
   <div class="fixed inset-0 grid-bg opacity-20 pointer-events-none"></div>
 
-  <!-- NAV -->
+  <!-- ===========================
+       NAVIGATION BAR
+  ============================ -->
   <nav class="fixed top-0 w-full z-50 glass-effect">
     <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+      <!-- Logo -->
       <div class="text-2xl font-bold neon-text">
         <span class="text-cyan-400">RORO</span><span class="text-pink-400"> LAB</span>
       </div>
+      <!-- Desktop Navigation -->
       <div class="hidden md:flex space-x-12 pr-20">
         <a href="#home" class="hover:text-cyan-400 active">HOME</a>
         <a href="#about" class="hover:text-cyan-400">ABOUT</a>
         <a href="#works" class="hover:text-cyan-400">WORKS</a>
-        <!-- New: Resume in nav -->
-        <a href="resume.html" target="_blank" class="hover:text-cyan-400">RESUME</a>
+        <a href="Roman_Singh.pdf" target="_blank" class="hover:text-cyan-400">RESUME</a>
       </div>
+      <!-- Mobile Navigation Button -->
       <button id="mobile-nav-toggle" class="md:hidden text-cyan-400">
         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -32,20 +38,21 @@
         </svg>
       </button>
     </div>
+    <!-- Mobile Navigation Menu -->
     <div id="mobile-nav" class="md:hidden hidden glass-effect border-t border-white/10 px-6 py-4 space-y-4">
       <a href="#home" class="block hover:text-cyan-400">HOME</a>
       <a href="#about" class="block hover:text-cyan-400">ABOUT</a>
       <a href="#works" class="block hover:text-cyan-400">WORKS</a>
-      <!-- New: Resume in mobile menu -->
-      <a href="resume.html" target="_blank" class="block hover:text-cyan-400">RESUME</a>
+      <a href="Roman_Singh.pdf" target="_blank" class="block hover:text-cyan-400">RESUME</a>
     </div>
   </nav>
 
-  <!-- HERO -->
+  <!-- ===========================
+       HERO SECTION
+  ============================ -->
   <section id="home" class="min-h-screen flex flex-col md:flex-row items-center justify-between relative pt-20 px-6 max-w-7xl mx-auto gap-10">
     <div class="absolute inset-0 parallax-bg opacity-10"></div>
-
-    <!-- Left -->
+    <!-- Left Side Text -->
     <div class="text-left z-10 w-full md:w-1/2 max-w-xl">
       <h1 class="text-6xl md:text-8xl font-black mb-4 neon-text bounce-text leading-tight ml-8">
         DIGITAL CREATOR
@@ -53,29 +60,27 @@
       <p class="text-xl md:text-2xl text-gray-300 mb-8 block leading-relaxed">
         Multimedia Artist • Visual Storyteller • Creative Innovator
       </p>
-
       <!-- Buttons -->
       <div class="flex flex-wrap gap-4">
         <a href="#works" class="px-8 py-4 bg-gradient-to-r from-cyan-500 to-pink-500 rounded-full font-semibold neon-glow inline-block">
           EXPLORE WORKS
         </a>
-
-        <!-- New: Resume button (opens new page) -->
-        <a href="resume.html" target="_blank"
+        <a href="Roman_Singh.pdf" target="_blank"
            class="px-8 py-4 rounded-full font-semibold inline-block border-2 border-cyan-400 text-cyan-400 hover:bg-cyan-400 hover:text-black transition">
           VIEW RÉSUMÉ
         </a>
       </div>
     </div>
-
-    <!-- Right -->
+    <!-- Right Side Image -->
     <div class="w-full md:w-1/2 flex justify-center md:justify-end">
       <img src="assets/ROMAN_PAINTING.jpg" alt="Creative Portrait"
            class="rounded-2xl shadow-lg w-full max-w-lg object-cover float-zoom" />
     </div>
   </section>
 
-  <!-- ABOUT -->
+  <!-- ===========================
+       ABOUT SECTION
+  ============================ -->
   <section id="about" class="py-20 relative max-w-7xl mx-auto px-6">
     <div class="text-center mb-16">
       <h2 class="text-5xl font-bold mb-6 neon-text">ABOUT THE ARTIST</h2>
@@ -84,6 +89,7 @@
         across digital and traditional mediums.
       </p>
     </div>
+    <!-- Skills Grid -->
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
       <div class="glass-effect rounded-2xl p-8 text-center work-card">
         <div class="text-6xl mb-4">🎨</div>
@@ -108,7 +114,9 @@
     </div>
   </section>
 
-  <!-- WORKS -->
+  <!-- ===========================
+       WORKS SECTION
+<!-- WORKS -->
   <section id="works" class="py-20 relative max-w-7xl mx-auto px-6">
     <div class="text-center mb-16">
       <h2 class="text-5xl font-bold mb-6 neon-text">FEATURED WORKS</h2>
@@ -171,7 +179,9 @@
     </div>
   </section>
 
-  <!-- FOOTER -->
+  <!-- ===========================
+       FOOTER
+  ============================ -->
   <footer class="mt-auto py-12 border-t border-gray-800 text-center">
     <div class="text-2xl font-bold mb-4">
       <span class="text-cyan-400">RORO</span><span class="text-pink-400"> LAB</span>
@@ -181,10 +191,11 @@
   </footer>
 
   <script>
-    // simple mobile menu toggle
+    // Mobile menu toggle
     const btn = document.getElementById('mobile-nav-toggle');
     const menu = document.getElementById('mobile-nav');
     if (btn && menu) btn.addEventListener('click', () => menu.classList.toggle('hidden'));
   </script>
+
 </body>
 </html>
