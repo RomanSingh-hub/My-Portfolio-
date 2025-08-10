@@ -198,3 +198,18 @@ nav.scrolled {
     background: rgba(10, 10, 10, 0.9);
     transition: background 0.3s ease;
 }
+
+@keyframes pulse-slow {
+  0%, 100% {
+    opacity: 0.4;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.7;
+    transform: scale(1.05);
+  }
+}
+
+.before\:animate-pulse-slow::before {
+  animation: pulse-slow 3s ease-in-out infinite;
+}
