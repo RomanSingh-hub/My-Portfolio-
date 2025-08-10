@@ -1,0 +1,553 @@
+You said:
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Creative Portfolio V2 - Multimedia Artist</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #0a0a0a;
+            color: #ffffff;
+        }
+        
+        .neon-glow {
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+        }
+        
+        .neon-text {
+            text-shadow: 0 0 10px rgba(0, 255, 255, 0.8);
+        }
+        
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .floating-animation {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        .pulse-glow {
+            animation: pulse-glow 2s ease-in-out infinite alternate;
+        }
+        
+        @keyframes pulse-glow {
+            from { box-shadow: 0 0 20px rgba(255, 0, 150, 0.4); }
+            to { box-shadow: 0 0 40px rgba(255, 0, 150, 0.8); }
+        }
+        
+        .grid-bg {
+            background-image: 
+                linear-gradient(rgba(0, 255, 255, 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 255, 255, 0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+        }
+        
+        .work-card {
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transform-style: preserve-3d;
+        }
+        
+        .work-card:hover {
+            transform: translateY(-15px) rotateX(5deg);
+            box-shadow: 0 25px 50px rgba(0, 255, 255, 0.2);
+        }
+        
+        .category-tab {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .category-tab::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        .category-tab:hover::before {
+            left: 100%;
+        }
+        
+        .typing-animation {
+            border-right: 2px solid #00ffff;
+            animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
+        }
+        
+        @keyframes typing {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+        
+        @keyframes blink-caret {
+            from, to { border-color: transparent; }
+            50% { border-color: #00ffff; }
+        }
+        
+        .parallax-bg {
+            background: linear-gradient(45deg, #ff006e, #8338ec, #3a86ff, #06ffa5);
+            background-size: 400% 400%;
+            animation: gradient-shift 15s ease infinite;
+        }
+        
+        @keyframes gradient-shift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+    </style>
+</head>
+<body class="overflow-x-hidden">
+    <!-- Animated Background -->
+    <div class="fixed inset-0 grid-bg opacity-20 pointer-events-none"></div>
+    
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 glass-effect">
+        <div class="max-w-7xl mx-auto px-6 py-4">
+            <div class="flex justify-between items-center">
+                <div class="text-2xl font-bold neon-text">
+                    <span class="text-cyan-400">CREATIVE</span><span class="text-pink-400">LAB</span>
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#home" class="hover:text-cyan-400 transition-colors duration-300">HOME</a>
+                    <a href="#about" class="hover:text-cyan-400 transition-colors duration-300">ABOUT</a>
+                    <a href="#works" class="hover:text-cyan-400 transition-colors duration-300">WORKS</a>
+                    <a href="#contact" class="hover:text-cyan-400 transition-colors duration-300">CONTACT</a>
+                </div>
+                <button id="mobile-nav-toggle" class="md:hidden text-cyan-400">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-nav" class="md:hidden hidden glass-effect border-t border-white/10">
+            <div class="px-6 py-4 space-y-4">
+                <a href="#home" class="block hover:text-cyan-400 transition-colors">HOME</a>
+                <a href="#about" class="block hover:text-cyan-400 transition-colors">ABOUT</a>
+                <a href="#works" class="block hover:text-cyan-400 transition-colors">WORKS</a>
+                <a href="#contact" class="block hover:text-cyan-400 transition-colors">CONTACT</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="min-h-screen flex items-center justify-center relative pt-20">
+        <div class="absolute inset-0 parallax-bg opacity-10"></div>
+        <div class="text-center z-10 px-6">
+            <div class="floating-animation">
+                <h1 class="text-6xl md:text-8xl font-black mb-6">
+                    <span class="neon-text text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-pink-400">
+                        DIGITAL
+                    </span>
+                    <br>
+                    <span class="text-white">CREATOR</span>
+                </h1>
+            </div>
+            <div class="typing-animation overflow-hidden whitespace-nowrap mx-auto max-w-2xl">
+                <p class="text-xl md:text-2xl text-gray-300 mb-8">Multimedia Artist • Visual Storyteller • Creative Innovator</p>
+            </div>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <button class="px-8 py-4 bg-gradient-to-r from-cyan-500 to-pink-500 rounded-full font-semibold hover:scale-105 transition-transform duration-300 neon-glow">
+                    EXPLORE WORKS
+                </button>
+                <button class="px-8 py-4 border border-cyan-400 rounded-full font-semibold hover:bg-cyan-400 hover:text-black transition-all duration-300">
+                    GET IN TOUCH
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 relative">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-5xl font-bold mb-6 neon-text">ABOUT THE ARTIST</h2>
+                <p class="text-xl text-gray-300 max-w-3xl mx-auto">
+                    I'm a multimedia content creator who transforms ideas into stunning visual experiences across digital and traditional mediums.
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="glass-effect rounded-2xl p-8 text-center work-card">
+                    <div class="text-6xl mb-4">🎨</div>
+                    <h3 class="text-xl font-bold mb-4 text-cyan-400">DIGITAL ART</h3>
+                    <p class="text-gray-300">Creating stunning digital paintings and illustrations that push creative boundaries</p>
+                </div>
+                
+                <div class="glass-effect rounded-2xl p-8 text-center work-card">
+                    <div class="text-6xl mb-4">📸</div>
+                    <h3 class="text-xl font-bold mb-4 text-pink-400">PHOTOGRAPHY</h3>
+                    <p class="text-gray-300">Capturing moments and emotions through the lens of artistic vision</p>
+                </div>
+                
+                <div class="glass-effect rounded-2xl p-8 text-center work-card">
+                    <div class="text-6xl mb-4">✍️</div>
+                    <h3 class="text-xl font-bold mb-4 text-purple-400">CONTENT WRITING</h3>
+                    <p class="text-gray-300">Crafting compelling narratives and engaging content across platforms</p>
+                </div>
+                
+                <div class="glass-effect rounded-2xl p-8 text-center work-card">
+                    <div class="text-6xl mb-4">🎬</div>
+                    <h3 class="text-xl font-bold mb-4 text-green-400">ANIMATION</h3>
+                    <p class="text-gray-300">Bringing static designs to life with dynamic motion graphics</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Works Section -->
+    <section id="works" class="py-20 relative">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-5xl font-bold mb-6 neon-text">FEATURED WORKS</h2>
+                <p class="text-xl text-gray-300">Explore my diverse portfolio of creative projects</p>
+            </div>
+
+            <!-- Category Filters -->
+            <div class="flex flex-wrap justify-center gap-4 mb-12">
+                <button class="category-tab px-6 py-3 rounded-full glass-effect border border-cyan-400 text-cyan-400 font-semibold active-filter" data-filter="all">
+                    ALL WORKS
+                </button>
+                <button class="category-tab px-6 py-3 rounded-full glass-effect border border-pink-400 text-pink-400 font-semibold" data-filter="paintings">
+                    PAINTINGS
+                </button>
+                <button class="category-tab px-6 py-3 rounded-full glass-effect border border-purple-400 text-purple-400 font-semibold" data-filter="photography">
+                    PHOTOGRAPHY
+                </button>
+                <button class="category-tab px-6 py-3 rounded-full glass-effect border border-green-400 text-green-400 font-semibold" data-filter="illustrations">
+                    ILLUSTRATIONS
+                </button>
+                <button class="category-tab px-6 py-3 rounded-full glass-effect border border-yellow-400 text-yellow-400 font-semibold" data-filter="writing">
+                    WRITING
+                </button>
+                <button class="category-tab px-6 py-3 rounded-full glass-effect border border-red-400 text-red-400 font-semibold" data-filter="animations">
+                    ANIMATIONS
+                </button>
+                <button class="category-tab px-6 py-3 rounded-full glass-effect border border-blue-400 text-blue-400 font-semibold" data-filter="posters">
+                    POSTERS
+                </button>
+            </div>
+
+            <!-- Portfolio Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="works-grid">
+                <!-- Painting Work -->
+                <div class="work-item glass-effect rounded-2xl overflow-hidden work-card pulse-glow" data-category="paintings">
+                    <div class="h-64 bg-gradient-to-br from-red-500 via-pink-500 to-purple-600 flex items-center justify-center relative">
+                        <div class="absolute inset-0 bg-black/20"></div>
+                        <svg class="w-24 h-24 text-white z-10" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z"/>
+                        </svg>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold mb-2 text-cyan-400">NEON DREAMS</h3>
+                        <p class="text-gray-300 mb-4">Abstract digital painting exploring cyberpunk aesthetics and futuristic themes</p>
+                        <button class="text-pink-400 hover:text-pink-300 font-semibold transition-colors" onclick="openWorkModal('NEON DREAMS', 'A vibrant exploration of cyberpunk aesthetics through abstract digital painting. This series combines neon colors with futuristic elements to create immersive visual experiences that transport viewers to a digital realm.')">
+                            VIEW PROJECT →
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Photography Work -->
+                <div class="work-item glass-effect rounded-2xl overflow-hidden work-card pulse-glow" data-category="photography">
+                    <div class="h-64 bg-gradient-to-br from-blue-500 via-cyan-500 to-teal-600 flex items-center justify-center relative">
+                        <div class="absolute inset-0 bg-black/20"></div>
+                        <svg class="w-24 h-24 text-white z-10" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M4 5a2 2 0 00-2 2v8a2 2 0 002 2h12a2 2 0 002-2V7a2 2 0 00-2-2h-1.586a1 1 0 01-.707-.293l-1.121-1.121A2 2 0 0011.172 3H8.828a2 2 0 00-1.414.586L6.293 4.707A1 1 0 015.586 5H4zm6 9a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd"/>
+                        </svg>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold mb-2 text-cyan-400">URBAN PULSE</h3>
+                        <p class="text-gray-300 mb-4">Street photography capturing the electric energy of metropolitan nightlife</p>
+                        <button class="text-pink-400 hover:text-pink-300 font-semibold transition-colors" onclick="openWorkModal('URBAN PULSE', 'A photographic journey through the neon-lit streets of the modern metropolis. This series captures the raw energy and electric atmosphere of urban nightlife, showcasing the intersection of human stories and architectural beauty.')">
+                            VIEW PROJECT →
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Illustration Work -->
+                <div class="work-item glass-effect rounded-2xl overflow-hidden work-card pulse-glow" data-category="illustrations">
+                    <div class="h-64 bg-gradient-to-br from-green-500 via-emerald-500 to-cyan-600 flex items-center justify-center relative">
+                        <div class="absolute inset-0 bg-black/20"></div>
+                        <svg class="w-24 h-24 text-white z-10" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M4 2a2 2 0 00-2 2v12a2 2 0 002 2h12a2 2 0 002-2V4a2 2 0 00-2-2H4zm3 2h2v4H7V4zm8 0v4h-2V4h2zM7 10h2v4H7v-4zm8 0v4h-2v-4h2z" clip-rule="evenodd"/>
+                        </svg>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold mb-2 text-cyan-400">CYBER WARRIORS</h3>
+                        <p class="text-gray-300 mb-4">Character design series featuring futuristic warriors and digital beings</p>
+                        <button class="text-pink-400 hover:text-pink-300 font-semibold transition-colors" onclick="openWorkModal('CYBER WARRIORS', 'An original character design series featuring futuristic warriors, digital beings, and cybernetic entities. Each character is meticulously crafted with unique backstories and visual elements that reflect their role in a dystopian digital future.')">
+                            VIEW PROJECT →
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Writing Work -->
+                <div class="work-item glass-effect rounded-2xl overflow-hidden work-card pulse-glow" data-category="writing">
+                    <div class="h-64 bg-gradient-to-br from-yellow-500 via-orange-500 to-red-600 flex items-center justify-center relative">
+                        <div class="absolute inset-0 bg-black/20"></div>
+                        <svg class="w-24 h-24 text-white z-10" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z"/>
+                        </svg>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold mb-2 text-cyan-400">DIGITAL FUTURES</h3>
+                        <p class="text-gray-300 mb-4">Blog series exploring the intersection of technology, art, and human creativity</p>
+                        <button class="text-pink-400 hover:text-pink-300 font-semibold transition-colors" onclick="openWorkModal('DIGITAL FUTURES', 'An insightful blog series that explores the evolving relationship between technology and creativity. These articles dive deep into emerging trends, artistic innovations, and the future of digital media in our increasingly connected world.')">
+                            VIEW PROJECT →
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Animation Work -->
+                <div class="work-item glass-effect rounded-2xl overflow-hidden work-card pulse-glow" data-category="animations">
+                    <div class="h-64 bg-gradient-to-br from-purple-500 via-pink-500 to-red-600 flex items-center justify-center relative">
+                        <div class="absolute inset-0 bg-black/20"></div>
+                        <svg class="w-24 h-24 text-white z-10" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"/>
+                        </svg>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold mb-2 text-cyan-400">MOTION MATRIX</h3>
+                        <p class="text-gray-300 mb-4">Dynamic motion graphics and animated sequences for digital campaigns</p>
+                        <button class="text-pink-400 hover:text-pink-300 font-semibold transition-colors" onclick="openWorkModal('MOTION MATRIX', 'A collection of dynamic motion graphics and animated sequences created for various digital campaigns. These pieces combine fluid animations with striking visual effects to create memorable brand experiences and engaging content.')">
+                            VIEW PROJECT →
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Poster Work -->
+                <div class="work-item glass-effect rounded-2xl overflow-hidden work-card pulse-glow" data-category="posters">
+                    <div class="h-64 bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-600 flex items-center justify-center relative">
+                        <div class="absolute inset-0 bg-black/20"></div>
+                        <svg class="w-24 h-24 text-white z-10" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm3 2h6v4H7V5zm8 8v2h1v-2h-1zm-2-2H7v4h6v-4z" clip-rule="evenodd"/>
+                        </svg>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold mb-2 text-cyan-400">NEON NIGHTS</h3>
+                        <p class="text-gray-300 mb-4">Event poster series for electronic music festivals and tech conferences</p>
+                        <button class="text-pink-400 hover:text-pink-300 font-semibold transition-colors" onclick="openWorkModal('NEON NIGHTS', 'A striking poster series designed for electronic music festivals and technology conferences. Each design captures the electric energy and futuristic aesthetic of these events through bold typography, vibrant colors, and dynamic compositions.')">
+                            VIEW PROJECT →
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 relative">
+        <div class="max-w-4xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-5xl font-bold mb-6 neon-text">LET'S CREATE TOGETHER</h2>
+                <p class="text-xl text-gray-300">Ready to bring your vision to life? Let's collaborate on something amazing.</p>
+            </div>
+            
+            <div class="glass-effect rounded-2xl p-8">
+                <form class="space-y-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-sm font-semibold text-cyan-400 mb-2">NAME</label>
+                            <input type="text" class="w-full px-4 py-3 bg-black/50 border border-gray-600 rounded-lg focus:border-cyan-400 focus:outline-none transition-colors" placeholder="Your Name">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold text-cyan-400 mb-2">EMAIL</label>
+                            <input type="email" class="w-full px-4 py-3 bg-black/50 border border-gray-600 rounded-lg focus:border-cyan-400 focus:outline-none transition-colors" placeholder="your@email.com">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold text-cyan-400 mb-2">PROJECT TYPE</label>
+                        <select class="w-full px-4 py-3 bg-black/50 border border-gray-600 rounded-lg focus:border-cyan-400 focus:outline-none transition-colors">
+                            <option>Select a service</option>
+                            <option>Digital Art & Illustration</option>
+                            <option>Photography</option>
+                            <option>Content Writing</option>
+                            <option>Animation & Motion Graphics</option>
+                            <option>Poster Design</option>
+                            <option>Other</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold text-cyan-400 mb-2">MESSAGE</label>
+                        <textarea rows="6" class="w-full px-4 py-3 bg-black/50 border border-gray-600 rounded-lg focus:border-cyan-400 focus:outline-none transition-colors" placeholder="Tell me about your project..."></textarea>
+                    </div>
+                    <div class="text-center">
+                        <button type="submit" class="px-8 py-4 bg-gradient-to-r from-cyan-500 to-pink-500 rounded-full font-semibold hover:scale-105 transition-transform duration-300 neon-glow">
+                            SEND MESSAGE
+                        </button>
+                    </div>
+                </form>
+                
+                <div class="mt-12 text-center">
+                    <p class="text-gray-400 mb-6">CONNECT WITH ME</p>
+                    <div class="flex justify-center space-x-8">
+                        <a href="#" class="text-gray-400 hover:text-cyan-400 transition-colors duration-300">
+                            <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/>
+                            </svg>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-pink-400 transition-colors duration-300">
+                            <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 5.079 3.158 9.417 7.618 11.174-.105-.949-.199-2.403.041-3.439.219-.937 1.406-5.957 1.406-5.957s-.359-.72-.359-1.781c0-1.663.967-2.911 2.168-2.911 1.024 0 1.518.769 1.518 1.688 0 1.029-.653 2.567-.992 3.992-.285 1.193.6 2.165 1.775 2.165 2.128 0 3.768-2.245 3.768-5.487 0-2.861-2.063-4.869-5.008-4.869-3.41 0-5.409 2.562-5.409 5.199 0 1.033.394 2.143.889 2.741.099.12.112.225.085.345-.09.375-.293 1.199-.334 1.363-.053.225-.172.271-.402.165-1.495-.69-2.433-2.878-2.433-4.646 0-3.776 2.748-7.252 7.92-7.252 4.158 0 7.392 2.967 7.392 6.923 0 4.135-2.607 7.462-6.233 7.462-1.214 0-2.357-.629-2.75-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24.009 12.017 24.009c6.624 0 11.99-5.367 11.99-11.988C24.007 5.367 18.641.001.012.001z"/>
+                            </svg>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-purple-400 transition-colors duration-300">
+                            <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 border-t border-gray-800">
+        <div class="max-w-7xl mx-auto px-6 text-center">
+            <div class="text-2xl font-bold mb-4">
+                <span class="text-cyan-400">CREATIVE</span><span class="text-pink-400">LAB</span>
+            </div>
+            <p class="text-gray-400 mb-4">Pushing the boundaries of digital creativity</p>
+            <p class="text-gray-600">&copy; 2024 CreativeLab. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Work Modal -->
+    <div id="work-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm hidden items-center justify-center z-50 p-4">
+        <div class="glass-effect rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+            <div class="p-8">
+                <div class="flex justify-between items-center mb-6">
+                    <h3 id="modal-work-title" class="text-3xl font-bold neon-text"></h3>
+                    <button id="close-work-modal" class="text-gray-400 hover:text-white transition-colors">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                    </button>
+                </div>
+                <p id="modal-work-content" class="text-gray-300 leading-relaxed text-lg"></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Mobile navigation toggle
+        const mobileNavToggle = document.getElementById('mobile-nav-toggle');
+        const mobileNav = document.getElementById('mobile-nav');
+        
+        mobileNavToggle.addEventListener('click', () => {
+            mobileNav.classList.toggle('hidden');
+        });
+
+        // Portfolio filtering
+        const filterButtons = document.querySelectorAll('[data-filter]');
+        const workItems = document.querySelectorAll('.work-item');
+
+        filterButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const filter = button.getAttribute('data-filter');
+                
+                // Update active filter
+                filterButtons.forEach(btn => btn.classList.remove('active-filter'));
+                button.classList.add('active-filter');
+                
+                // Filter work items
+                workItems.forEach(item => {
+                    const category = item.getAttribute('data-category');
+                    if (filter === 'all' || category === filter) {
+                        item.style.display = 'block';
+                        setTimeout(() => {
+                            item.style.opacity = '1';
+                            item.style.transform = 'scale(1)';
+                        }, 100);
+                    } else {
+                        item.style.opacity = '0';
+                        item.style.transform = 'scale(0.8)';
+                        setTimeout(() => {
+                            item.style.display = 'none';
+                        }, 300);
+                    }
+                });
+            });
+        });
+
+        // Work modal functionality
+        const workModal = document.getElementById('work-modal');
+        const modalWorkTitle = document.getElementById('modal-work-title');
+        const modalWorkContent = document.getElementById('modal-work-content');
+        const closeWorkModal = document.getElementById('close-work-modal');
+
+        function openWorkModal(title, content) {
+            modalWorkTitle.textContent = title;
+            modalWorkContent.textContent = content;
+            workModal.classList.remove('hidden');
+            workModal.classList.add('flex');
+        }
+
+        closeWorkModal.addEventListener('click', () => {
+            workModal.classList.add('hidden');
+            workModal.classList.remove('flex');
+        });
+
+        workModal.addEventListener('click', (e) => {
+            if (e.target === workModal) {
+                workModal.classList.add('hidden');
+                workModal.classList.remove('flex');
+            }
+        });
+
+        // Smooth scrolling for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                    // Close mobile menu
+                    mobileNav.classList.add('hidden');
+                }
+            });
+        });
+
+        // Form submission
+        document.querySelector('form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Message sent! This is a demo form. In a real website, this would send your message.');
+        });
+
+        // Add some interactive effects
+        document.addEventListener('mousemove', (e) => {
+            const cursor = document.querySelector('.cursor');
+            if (!cursor) {
+                const newCursor = document.createElement('div');
+                newCursor.className = 'cursor fixed w-4 h-4 bg-cyan-400 rounded-full pointer-events-none z-50 mix-blend-difference';
+                document.body.appendChild(newCursor);
+            }
+            
+            const cursorElement = document.querySelector('.cursor');
+            cursorElement.style.left = e.clientX - 8 + 'px';
+            cursorElement.style.top = e.clientY - 8 + 'px';
+        });
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'969f7d99947ba26c',t:'MTc1NDMyNTU2NC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
