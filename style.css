@@ -244,3 +244,13 @@ nav.scrolled {
   font-size: 0.9em;
   color: #666;
 }
+.frame{
+  /* ... */
+  background:#000;             /* black matte */
+}
+.frame img{
+  /* ... */
+  object-fit: contain;
+  object-position: center;
+  background:#000;             /* black letterbox */
+}
