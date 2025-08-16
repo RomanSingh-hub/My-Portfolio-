@@ -3,19 +3,20 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Collage – Roman Singh</title>
+  <title>Collage – RoroLab</title>
 
   <!-- Tailwind only; no site CSS so index.html is untouched -->
   <script src="https://cdn.tailwindcss.com"></script>
 
   <style>
-    /* ===== Collage-specific (standalone) ===== */
     :root{
-      --rail-h: 14px;          /* top black bar height */
-      --string-w: 3px;         /* hanging line thickness */
-      --string-color: #0f172a; /* slate-900 */
+      --rail-h: 14px;
+      --string-w: 3px;
+      --string-color: #0f172a;
+      --string-height: clamp(90px, 14vh, 160px);
     }
-    body{ background:#000; color:#000; }
+
+    body{ background:#000; color:#e5e7eb; }
 
     .rail{ position:absolute; top:0; left:0; right:0; height:var(--rail-h); background:#000; }
 
@@ -26,41 +27,40 @@
       align-items:start;
     }
 
-    /* Clean frames: no border/matte/shadow */
     .frame{
       position:relative;
-      aspect-ratio: 4 / 3;    /* unified boxes */
+      aspect-ratio: 4 / 3;
       border:0;
       background:#000;
       box-shadow:none;
+      overflow:hidden;
+      border-radius: 8px;
     }
 
-    /* Fill frame edge-to-edge (no white). May crop slightly. */
     .frame img{
       position:absolute; inset:0;
       width:100%; height:100%;
-      object-fit: cover;       /* change to 'contain' if you prefer no cropping */
+      object-fit: cover;
       object-position: center;
       background:#000;
       display:block;
     }
 
-    /* Hanging strings for the 2 top frames */
     .hanger{ position:relative; }
     .hanger::before{
       content:"";
       position:absolute; left:50%; transform:translateX(-50%);
-      top: calc(-1 * (clamp(90px, 14vh, 160px) - var(--rail-h)));
-      height: calc(clamp(90px, 14vh, 160px) - var(--rail-h));
+      top: calc(-1 * (var(--string-height) - var(--rail-h)));
+      height: calc(var(--string-height) - var(--rail-h));
       width: var(--string-w); background: var(--string-color);
     }
 
-    /* Desktop placement */
     .small-left{  grid-column: 1; }
     .small-right{ grid-column: 3; }
-    .big-1{ grid-column: 1; } .big-2{ grid-column: 2; } .big-3{ grid-column: 3; }
+    .big-1{ grid-column: 1; }
+    .big-2{ grid-column: 2; }
+    .big-3{ grid-column: 3; }
 
-    /* Mobile stacking */
     @media (max-width: 768px){
       .collage-grid{ grid-template-columns: 1fr; }
       .small-left,.small-right,.big-1,.big-2,.big-3{ grid-column:auto; }
@@ -69,15 +69,16 @@
   </style>
 </head>
 <body>
-
-  <!-- Fixed header (links back to existing anchors; no index edit needed) -->
+  <!-- Fixed header styled like index page with RORO LAB -->
   <nav class="fixed top-0 left-0 right-0 z-50 bg-black/80 backdrop-blur border-b border-neutral-800">
     <div class="max-w-6xl mx-auto h-14 px-5 flex items-center justify-between">
-      <a href="./index.html#home" class="font-bold tracking-wide">Roman Singh</a>
-      <div class="hidden sm:flex gap-6 text-sm">
+      <a href="./index.html#home" class="font-extrabold tracking-tight text-xl text-cyan-400">
+        <span class="text-cyan-400">RORO</span><span class="text-pink-400"> LAB</span>
+      </a>
+      <div class="hidden sm:flex gap-6 text-sm text-neutral-300">
         <a href="./index.html#home" class="hover:text-cyan-400">Home</a>
-        <a href="./index.html#portfolio" class="hover:text-cyan-400">Portfolio</a>
-        <a href="./index.html#photography" class="hover:text-cyan-400">Photography</a>
+        <a href="./index.html#about" class="hover:text-cyan-400">About</a>
+        <a href="./index.html#works" class="hover:text-cyan-400">Works</a>
       </div>
     </div>
   </nav>
@@ -87,42 +88,40 @@
     <div class="rail" aria-hidden="true"></div>
 
     <header class="mb-8">
-      <h1 class="text-3xl sm:text-4xl font-semibold">Collage Photo Frame</h1>
-      <p class="text-neutral-300">Five-image layout: two hanging, three grounded.</p>
+      <h1 class="text-3xl sm:text-4xl font-semibold text-white">Collage Photo Frame</h1>
+      <p class="text-neutral-400">Five-image layout: two hanging, three grounded. No white borders.</p>
     </header>
 
     <div class="collage-grid">
-      <!-- Top (hanging) -->
       <div class="hanger small-left">
         <figure class="frame">
-          <img src="./assets/preview/DSC01138_enhanced.jpg" alt="Top left">
+          <img src="./assets/preview/DSC01138_enhanced.jpg" alt="Top left" />
         </figure>
       </div>
 
-      <div></div> <!-- center spacer on desktop -->
+      <div></div>
 
       <div class="hanger small-right">
         <figure class="frame">
-          <img src="./assets/preview/DSC01140.JPG" alt="Top right">
+          <img src="./assets/preview/DSC01140.JPG" alt="Top right" />
         </figure>
       </div>
 
-      <!-- Bottom row -->
       <figure class="frame big-1">
-        <img src="./assets/preview/DSC01189.JPG" alt="Bottom left">
+        <img src="./assets/preview/DSC01189.JPG" alt="Bottom left" />
       </figure>
 
       <figure class="frame big-2">
-        <img src="./assets/preview/SDC10726.JPG" alt="Bottom center">
+        <img src="./assets/preview/SDC10726.JPG" alt="Bottom center" />
       </figure>
 
       <figure class="frame big-3">
-        <img src="./assets/preview/SDC10746.JPG" alt="Bottom right">
+        <img src="./assets/preview/SDC10746.JPG" alt="Bottom right" />
       </figure>
     </div>
 
-    <footer class="text-center text-xs text-neutral-400 mt-12 mb-8">
-      &copy; 2025 Roman Singh. All Rights Reserved.
+    <footer class="text-center text-xs text-neutral-500 mt-12 mb-8">
+      &copy; 2025 RORO LAB. All Rights Reserved.
     </footer>
   </main>
 </body>
