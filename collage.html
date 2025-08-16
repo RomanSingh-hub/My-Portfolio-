@@ -3,78 +3,53 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Collage – RoroLab</title>
-
-  <!-- Tailwind only; no site CSS so index.html is untouched -->
+  <title>Collage Grid with Glow – RORO LAB</title>
   <script src="https://cdn.tailwindcss.com"></script>
-
   <style>
-    :root{
-      --rail-h: 14px;
-      --string-w: 3px;
-      --string-color: #0f172a;
-      --string-height: clamp(90px, 14vh, 160px);
+    /* ===== Page base ===== */
+    :root{ --cy:#22d3ee; --pk:#f472b6; }
+    body{ margin:0; background:#0a0a0a; color:#fff; font-family: 'Poppins', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; }
+
+    /* ===== Header (matches index vibe) ===== */
+    .glass{ background: rgba(255,255,255,.05); backdrop-filter: blur(10px); border-bottom:1px solid rgba(255,255,255,.08); }
+    .brand{ font-weight: 800; letter-spacing:.2px; text-shadow:0 0 10px rgba(34,211,238,.7); }
+
+    /* ===== Collage grid ===== */
+    .wrap{ max-width: 1100px; margin: 90px auto 40px; padding: 0 16px; }
+    .collage{ display:grid; grid-template-columns: repeat(3, 1fr); gap: clamp(12px, 2vw, 22px); }
+
+    /* frames: no white edges */
+    .frame{ position:relative; width:100%; aspect-ratio: 3/4; background:#000; border:0; overflow:hidden; border-radius: 10px; box-shadow: 0 10px 30px rgba(0,0,0,.45); }
+    .frame img{ position:absolute; inset:0; width:100%; height:100%; object-fit: cover; object-position: center; display:block; background:#000; }
+
+    /* Center cell: glow + button */
+    .center-cell{ position:relative; display:flex; align-items:center; justify-content:center; border-radius: 14px; overflow:hidden; }
+    .center-glow{ position:absolute; inset:-30%; background: radial-gradient(circle at 50% 50%, rgba(34,211,238,.65), rgba(244,114,182,.45) 40%, rgba(0,0,0,.0) 70%); filter: blur(18px); animation: pulse 3.2s ease-in-out infinite alternate; }
+    @keyframes pulse{ from{ transform: scale(1); opacity:.85 } to{ transform: scale(1.15); opacity:1 } }
+
+    .cta{ position:relative; z-index:1; display:inline-block; padding:16px 28px; border-radius: 9999px; font-weight:800; letter-spacing:.3px; text-decoration:none; color:#fff; box-shadow: 0 10px 30px rgba(0,0,0,.5); background: linear-gradient(45deg,#f58529,#dd2a7b,#8134af,#515bd4); transition: transform .25s ease, box-shadow .25s ease; text-align:center; }
+    .cta:hover{ transform: translateY(-3px) scale(1.03); box-shadow: 0 18px 40px rgba(0,0,0,.6); }
+
+    /* Layout helpers: keep top row frames a bit shorter if wanted */
+    .tall{ aspect-ratio: 3/5; }
+
+    /* Mobile stack */
+    @media (max-width: 820px){
+      .collage{ grid-template-columns: 1fr 1fr; }
+      .center-span{ grid-column: span 2; }
     }
-
-    body{ background:#000; color:#e5e7eb; }
-
-    .rail{ position:absolute; top:0; left:0; right:0; height:var(--rail-h); background:#000; }
-
-    .collage-grid{
-      display:grid;
-      grid-template-columns: repeat(3, minmax(0,1fr));
-      gap: clamp(16px, 2vw, 28px);
-      align-items:start;
-    }
-
-    .frame{
-      position:relative;
-      aspect-ratio: 4 / 3;
-      border:0;
-      background:#000;
-      box-shadow:none;
-      overflow:hidden;
-      border-radius: 8px;
-    }
-
-    .frame img{
-      position:absolute; inset:0;
-      width:100%; height:100%;
-      object-fit: cover;
-      object-position: center;
-      background:#000;
-      display:block;
-    }
-
-    .hanger{ position:relative; }
-    .hanger::before{
-      content:"";
-      position:absolute; left:50%; transform:translateX(-50%);
-      top: calc(-1 * (var(--string-height) - var(--rail-h)));
-      height: calc(var(--string-height) - var(--rail-h));
-      width: var(--string-w); background: var(--string-color);
-    }
-
-    .small-left{  grid-column: 1; }
-    .small-right{ grid-column: 3; }
-    .big-1{ grid-column: 1; }
-    .big-2{ grid-column: 2; }
-    .big-3{ grid-column: 3; }
-
-    @media (max-width: 768px){
-      .collage-grid{ grid-template-columns: 1fr; }
-      .small-left,.small-right,.big-1,.big-2,.big-3{ grid-column:auto; }
-      .hanger::before{ top:-70px; height:70px; }
+    @media (max-width: 560px){
+      .wrap{ margin-top:76px }
+      .collage{ grid-template-columns: 1fr; }
+      .center-span{ grid-column: auto; }
     }
   </style>
 </head>
 <body>
-  <!-- Fixed header styled like index page with RORO LAB -->
-  <nav class="fixed top-0 left-0 right-0 z-50 bg-black/80 backdrop-blur border-b border-neutral-800">
+  <!-- Header -->
+  <nav class="fixed top-0 left-0 right-0 z-50 glass">
     <div class="max-w-6xl mx-auto h-14 px-5 flex items-center justify-between">
-      <a href="./index.html#home" class="font-extrabold tracking-tight text-xl text-cyan-400">
-        <span class="text-cyan-400">RORO</span><span class="text-pink-400"> LAB</span>
-      </a>
+      <a href="./index.html#home" class="brand text-xl"><span class="text-cyan-400">RORO</span><span class="text-pink-400"> LAB</span></a>
       <div class="hidden sm:flex gap-6 text-sm text-neutral-300">
         <a href="./index.html#home" class="hover:text-cyan-400">Home</a>
         <a href="./index.html#about" class="hover:text-cyan-400">About</a>
@@ -82,47 +57,30 @@
       </div>
     </div>
   </nav>
-  <div class="h-14"></div>
 
-  <main class="relative mx-auto max-w-6xl px-5 sm:px-6 md:px-8 pt-12">
-    <div class="rail" aria-hidden="true"></div>
+  <main class="wrap">
+    <!-- Collage grid: 3x3 (7 images + center CTA) -->
+    <div class="collage">
+      <!-- Row 1 -->
+      <figure class="frame"><img src=".assets/preview/DSC01138_enhanced.jpg" alt="Craft 1"></figure>
+      <figure class="frame tall"><img src=".assets/preview/DSC01140.JPG" alt="Craft 2"></figure>
+      <figure class="frame"><img src=".assets/preview/DSC01189.JPG" alt="Craft 3"></figure>
 
-    <header class="mb-8">
-      <h1 class="text-3xl sm:text-4xl font-semibold text-white">Collage Photo Frame</h1>
-      <p class="text-neutral-400">Five-image layout: two hanging, three grounded. No white borders.</p>
-    </header>
-
-    <div class="collage-grid">
-      <div class="hanger small-left">
-        <figure class="frame">
-          <img src="./assets/preview/DSC01138_enhanced.jpg" alt="Top left" />
-        </figure>
+      <!-- Row 2 with center button (spans one cell) -->
+      <figure class="frame"><img src=".assets/preview/SDC10726.JPG" alt="Craft 4"></figure>
+      <div class="center-cell center-span frame" style="display:flex; align-items:center; justify-content:center;">
+        <div class="center-glow" aria-hidden="true"></div>
+        <a class="cta" href="https://instagram.com/yourusername" target="_blank" rel="noopener">Follow RORO LAB on Instagram</a>
       </div>
+      <figure class="frame"><img src=".assets/preview/SDC10746.JPG" alt="Craft 5"></figure>
 
-      <div></div>
-
-      <div class="hanger small-right">
-        <figure class="frame">
-          <img src="./assets/preview/DSC01140.JPG" alt="Top right" />
-        </figure>
-      </div>
-
-      <figure class="frame big-1">
-        <img src="./assets/preview/DSC01189.JPG" alt="Bottom left" />
-      </figure>
-
-      <figure class="frame big-2">
-        <img src="./assets/preview/SDC10726.JPG" alt="Bottom center" />
-      </figure>
-
-      <figure class="frame big-3">
-        <img src="./assets/preview/SDC10746.JPG" alt="Bottom right" />
-      </figure>
+      <!-- Row 3 -->
+      <figure class="frame"><img src=".assets/preview/SDC10826.JPG" alt="Craft 6"></figure>
+      <figure class="frame tall"><img src="./assets/preview/photo-7.jpg" alt="Craft 7"></figure>
+      <figure class="frame"><img src="./assets/preview/photo-8.jpg" alt="Craft 8"></figure>
     </div>
 
-    <footer class="text-center text-xs text-neutral-500 mt-12 mb-8">
-      &copy; 2025 RORO LAB. All Rights Reserved.
-    </footer>
+    <p class="text-center text-neutral-400 text-sm mt-6">Tip: replace <code>./assets/preview/photo-*.jpg</code> with your images. No white borders—images are set to <code>object-fit: cover</code>.</p>
   </main>
 </body>
 </html>
