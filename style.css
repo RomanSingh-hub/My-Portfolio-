@@ -147,6 +147,12 @@ nav.scrolled { background:rgba(10,10,10,.9); transition:background .3s ease; }
 }
 /* Blue glow on hover for cards */
 .work-card:hover {
-  box-shadow: 0 0 20px rgba(0, 188, 212, 0.8), 0 0 40px rgba(0, 188, 212, 0.6);
+  .soft-glow {
+  box-shadow: 0 0 6px rgba(34, 211, 238, 0.6), 0 0 12px rgba(34, 211, 238, 0.4);
+}
+.soft-glow {
+  box-shadow: 0 0 6px rgba(34, 211, 238, 0.6), 0 0 12px rgba(34, 211, 238, 0.4);
+}
+
   border-color: #00bcd4; /* optional: adds a subtle cyan border */
 }
