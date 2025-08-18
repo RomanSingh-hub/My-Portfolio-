@@ -7,6 +7,19 @@
   <title>Projects - RORO LAB</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="style.css" />
+
+  <!-- Keep your PWA/site manifest separate from the gallery manifest -->
+  <!-- If you use one, link it like this (optional): -->
+  <!-- <link rel="manifest" href="/site.webmanifest"> -->
+
+  <style>
+    /* Small enhancements so cards look good even before images load */
+    .glass-effect{background:rgba(255,255,255,.03);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.08);border-radius:16px;box-shadow:0 10px 40px rgba(0,0,0,.35)}
+    body{background:#000;color:#eaeaea}
+    img{display:block}
+    /* prevent layout shift while thumbs load */
+    .thumb{background:#111}
+  </style>
 </head>
 <body class="min-h-screen flex flex-col overflow-x-hidden bg-black text-white">
 
@@ -39,61 +52,59 @@
     <div class="glass-effect rounded-2xl p-8 work-card">
       <h3 class="text-3xl font-bold text-cyan-400 mb-2">Walk with me</h3>
       <p class="text-gray-300 mb-6">
-       A 50-photo journey capturing the calm beauty of a beachside walk, from golden sunrises to the gentle rhythm of the waves.
+        A 50-photo journey capturing the calm beauty of a beachside walk, from golden sunrises to the gentle rhythm of the waves.
       </p>
 
       <!-- Embedded YouTube Video -->
       <div class="w-full aspect-video rounded-xl overflow-hidden shadow-lg">
-        <iframe 
-          src="https://www.youtube.com/embed/WZnoF3HHT_Q" 
-          title="Walk With Me" 
-          frameborder="0" 
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-          allowfullscreen 
+        <iframe
+          src="https://www.youtube.com/embed/WZnoF3HHT_Q"
+          title="Walk With Me"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowfullscreen
           class="w-full h-full">
         </iframe>
       </div>
-         <!-- Creator Credit -->
-        <p class="mt-4 text-sm text-gray-400 italic">
-          🎬 photographe and edited by Roman Singh for a college project.
-        </p>
+      <p class="mt-4 text-sm text-gray-400 italic">
+        🎬 photographed and edited by Roman Singh for a college project.
+      </p>
     </div>
-   
-       <!-- Project 1 -->
+
+    <!-- Project 2 -->
     <div class="glass-effect rounded-2xl p-8 work-card">
-      <h3 class="text-3xl font-bold text-cyan-400 mb-2">college</h3>
+      <h3 class="text-3xl font-bold text-cyan-400 mb-2">College</h3>
       <p class="text-gray-300 mb-6">
-       A 15-photo series showcasing the architecture and character of the college building, highlighting its design, details, and timeless presence.
+        A 15-photo series showcasing the architecture and character of the college building, highlighting its design, details, and timeless presence.
       </p>
 
-      <!-- Embedded YouTube Video -->
       <div class="w-full aspect-video rounded-xl overflow-hidden shadow-lg">
-        <iframe 
-          src="https://www.youtube.com/embed/1gjqOHNO-P4" 
-          title="college" 
-          frameborder="0" 
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-          allowfullscreen 
+        <iframe
+          src="https://www.youtube.com/embed/1gjqOHNO-P4"
+          title="College"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowfullscreen
           class="w-full h-full">
         </iframe>
       </div>
-         <!-- Creator Credit -->
-        <p class="mt-4 text-sm text-gray-400 italic">
-          🎬 photographe and edited by Roman Singh for a college project.
-        </p>
-    </div>  
-    
-       <!-- Header -->
-  <header class="pt-32 pb-8 text-center">
-    <h1 class="text-5xl font-bold neon-text mb-3">Photo-Gallery</h1>
-    <p class="text-gray-300 max-w-3xl mx-auto">Selected Photo</p>
-  </header>
+      <p class="mt-4 text-sm text-gray-400 italic">
+        🎬 photographed and edited by Roman Singh for a college project.
+      </p>
+    </div>
 
-  <!-- Grid -->
-  <main class="max-w-7xl mx-auto px-6 pb-24">
-    <div id="galleryGrid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5"></div>
-    <div id="pager" class="flex justify-center gap-2 mt-10"></div>
-  </main>
+    <!-- Header -->
+    <header class="pt-8 pb-4 text-center">
+      <h2 class="text-5xl font-bold neon-text mb-3">Photo-Gallery</h2>
+      <p class="text-gray-300 max-w-3xl mx-auto">Selected Photo</p>
+    </header>
+
+    <!-- Grid -->
+    <main class="max-w-7xl mx-auto px-0 md:px-6 pb-8 w-full">
+      <div id="galleryGrid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5"></div>
+      <div id="pager" class="flex justify-center gap-2 mt-10"></div>
+    </main>
+  </section>
 
   <!-- Lightbox -->
   <div id="lightbox" class="fixed inset-0 bg-black/90 z-[60] hidden">
@@ -104,18 +115,20 @@
     <div id="lbCap" class="text-center text-gray-300 mt-4 px-4"></div>
   </div>
 
+  <!-- Gallery Script -->
   <script>
-    // ===== CONFIG (paths updated to your repo layout) =====
-    const MANIFEST_URL = 'manifest.json';          // root
-    const BASE = 'assets/photograph/';             // images folder
+    // ========= CONFIG =========
+    // Make sure you have: assets/photograph/gallery-manifest.json  (array of "file.jpg")
+    const MANIFEST_URL = 'assets/photograph/gallery-manifest.json';
+    const BASE = 'assets/photograph/'; // folder that actually contains the images
     const PAGE_SIZE = 20;
 
-    // ===== STATE =====
+    // ========= STATE =========
     let files = [];
     let page = 1;
     let currentIndex = 0;
 
-    // ===== DOM =====
+    // ========= DOM =========
     const grid = document.getElementById('galleryGrid');
     const pager = document.getElementById('pager');
     const lightbox = document.getElementById('lightbox');
@@ -136,14 +149,19 @@
         const a = document.createElement('a');
         a.href = '#';
         a.className = 'block group rounded-xl overflow-hidden glass-effect hover:scale-[1.01] transition';
+
+        // Use a fixed aspect ratio so the grid stays tidy while images load
         a.innerHTML = `
-          <img src="${BASE + encodeURIComponent(name)}"
-               alt="${captionFrom(name)}"
-               loading="lazy"
-               class="w-full h-48 md:h-56 object-cover"/>
+          <div class="thumb w-full aspect-[3/4] md:aspect-[16/10] overflow-hidden">
+            <img src="${BASE + encodeURIComponent(name)}"
+                 alt="${captionFrom(name)}"
+                 loading="lazy"
+                 class="w-full h-full object-cover"/>
+          </div>
           <div class="p-3">
-            <h3 class="text-sm text-gray-300 group-hover:text-white">${captionFrom(name)}</h3>
+            <h3 class="text-sm text-gray-300 line-clamp-1 group-hover:text-white">${captionFrom(name)}</h3>
           </div>`;
+
         a.addEventListener('click', (e)=>{ e.preventDefault(); openLightbox(idx); });
         grid.appendChild(a);
       });
@@ -187,19 +205,31 @@
       if (e.key === 'ArrowLeft') prev();
     });
 
-    // Fetch manifest (must be a JSON array of filenames, e.g. ["20250809_001123.jpg", ...])
-    fetch(MANIFEST_URL, {cache: 'no-store'})
-      .then(r => r.json())
-      .then(list => { files = Array.isArray(list) ? list : []; render(); })
+    // ===== Friendlier manifest loader (clear diagnostics) =====
+    const resolvedURL = location.origin + location.pathname.replace(/[^/]*$/, '') + MANIFEST_URL;
+    fetch(MANIFEST_URL, { cache: 'no-store' })
+      .then(r => {
+        if (!r.ok) throw new Error(`HTTP ${r.status} for ${resolvedURL}`);
+        return r.json();
+      })
+      .then(list => {
+        if (!Array.isArray(list)) throw new Error('Manifest is not a JSON array of filenames');
+        files = list;
+        console.log('Loaded gallery manifest from:', resolvedURL);
+        console.log('First few entries:', files.slice(0,5));
+        render();
+      })
       .catch(err => {
         console.error('Manifest load error:', err);
-        grid.innerHTML = '<p class="text-gray-400">Could not load gallery manifest.</p>';
+        grid.innerHTML = `
+          <div class="text-gray-400 space-y-2 p-4">
+            <p>Could not load gallery manifest.</p>
+            <p class="text-sm">Checked URL: <code>${resolvedURL}</code></p>
+            <p class="text-sm">Error: ${err.message}</p>
+            <p class="text-sm">Tip: Ensure file exists and Casing of filenames matches (e.g. <code>.jpg</code> vs <code>.JPG</code>).</p>
+          </div>`;
       });
   </script>
-   
-
-    
-  </section>
 
   <!-- Footer -->
   <footer class="mt-auto py-12 border-t border-gray-800 text-center">
