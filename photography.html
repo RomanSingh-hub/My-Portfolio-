@@ -82,7 +82,120 @@
           🎬 photographe and edited by Roman Singh for a college project.
         </p>
     </div>  
+    
+       <!-- Header -->
+  <header class="pt-32 pb-8 text-center">
+    <h1 class="text-5xl font-bold neon-text mb-3">Photo-Gallery</h1>
+    <p class="text-gray-300 max-w-3xl mx-auto">Selected Photo</p>
+  </header>
 
+  <!-- Grid -->
+  <main class="max-w-7xl mx-auto px-6 pb-24">
+    <div id="galleryGrid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5"></div>
+    <div id="pager" class="flex justify-center gap-2 mt-10"></div>
+  </main>
+
+  <!-- Lightbox -->
+  <div id="lightbox" class="fixed inset-0 bg-black/90 z-[60] hidden">
+    <button id="lbClose" class="absolute top-5 right-5 text-white/70 hover:text-white text-3xl">✕</button>
+    <button id="lbPrev"  class="absolute left-4 top-1/2 -translate-y-1/2 text-white/70 hover:text-white text-3xl">❮</button>
+    <button id="lbNext"  class="absolute right-4 top-1/2 -translate-y-1/2 text-white/70 hover:text-white text-3xl">❯</button>
+    <img id="lbImg" alt="" class="max-h-[88vh] max-w-[92vw] mx-auto mt-16 rounded-xl shadow-2xl object-contain"/>
+    <div id="lbCap" class="text-center text-gray-300 mt-4 px-4"></div>
+  </div>
+
+  <script>
+    // ===== CONFIG (paths updated to your repo layout) =====
+    const MANIFEST_URL = 'manifest.json';          // root
+    const BASE = 'final_pdf/gallery/';             // images folder
+    const PAGE_SIZE = 20;
+
+    // ===== STATE =====
+    let files = [];
+    let page = 1;
+    let currentIndex = 0;
+
+    // ===== DOM =====
+    const grid = document.getElementById('galleryGrid');
+    const pager = document.getElementById('pager');
+    const lightbox = document.getElementById('lightbox');
+    const lbImg = document.getElementById('lbImg');
+    const lbCap = document.getElementById('lbCap');
+
+    // Helpers
+    const captionFrom = (fn) =>
+      fn.replace(/\.[^.]+$/, '').replace(/[-_]+/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
+
+    function render() {
+      grid.innerHTML = '';
+      const start = (page - 1) * PAGE_SIZE;
+      const slice = files.slice(start, start + PAGE_SIZE);
+
+      slice.forEach((name, i) => {
+        const idx = start + i;
+        const a = document.createElement('a');
+        a.href = '#';
+        a.className = 'block group rounded-xl overflow-hidden glass-effect hover:scale-[1.01] transition';
+        a.innerHTML = `
+          <img src="${BASE + encodeURIComponent(name)}"
+               alt="${captionFrom(name)}"
+               loading="lazy"
+               class="w-full h-48 md:h-56 object-cover"/>
+          <div class="p-3">
+            <h3 class="text-sm text-gray-300 group-hover:text-white">${captionFrom(name)}</h3>
+          </div>`;
+        a.addEventListener('click', (e)=>{ e.preventDefault(); openLightbox(idx); });
+        grid.appendChild(a);
+      });
+
+      renderPager();
+    }
+
+    function renderPager(){
+      pager.innerHTML = '';
+      const pages = Math.ceil(files.length / PAGE_SIZE);
+      if (pages <= 1) return;
+      for (let p = 1; p <= pages; p++){
+        const b = document.createElement('button');
+        b.textContent = p;
+        b.className = 'px-3 py-1 rounded-md border border-white/10 ' +
+                      (p === page ? 'bg-white/10 text-white' : 'text-gray-300 hover:text-white');
+        b.onclick = ()=>{ page = p; render(); };
+        pager.appendChild(b);
+      }
+    }
+
+    function openLightbox(idx){
+      currentIndex = idx;
+      const name = files[idx];
+      lbImg.src = BASE + encodeURIComponent(name);
+      lbImg.alt = captionFrom(name);
+      lbCap.textContent = captionFrom(name);
+      lightbox.classList.remove('hidden');
+    }
+    function closeLightbox(){ lightbox.classList.add('hidden'); lbImg.src = ''; }
+    function next(){ currentIndex = (currentIndex + 1) % files.length; openLightbox(currentIndex); }
+    function prev(){ currentIndex = (currentIndex - 1 + files.length) % files.length; openLightbox(currentIndex); }
+
+    document.getElementById('lbClose').onclick = closeLightbox;
+    document.getElementById('lbNext').onclick = next;
+    document.getElementById('lbPrev').onclick = prev;
+    window.addEventListener('keydown', (e)=>{
+      if (lightbox.classList.contains('hidden')) return;
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowRight') next();
+      if (e.key === 'ArrowLeft') prev();
+    });
+
+    // Fetch manifest (must be a JSON array of filenames, e.g. ["20250809_001123.jpg", ...])
+    fetch(MANIFEST_URL, {cache: 'no-store'})
+      .then(r => r.json())
+      .then(list => { files = Array.isArray(list) ? list : []; render(); })
+      .catch(err => {
+        console.error('Manifest load error:', err);
+        grid.innerHTML = '<p class="text-gray-400">Could not load gallery manifest.</p>';
+      });
+  </script>
    
 
     
