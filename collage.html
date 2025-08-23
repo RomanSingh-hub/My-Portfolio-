@@ -3,107 +3,37 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Collage Grid with Glow – RORO LAB</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <style>
-    :root{ --cy:#22d3ee; --pk:#f472b6; }
-    body{ margin:0; background:#0a0a0a; color:#fff; font-family: 'Poppins', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; }
-
-    /* Header */
-    .glass{ background: rgba(255,255,255,.05); backdrop-filter: blur(10px); border-bottom:1px solid rgba(255,255,255,.08); }
-    .brand{ font-weight: 800; letter-spacing:.2px; text-shadow:0 0 10px rgba(34,211,238,.7); }
-
-    /* Layout */
-    .wrap{ max-width: 1100px; margin: 90px auto 40px; padding: 0 16px; }
-
-    /* 3-column wrapper that matches the sketch */
-    .collage3{
-      display:grid;
-      grid-template-columns: 1fr 1.15fr 1fr;
-      gap: clamp(12px, 2vw, 22px);
-      align-items: start;
-    }
-    .col{ display:grid; gap: clamp(12px, 2vw, 22px); }
-
-    /* Frames */
-    .frame{
-      position:relative; width:100%; overflow:hidden;
-      border-radius: 14px; background:#000; border:0;
-      box-shadow: 0 10px 30px rgba(0,0,0,.45);
-    }
-    /* Tall pics on left/right */
-    .tall{ aspect-ratio: 3/5; }
-    /* Wide pics in center */
-    .wide{ aspect-ratio: 16/9; }
-
-    .frame img{
-      position:absolute; inset:0; width:100%; height:100%;
-      object-fit: cover; object-position:center; display:block; background:#000;
-    }
-
-    /* Center CTA glow panel */
-    .center-cell{ display:flex; align-items:center; justify-content:center; }
-    .center-glow{
-      position:absolute; inset:-30%;
-      background: radial-gradient(circle at 50% 50%, rgba(34,211,238,.6), rgba(244,114,182,.45) 40%, transparent 70%);
-      filter: blur(18px);
-      animation: pulse 3s ease-in-out infinite alternate;
-    }
-    @keyframes pulse{ from{ transform:scale(1); opacity:.9 } to{ transform:scale(1.15); opacity:1 } }
-    .cta{
-      position:relative; z-index:1; display:inline-block;
-      padding:16px 28px; border-radius:9999px; font-weight:800; letter-spacing:.3px; color:#fff; text-decoration:none;
-      background: linear-gradient(45deg,#f58529,#dd2a7b,#8134af,#515bd4);
-      box-shadow: 0 10px 30px rgba(0,0,0,.5);
-      transition: transform .25s ease, box-shadow .25s ease;
-      text-align:center;
-      white-space:nowrap;
-    }
-    .cta:hover{ transform: translateY(-3px) scale(1.03); box-shadow: 0 18px 40px rgba(0,0,0,.6); }
-
-    /* Responsive */
-    @media (max-width: 900px){
-      .collage3{ grid-template-columns: 1fr; }
-      .col{ grid-template-columns: 1fr; }
-      .tall{ aspect-ratio: 3/4; }     /* slightly shorter on mobile */
-    }
-  </style>
+  <title>Collage Grid – RORO LAB</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <!-- Header -->
-  <nav class="fixed top-0 left-0 right-0 z-50 glass">
-    <div class="max-w-6xl mx-auto h-14 px-5 flex items-center justify-between">
-      <a href="./index.html#home" class="brand text-xl">
-        <span class="text-cyan-400">RORO</span><span class="text-pink-400"> LAB</span>
+  <!-- Top rail nav (simple) -->
+  <header class="glass-effect" style="position:sticky;top:0;z-index:50">
+    <nav class="navbar" style="max-width:1100px;margin:0 auto;padding:12px 16px;display:flex;justify-content:space-between;align-items:center">
+      <a href="index.html" class="logo neon-text" style="text-decoration:none;color:#fff;font-weight:800">
+        <span style="color:#22d3ee">RORO</span> <span style="color:#f472b6">LAB</span>
       </a>
-      <div class="hidden sm:flex gap-6 text-sm text-neutral-300">
-        <a href="./index.html#home" class="hover:text-cyan-400">Home</a>
-        <a href="./index.html#about" class="hover:text-cyan-400">About</a>
-        <a href="./index.html#works" class="hover:text-cyan-400">Works</a>
+      <div class="nav-links" style="display:flex;gap:18px">
+        <a href="index.html#home" class="btn-link">Home</a>
+        <a href="index.html#works" class="btn-link">Works</a>
       </div>
-    </div>
-  </nav>
+    </nav>
+  </header>
 
-  <main class="wrap">
-    <!-- ==== 3-column collage (matches your drawing) ==== -->
+  <main style="max-width:1100px;margin:32px auto;padding:0 16px">
+    <!-- ===== 3 equal columns: LEFT | CENTER | RIGHT ===== -->
     <div class="collage3">
-      <!-- Left column: pic1 (top), pic4 (bottom) -->
+      <!-- Left column: pic1 / pic4 -->
       <div class="col">
-        <figure class="frame tall">
-          <img src="assets/preview/SDC10726.JPG" alt="pic1">
-        </figure>
-        <figure class="frame tall">
-          <img src="assets/preview/SDC10746.JPG" alt="pic4">
-        </figure>
+        <figure class="frame tall"><img src="assets/preview/SDC10726.JPG" alt="pic1"></figure>
+        <figure class="frame tall"><img src="assets/preview/SDC10746.JPG" alt="pic4"></figure>
       </div>
 
-      <!-- Center column: pic2 (top), Instagram button (middle), pic5 (bottom) -->
+      <!-- Center column: pic2 / instagram button / pic5 -->
       <div class="col">
-        <figure class="frame wide">
-          <img src="assets/preview/SDC10826.JPG" alt="pic2">
-        </figure>
+        <figure class="frame tall"><img src="assets/preview/SDC10826.JPG" alt="pic2"></figure>
 
-        <div class="frame wide center-cell">
+        <div class="frame short center-cell">
           <div class="center-glow" aria-hidden="true"></div>
           <a class="cta"
              href="https://instagram.com/romansingh1820?igsh=ZWR2dzM5aWRpd3Bh"
@@ -112,26 +42,17 @@
           </a>
         </div>
 
-        <figure class="frame wide">
-          <img src="assets/preview/DSC01189.JPG" alt="pic5">
-        </figure>
+        <figure class="frame tall"><img src="assets/preview/DSC01189.JPG" alt="pic5"></figure>
       </div>
 
-      <!-- Right column: pic3 (top), pic6 (bottom) -->
+      <!-- Right column: pic3 / pic6 -->
       <div class="col">
-        <figure class="frame tall">
-          <img src="assets/preview/DSC01138_enhanced.jpg" alt="pic3">
-        </figure>
-        <figure class="frame tall">
-          <img src="assets/preview/DSC01140.JPG" alt="pic6">
-        </figure>
+        <figure class="frame tall"><img src="assets/preview/DSC01138_enhanced.jpg" alt="pic3"></figure>
+        <figure class="frame tall"><img src="assets/preview/DSC01140.JPG" alt="pic6"></figure>
       </div>
     </div>
 
-    <p class="text-center text-neutral-400 text-sm mt-6">
-      Replace <code>assets/preview/pic*.jpg</code> with your files. Images are
-      <code>object-fit: cover</code> so there are no white borders.
-    </p>
+    <p class="note-subtle">Tip: swap <code>assets/preview/*.jpg</code> for your images. No white edges—images use <code>object-fit:cover</code>.</p>
   </main>
 </body>
 </html>
