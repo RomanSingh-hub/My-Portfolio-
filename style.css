@@ -164,9 +164,16 @@ header {
 
 /* =======================
    Sections
+   (SCOPED to SPA only so other pages aren't blank)
 ======================= */
-section { display: none; padding: 50px 20px; }
-section.active { display: block; }
+/* Add class="spa" on <body> in index.html ONLY */
+.spa main > section { display: none; padding: 50px 20px; }
+.spa main > section.active { display: block; }
+
+/* Standalone pages (no .spa on body) just use normal flow.
+   (No global 'section{display:none}' anymore) */
+section { padding: 50px 20px; }
+
 #articles, #blogs, #stories, #published,
 #designs, #newspapers, #brochures, #advertisements,
 #photography {
@@ -218,12 +225,13 @@ footer {
   box-shadow:0 0 6px rgba(34,211,238,.6), 0 0 12px rgba(34,211,238,.4);
   border-color:#00bcd4;
 }
+
 /* =======================
    Collage Page Layout
    (keeps images small & centered)
 ======================= */
 .collage-wrap {
-  max-width: 900px;      /* <-- caps the width */
+  max-width: 900px;
   margin: 32px auto;
   padding: 0 16px;
 }
@@ -248,8 +256,8 @@ footer {
   box-shadow: 0 6px 20px rgba(0,0,0,.4);
 }
 
-.collage3 .frame.tall { height: 280px; }   /* <= adjust height here */
-.collage3 .frame.short { 
+.collage3 .frame.tall { height: 280px; }
+.collage3 .frame.short {
   height: 80px;
   display: flex;
   align-items: center;
