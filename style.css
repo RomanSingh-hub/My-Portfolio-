@@ -1,58 +1,57 @@
 /* =======================
-   Base & Fonts
+   Base & Fonts (add-on)
 ======================= */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
 
 :root{
-  /* Collage vars (used in collage.html) */
-  --rail-h: 14px;             /* top black bar height */
-  --string-w: 3px;            /* hanging line thickness */
-  --string-color: #0f172a;    /* slate-900 */
-  --frame-border: #e5e7eb;    /* light border so it pops on black */
-  --frame-ratio: 4 / 3;       /* one ratio for all frames */
+  /* Collage vars (used in collage pages) */
+  --rail-h: 14px;           /* top black bar height */
+  --string-w: 3px;          /* hanging line thickness */
+  --string-color: #0f172a;  /* slate-900 */
+  --frame-border: #e5e7eb;  /* light border so it pops on black */
+  --frame-ratio: 4 / 3;     /* one ratio for all frames */
 }
 
-html, body {
-  margin: 0;
-  padding: 0;
-  background: #0a0a0a;
-  color: #ffffff;
-  font-family: 'Poppins', sans-serif;
+/* keep your existing body styles — these just ensure parity */
+html, body{
+  background:#0a0a0a;
+  color:#fff;
+  font-family:'Poppins',sans-serif;
 }
 
 /* =======================
    Neon / Glass / Grid BG
 ======================= */
-.neon-glow { box-shadow: 0 0 20px rgba(0,255,255,.3); }
-.neon-text { text-shadow: 0 0 10px rgba(0,255,255,.8); }
+.neon-glow{ box-shadow:0 0 20px rgba(0,255,255,.3) }
+.neon-text{ text-shadow:0 0 10px rgba(0,255,255,.8) }
 
 .glass-effect{
-  background: rgba(255,255,255,.05);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255,255,255,.1);
+  background:rgba(255,255,255,.05);
+  backdrop-filter:blur(10px);
+  border:1px solid rgba(255,255,255,.1);
 }
 
 .grid-bg{
   background-image:
     linear-gradient(rgba(0,255,255,.1) 1px, transparent 1px),
     linear-gradient(90deg, rgba(0,255,255,.1) 1px, transparent 1px);
-  background-size: 50px 50px;
+  background-size:50px 50px;
 }
 
 /* =======================
    Animations / Effects
 ======================= */
-.floating-animation { animation: float 6s ease-in-out infinite; }
-@keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-20px)} }
+.floating-animation{ animation:float 6s ease-in-out infinite }
+@keyframes float{ 0%,100%{transform:translateY(0)} 50%{transform:translateY(-20px)} }
 
-.pulse-glow { animation: pulse-glow 2s ease-in-out infinite alternate; }
-@keyframes pulse-glow {
-  from { box-shadow: 0 0 20px rgba(255,0,150,.4); }
-  to   { box-shadow: 0 0 40px rgba(255,0,150,.8); }
+.pulse-glow{ animation:pulse-glow 2s ease-in-out infinite alternate }
+@keyframes pulse-glow{
+  from{ box-shadow:0 0 20px rgba(255,0,150,.4) }
+  to{   box-shadow:0 0 40px rgba(255,0,150,.8) }
 }
 
-.bounce-text { display:inline-block; animation: bounce-elastic 3s infinite ease-in-out; }
-@keyframes bounce-elastic {
+.bounce-text{ display:inline-block; animation:bounce-elastic 3s infinite ease-in-out }
+@keyframes bounce-elastic{
   0%{transform:translateY(0)} 20%{transform:translateY(-25px)}
   40%{transform:translateY(0)} 55%{transform:translateY(-12px)}
   70%{transform:translateY(0)} 85%{transform:translateY(-6px)} 100%{transform:translateY(0)}
@@ -62,16 +61,16 @@ html, body {
 .typing-animation{
   display:inline-block; white-space:nowrap; overflow:hidden;
   border-right:2px solid #00ffff; width:0;
-  animation: typing 4s steps(40,end) forwards, blink-caret .75s step-end infinite;
+  animation:typing 4s steps(40,end) forwards, blink-caret .75s step-end infinite;
 }
-@keyframes typing { from{width:0} to{width:100%} }
-@keyframes blink-caret { 0%,100%{border-color:transparent} 50%{border-color:#00ffff} }
+@keyframes typing{ from{width:0} to{width:100%} }
+@keyframes blink-caret{ 0%,100%{border-color:transparent} 50%{border-color:#00ffff} }
 
-/* Portrait / Float Zoom */
-.float-fade{ animation: floatFade 4s ease-in-out infinite alternate; }
-@keyframes floatFade { 0%{opacity:0;transform:translateY(20px)} 40%{opacity:1;transform:translateY(0)} 100%{opacity:1;transform:translateY(-10px)} }
-.float-zoom{ animation: floatZoom 6s ease-in-out infinite; }
-@keyframes floatZoom { 0%,100%{transform:translateY(0) scale(1)} 50%{transform:translateY(-10px) scale(1.02)} }
+/* Portrait helpers */
+.float-fade{ animation:floatFade 4s ease-in-out infinite alternate }
+@keyframes floatFade{ 0%{opacity:0;transform:translateY(20px)} 40%{opacity:1;transform:translateY(0)} 100%{opacity:1;transform:translateY(-10px)} }
+.float-zoom{ animation:floatZoom 6s ease-in-out infinite }
+@keyframes floatZoom{ 0%,100%{transform:translateY(0) scale(1)} 50%{transform:translateY(-10px) scale(1.02)} }
 
 /* Cursor dot */
 .cursor{
@@ -80,15 +79,15 @@ html, body {
 }
 
 /* Active nav highlight + scrolled bg */
-nav a.active { color:#06b6d4; }
-nav.scrolled { background:rgba(10,10,10,.9); transition:background .3s ease; }
+nav a.active{ color:#06b6d4 }
+nav.scrolled{ background:rgba(10,10,10,.9); transition:background .3s ease }
 
-/* gentle before:animate helper (if you use it) */
-@keyframes pulse-slow {
-  0%,100% { opacity:.4; transform:scale(1); }
-  50%     { opacity:.7; transform:scale(1.05); }
+/* gentle before:animate helper */
+@keyframes pulse-slow{
+  0%,100%{opacity:.4; transform:scale(1)}
+  50%{opacity:.7; transform:scale(1.05)}
 }
-.before\:animate-pulse-slow::before { animation:pulse-slow 3s ease-in-out infinite; }
+.before\:animate-pulse-slow::before{ animation:pulse-slow 3s ease-in-out infinite }
 
 /* =======================
    Project Cards
@@ -105,16 +104,15 @@ nav.scrolled { background:rgba(10,10,10,.9); transition:background .3s ease; }
   text-decoration:none; display:block;
   transition:transform .3s ease, box-shadow .3s ease;
 }
-.card:hover{ transform:translateY(-6px); box-shadow:0 12px 28px rgba(0,0,0,.32); }
-.card img{ width:100%; display:block; }
-.card h3{ margin:12px; font-size:1.2em; }
-.card p{ margin:0 12px 12px; font-size:.9em; color:#666; }
+.card:hover{ transform:translateY(-6px); box-shadow:0 12px 28px rgba(0,0,0,.32) }
+.card img{ width:100%; display:block }
+.card h3{ margin:12px; font-size:1.2em }
+.card p{ margin:0 12px 12px; font-size:.9em; color:#666 }
 
 /* =======================
-   Collage page styles
-   (used by collage.html)
+   Collage page utilities
 ======================= */
-.rail{ position:absolute; top:0; left:0; right:0; height:var(--rail-h); background:#000; }
+.rail{ position:absolute; top:0; left:0; right:0; height:var(--rail-h); background:#000 }
 
 .collage-grid{
   display:grid;
@@ -123,10 +121,11 @@ nav.scrolled { background:rgba(10,10,10,.9); transition:background .3s ease; }
   align-items:start;
 }
 
-.frame img{ inset:0; width:100%; height:100%; object-fit: cover; background:#000; }
+.frame{ border-radius:18px; border:1px solid var(--frame-border); overflow:hidden }
+.frame img{ width:100%; height:100%; display:block; object-fit:cover; background:#000 }
 
 /* Hanging strings for top frames */
-.hanger{ position:relative; }
+.hanger{ position:relative }
 .hanger::before{
   content:""; position:absolute; left:50%; transform:translateX(-50%);
   top: calc(-1 * (clamp(90px, 14vh, 160px) - var(--rail-h)));
@@ -135,24 +134,28 @@ nav.scrolled { background:rgba(10,10,10,.9); transition:background .3s ease; }
 }
 
 /* Desktop placement */
-.small-left{  grid-column:1; }
-.small-right{ grid-column:3; }
-.big-1{ grid-column:1; } .big-2{ grid-column:2; } .big-3{ grid-column:3; }
+.small-left{  grid-column:1 }
+.small-right{ grid-column:3 }
+.big-1{ grid-column:1 } .big-2{ grid-column:2 } .big-3{ grid-column:3 }
 
 /* Mobile stacking */
 @media (max-width:768px){
-  .collage-grid{ grid-template-columns:1fr; }
-  .small-left,.small-right,.big-1,.big-2,.big-3{ grid-column:auto; }
-  .hanger::before{ top:-70px; height:70px; }
-}
-/* Blue glow on hover for cards */
-.work-card:hover {
-  .soft-glow {
-  box-shadow: 0 0 6px rgba(34, 211, 238, 0.6), 0 0 12px rgba(34, 211, 238, 0.4);
-}
-.soft-glow {
-  box-shadow: 0 0 6px rgba(34, 211, 238, 0.6), 0 0 12px rgba(34, 211, 238, 0.4);
+  .collage-grid{ grid-template-columns:1fr }
+  .small-left,.small-right,.big-1,.big-2,.big-3{ grid-column:auto }
+  .hanger::before{ top:-70px; height:70px }
 }
 
-  border-color: #00bcd4; /* optional: adds a subtle cyan border */
+/* =======================
+   Blue glow hover (fixed)
+   - apply class "soft-glow" to any card/frame you want to glow
+======================= */
+.soft-glow{ transition: box-shadow .25s ease, border-color .25s ease }
+.soft-glow:hover{
+  box-shadow:0 0 6px rgba(34,211,238,.6), 0 0 12px rgba(34,211,238,.4);
+  border-color:#00bcd4; /* optional: cyan border accent */
 }
+
+/* Also glow specific components on hover */
+.work-card.soft-glow:hover,
+.frame.soft-glow:hover{ box-shadow:0 0 6px rgba(34,211,238,.6), 0 0 12px rgba(34,211,238,.4) }
+
