@@ -6,8 +6,8 @@
   <title>Collage Grid – RORO LAB</title>
   <link rel="stylesheet" href="style.css" />
 </head>
-<body>
-  <!-- Top rail nav (simple) -->
+<body class="bg-black">
+  <!-- Top rail nav -->
   <header class="glass-effect" style="position:sticky;top:0;z-index:50">
     <nav class="navbar" style="max-width:1100px;margin:0 auto;padding:12px 16px;display:flex;justify-content:space-between;align-items:center">
       <a href="index.html" class="logo neon-text" style="text-decoration:none;color:#fff;font-weight:800">
@@ -21,38 +21,36 @@
   </header>
 
   <main style="max-width:1100px;margin:32px auto;padding:0 16px">
-    <!-- ===== 3 equal columns: LEFT | CENTER | RIGHT ===== -->
+    <!-- Collage: 3 equal columns -->
     <div class="collage3">
-      <!-- Left column: pic1 / pic4 -->
+      <!-- LEFT: pic1 / pic4 -->
       <div class="col">
         <figure class="frame tall"><img src="assets/preview/SDC10726.JPG" alt="pic1"></figure>
         <figure class="frame tall"><img src="assets/preview/SDC10746.JPG" alt="pic4"></figure>
       </div>
 
-      <!-- Center column: pic2 / instagram button / pic5 -->
+      <!-- CENTER: pic2 / CTA / pic5 -->
       <div class="col">
         <figure class="frame tall"><img src="assets/preview/SDC10826.JPG" alt="pic2"></figure>
 
+        <!-- small rounded center link (your “intalink”) -->
         <div class="frame short center-cell">
-          <div class="center-glow" aria-hidden="true"></div>
-          <a class="cta"
-             href="https://instagram.com/romansingh1820?igsh=ZWR2dzM5aWRpd3Bh"
-             target="_blank" rel="noopener">
-            Follow RORO LAB on Instagram
-          </a>
+          <a class="cta" href="https://instagram.com/romansingh1820?igsh=ZWR2dzM5aWRpd3Bh" target="_blank" rel="noopener">INSTAGRAM</a>
         </div>
 
         <figure class="frame tall"><img src="assets/preview/DSC01189.JPG" alt="pic5"></figure>
       </div>
 
-      <!-- Right column: pic3 / pic6 -->
+      <!-- RIGHT: pic3 / pic6 -->
       <div class="col">
         <figure class="frame tall"><img src="assets/preview/DSC01138_enhanced.jpg" alt="pic3"></figure>
         <figure class="frame tall"><img src="assets/preview/DSC01140.JPG" alt="pic6"></figure>
       </div>
     </div>
 
-    <p class="note-subtle">Tip: swap <code>assets/preview/*.jpg</code> for your images. No white edges—images use <code>object-fit:cover</code>.</p>
+    <p class="note-subtle" style="opacity:.7;margin-top:18px">
+      Swap <code>assets/preview/*.jpg</code> for your images. Images fill the frames (no white edges).
+    </p>
   </main>
 </body>
 </html>
