@@ -10,9 +10,18 @@
   <style>
     .glass-effect{background:rgba(255,255,255,.05);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.1)}
     .neon-text{text-shadow:0 0 10px rgba(34,211,238,.7)}
+    /* Card lift + strong keyboard focus */
+    .work-card{transition:transform .25s ease, box-shadow .25s ease}
+    .work-card:hover{transform:translateY(-4px)}
+    .work-card:focus-visible{outline:none;box-shadow:0 0 0 3px rgba(34,211,238,.6)}
+    /* Respect reduced motion */
+    @media (prefers-reduced-motion: reduce){
+      .work-card{transition:none}
+      .work-card:hover{transform:none}
+    }
   </style>
 </head>
-<body class="overflow-x-hidden">
+<body class="overflow-x-hidden bg-black text-white">
 
   <!-- ===========================
        NAVIGATION
@@ -24,7 +33,9 @@
       </div>
       <div class="hidden md:flex space-x-12 pr-20">
         <a href="index.html#home" class="hover:text-cyan-400">HOME</a>
-        <a href="index.html#works" class="hover:text-cyan-400">WORKS</a>
+        <!-- If Projects live on another page, link it directly: -->
+        <a href="projects.html" class="hover:text-cyan-400">WORKS</a>
+        <!-- If you actually have <section id="works"> on index, use: index.html#works -->
       </div>
     </div>
   </nav>
@@ -47,18 +58,16 @@
     <!-- P4 -->
     <a href="final_pdf/published/a_mounting_problem_for_municipalities.pdf" target="_blank" rel="noopener"
        aria-label="Read: A mounting problem for municipalities"
-       class="block glass-effect rounded-2xl p-6 work-card transition transform hover:-translate-y-1 hover:shadow-2xl focus:outline-none focus:ring-2 focus:ring-cyan-400/60">
+       class="block glass-effect rounded-2xl p-6 work-card hover:shadow-2xl">
       <h3 class="text-2xl font-bold mb-2 text-cyan-400">A mounting problem for municipalities</h3>
-      <p class="text-gray-300">
-        Published on Hill Post (web) — PDF reprint available.
-      </p>
+      <p class="text-gray-300">Published on Hill Post (web) — PDF reprint available.</p>
       <span class="mt-3 inline-block text-pink-400 font-semibold">READ FULL STORY →</span>
     </a>
 
     <!-- P1 -->
     <a href="final_pdf/published/algonquin_summer_market_goes_virtual.pdf" target="_blank" rel="noopener"
        aria-label="Read: Algonquin Summer Market goes virtual"
-       class="block glass-effect rounded-2xl p-6 work-card transition transform hover:-translate-y-1 hover:shadow-2xl focus:outline-none focus:ring-2 focus:ring-cyan-400/60">
+       class="block glass-effect rounded-2xl p-6 work-card hover:shadow-2xl">
       <h3 class="text-2xl font-bold mb-2 text-cyan-400">Algonquin Summer Market goes virtual</h3>
       <p class="text-gray-300">Published in Algonquin Times — PDF reprint.</p>
       <span class="mt-3 inline-block text-pink-400 font-semibold">READ FULL STORY →</span>
@@ -67,7 +76,7 @@
     <!-- P2 -->
     <a href="final_pdf/published/new_immigration_rules_target_students_in_online_classes.pdf" target="_blank" rel="noopener"
        aria-label="Read: New U.S. immigration rules target students in online classes"
-       class="block glass-effect rounded-2xl p-6 work-card transition transform hover:-translate-y-1 hover:shadow-2xl focus:outline-none focus:ring-2 focus:ring-cyan-400/60">
+       class="block glass-effect rounded-2xl p-6 work-card hover:shadow-2xl">
       <h3 class="text-2xl font-bold mb-2 text-cyan-400">New U.S. immigration rules target students in online classes</h3>
       <p class="text-gray-300">Published in Algonquin Times — PDF reprint.</p>
       <span class="mt-3 inline-block text-pink-400 font-semibold">READ FULL STORY →</span>
@@ -76,7 +85,7 @@
     <!-- P3 -->
     <a href="final_pdf/published/show_your_pride.pdf" target="_blank" rel="noopener"
        aria-label="Read: Show Your Pride"
-       class="block glass-effect rounded-2xl p-6 work-card transition transform hover:-translate-y-1 hover:shadow-2xl focus:outline-none focus:ring-2 focus:ring-cyan-400/60">
+       class="block glass-effect rounded-2xl p-6 work-card hover:shadow-2xl">
       <h3 class="text-2xl font-bold mb-2 text-cyan-400">Show Your Pride</h3>
       <p class="text-gray-300">Published in Algonquin Times — PDF reprint.</p>
       <span class="mt-3 inline-block text-pink-400 font-semibold">READ FULL STORY →</span>
@@ -85,7 +94,7 @@
     <!-- 1 -->
     <a href="final_pdf/canada-park-in-2020.pdf" target="_blank" rel="noopener"
        aria-label="Read: Canada Park in 2020"
-       class="block glass-effect rounded-2xl p-6 work-card transition transform hover:-translate-y-1 hover:shadow-2xl focus:outline-none focus:ring-2 focus:ring-cyan-400/60">
+       class="block glass-effect rounded-2xl p-6 work-card hover:shadow-2xl">
       <h3 class="text-2xl font-bold mb-2 text-cyan-400">Canada Park in 2020</h3>
       <p class="text-gray-300">Parks Canada suspended visitor access to reduce COVID-19 spread.</p>
       <span class="mt-3 inline-block text-pink-400 font-semibold">READ FULL STORY →</span>
@@ -94,7 +103,7 @@
     <!-- 2 -->
     <a href="final_pdf/facial-expression.pdf" target="_blank" rel="noopener"
        aria-label="Read: Facial Expression"
-       class="block glass-effect rounded-2xl p-6 work-card transition transform hover:-translate-y-1 hover:shadow-2xl focus:outline-none focus:ring-2 focus:ring-cyan-400/60">
+       class="block glass-effect rounded-2xl p-6 work-card hover:shadow-2xl">
       <h3 class="text-2xl font-bold mb-2 text-cyan-400">Facial Expression</h3>
       <p class="text-gray-300">Why expressions don’t always match emotion—and how we communicate.</p>
       <span class="mt-3 inline-block text-pink-400 font-semibold">READ FULL STORY →</span>
@@ -103,7 +112,7 @@
     <!-- 3 -->
     <a href="final_pdf/mental-health-awareness.pdf" target="_blank" rel="noopener"
        aria-label="Read: Mental Health Awareness"
-       class="block glass-effect rounded-2xl p-6 work-card transition transform hover:-translate-y-1 hover:shadow-2xl focus:outline-none focus:ring-2 focus:ring-cyan-400/60">
+       class="block glass-effect rounded-2xl p-6 work-card hover:shadow-2xl">
       <h3 class="text-2xl font-bold mb-2 text-cyan-400">Mental Health Awareness</h3>
       <p class="text-gray-300">Algonquin College’s Awareness Week promoted student wellness.</p>
       <span class="mt-3 inline-block text-pink-400 font-semibold">READ FULL STORY →</span>
@@ -112,7 +121,7 @@
     <!-- 4 -->
     <a href="final_pdf/train-transit.pdf" target="_blank" rel="noopener"
        aria-label="Read: Train Transit"
-       class="block glass-effect rounded-2xl p-6 work-card transition transform hover:-translate-y-1 hover:shadow-2xl focus:outline-none focus:ring-2 focus:ring-cyan-400/60">
+       class="block glass-effect rounded-2xl p-6 work-card hover:shadow-2xl">
       <h3 class="text-2xl font-bold mb-2 text-cyan-400">Train Transit</h3>
       <p class="text-gray-300">Community opinions on Ottawa’s LRT expansion.</p>
       <span class="mt-3 inline-block text-pink-400 font-semibold">READ FULL STORY →</span>
@@ -121,7 +130,7 @@
     <!-- 5 -->
     <a href="final_pdf/valentine.pdf" target="_blank" rel="noopener"
        aria-label="Read: Valentine’s Day"
-       class="block glass-effect rounded-2xl p-6 work-card transition transform hover:-translate-y-1 hover:shadow-2xl focus:outline-none focus:ring-2 focus:ring-cyan-400/60">
+       class="block glass-effect rounded-2xl p-6 work-card hover:shadow-2xl">
       <h3 class="text-2xl font-bold mb-2 text-cyan-400">Valentine’s Day</h3>
       <p class="text-gray-300">Perspectives on celebrations, traditions, and personal experiences.</p>
       <span class="mt-3 inline-block text-pink-400 font-semibold">READ FULL STORY →</span>
@@ -130,7 +139,7 @@
     <!-- 6 -->
     <a href="final_pdf/winterlude.pdf" target="_blank" rel="noopener"
        aria-label="Read: Winterlude Festival"
-       class="block glass-effect rounded-2xl p-6 work-card transition transform hover:-translate-y-1 hover:shadow-2xl focus:outline-none focus:ring-2 focus:ring-cyan-400/60">
+       class="block glass-effect rounded-2xl p-6 work-card hover:shadow-2xl">
       <h3 class="text-2xl font-bold mb-2 text-cyan-400">Winterlude Festival</h3>
       <p class="text-gray-300">Ottawa’s Winterlude returns with activities and culture.</p>
       <span class="mt-3 inline-block text-pink-400 font-semibold">READ FULL STORY →</span>
@@ -139,7 +148,7 @@
     <!-- 7 -->
     <a href="final_pdf/crisps-of-fall.pdf" target="_blank" rel="noopener"
        aria-label="Read: Crisps of Fall"
-       class="block glass-effect rounded-2xl p-6 work-card transition transform hover:-translate-y-1 hover:shadow-2xl focus:outline-none focus:ring-2 focus:ring-cyan-400/60">
+       class="block glass-effect rounded-2xl p-6 work-card hover:shadow-2xl">
       <h3 class="text-2xl font-bold mb-2 text-cyan-400">Crisps of Fall</h3>
       <p class="text-gray-300">Mistakes, growth, and starting fresh in the crisp energy of fall.</p>
       <span class="mt-3 inline-block text-pink-400 font-semibold">READ FULL STORY →</span>
@@ -148,7 +157,7 @@
     <!-- 8 -->
     <a href="final_pdf/fly-away.pdf" target="_blank" rel="noopener"
        aria-label="Read: Fly Away"
-       class="block glass-effect rounded-2xl p-6 work-card transition transform hover:-translate-y-1 hover:shadow-2xl focus:outline-none focus:ring-2 focus:ring-cyan-400/60">
+       class="block glass-effect rounded-2xl p-6 work-card hover:shadow-2xl">
       <h3 class="text-2xl font-bold mb-2 text-cyan-400">Fly Away</h3>
       <p class="text-gray-300">Leaving home, missing flights, and finding strength in independence.</p>
       <span class="mt-3 inline-block text-pink-400 font-semibold">READ FULL STORY →</span>
@@ -157,7 +166,7 @@
     <!-- 9 -->
     <a href="final_pdf/its-my-thing.pdf" target="_blank" rel="noopener"
        aria-label="Read: It’s My Thing"
-       class="block glass-effect rounded-2xl p-6 work-card transition transform hover:-translate-y-1 hover:shadow-2xl focus:outline-none focus:ring-2 focus:ring-cyan-400/60">
+       class="block glass-effect rounded-2xl p-6 work-card hover:shadow-2xl">
       <h3 class="text-2xl font-bold mb-2 text-cyan-400">It’s My Thing</h3>
       <p class="text-gray-300">Finding confidence and joy through writing after setbacks.</p>
       <span class="mt-3 inline-block text-pink-400 font-semibold">READ FULL STORY →</span>
@@ -166,7 +175,7 @@
     <!-- 10 -->
     <a href="final_pdf/plank's-prank.pdf" target="_blank" rel="noopener"
        aria-label="Read: Plank’s Prank"
-       class="block glass-effect rounded-2xl p-6 work-card transition transform hover:-translate-y-1 hover:shadow-2xl focus:outline-none focus:ring-2 focus:ring-cyan-400/60">
+       class="block glass-effect rounded-2xl p-6 work-card hover:shadow-2xl">
       <h3 class="text-2xl font-bold mb-2 text-cyan-400">Plank’s Prank</h3>
       <p class="text-gray-300">A broken bed and the comedy of settling into a new place.</p>
       <span class="mt-3 inline-block text-pink-400 font-semibold">READ FULL STORY →</span>
@@ -175,7 +184,7 @@
     <!-- 11 -->
     <a href="final_pdf/wall-of-dreams.pdf" target="_blank" rel="noopener"
        aria-label="Read: Wall of Dreams"
-       class="block glass-effect rounded-2xl p-6 work-card transition transform hover:-translate-y-1 hover:shadow-2xl focus:outline-none focus:ring-2 focus:ring-cyan-400/60">
+       class="block glass-effect rounded-2xl p-6 work-card hover:shadow-2xl">
       <h3 class="text-2xl font-bold mb-2 text-cyan-400">Wall of Dreams</h3>
       <p class="text-gray-300">Turning an unused corner into an inspiring creative space.</p>
       <span class="mt-3 inline-block text-pink-400 font-semibold">READ FULL STORY →</span>
