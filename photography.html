@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,17 +7,24 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="style.css" />
 
-  <!-- Keep your PWA/site manifest separate from the gallery manifest -->
-  <!-- If you use one, link it like this (optional): -->
+  <!-- Optional site manifest (not the gallery manifest) -->
   <!-- <link rel="manifest" href="/site.webmanifest"> -->
 
   <style>
-    /* Small enhancements so cards look good even before images load */
+    /* Minimal local polish so page looks good even without global CSS */
     .glass-effect{background:rgba(255,255,255,.03);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.08);border-radius:16px;box-shadow:0 10px 40px rgba(0,0,0,.35)}
     body{background:#000;color:#eaeaea}
     img{display:block}
-    /* prevent layout shift while thumbs load */
     .thumb{background:#111}
+    /* Glow text if your global neon-text isn’t present */
+    .neon-text{text-shadow:0 0 6px rgba(34,211,238,.8),0 0 18px rgba(34,211,238,.35)}
+    /* Gentle hover lift for cards */
+    .work-card{transition:transform .25s ease, box-shadow .25s ease}
+    .work-card:hover{transform:translateY(-2px)}
+    /* Truncate fallback (instead of Tailwind line-clamp plugin) */
+    .title-truncate{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    /* Prevent body scroll when lightbox is open */
+    .no-scroll{overflow:hidden}
   </style>
 </head>
 <body class="min-h-screen flex flex-col overflow-x-hidden bg-black text-white">
@@ -31,7 +37,8 @@
       </div>
       <div class="hidden md:flex space-x-12 pr-20">
         <a href="index.html#home" class="hover:text-cyan-400">HOME</a>
-       <a href="#works" class="hover:text-cyan-300/90">WORKS</a>
+        <!-- Jump directly to gallery grid so the link works -->
+        <a href="#galleryGrid" class="hover:text-cyan-300/90">WORKS</a>
       </div>
     </div>
   </nav>
@@ -54,7 +61,6 @@
         A 50-photo journey capturing the calm beauty of a beachside walk, from golden sunrises to the gentle rhythm of the waves.
       </p>
 
-      <!-- Embedded YouTube Video -->
       <div class="w-full aspect-video rounded-xl overflow-hidden shadow-lg">
         <iframe
           src="https://www.youtube.com/embed/WZnoF3HHT_Q"
@@ -106,10 +112,12 @@
   </section>
 
   <!-- Lightbox -->
-  <div id="lightbox" class="fixed inset-0 bg-black/90 z-[60] hidden">
-    <button id="lbClose" class="absolute top-5 right-5 text-white/70 hover:text-white text-3xl">✕</button>
-    <button id="lbPrev"  class="absolute left-4 top-1/2 -translate-y-1/2 text-white/70 hover:text-white text-3xl">❮</button>
-    <button id="lbNext"  class="absolute right-4 top-1/2 -translate-y-1/2 text-white/70 hover:text-white text-3xl">❯</button>
+  <div id="lightbox"
+       class="fixed inset-0 bg-black/90 z-[60] hidden"
+       role="dialog" aria-modal="true" aria-hidden="true" aria-label="Image viewer">
+    <button id="lbClose" class="absolute top-5 right-5 text-white/70 hover:text-white text-3xl" aria-label="Close">✕</button>
+    <button id="lbPrev"  class="absolute left-4 top-1/2 -translate-y-1/2 text-white/70 hover:text-white text-3xl" aria-label="Previous">❮</button>
+    <button id="lbNext"  class="absolute right-4 top-1/2 -translate-y-1/2 text-white/70 hover:text-white text-3xl" aria-label="Next">❯</button>
     <img id="lbImg" alt="" class="max-h-[88vh] max-w-[92vw] mx-auto mt-16 rounded-xl shadow-2xl object-contain"/>
     <div id="lbCap" class="text-center text-gray-300 mt-4 px-4"></div>
   </div>
@@ -117,9 +125,9 @@
   <!-- Gallery Script -->
   <script>
     // ========= CONFIG =========
-    // Make sure you have: assets/photograph/gallery-manifest.json  (array of "file.jpg")
+    // Make sure you have: assets/photograph/manifest.json (array of "file.jpg")
     const MANIFEST_URL = 'assets/photograph/manifest.json';
-    const BASE = 'assets/photograph/'; // folder that actually contains the images
+    const BASE = 'assets/photograph/'; // folder that contains the images
     const PAGE_SIZE = 20;
 
     // ========= STATE =========
@@ -133,8 +141,11 @@
     const lightbox = document.getElementById('lightbox');
     const lbImg = document.getElementById('lbImg');
     const lbCap = document.getElementById('lbCap');
+    const lbClose = document.getElementById('lbClose');
+    const lbNext = document.getElementById('lbNext');
+    const lbPrev = document.getElementById('lbPrev');
 
-    // Helpers
+    // ========= HELPERS =========
     const captionFrom = (fn) =>
       fn.replace(/\.[^.]+$/, '').replace(/[-_]+/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
 
@@ -143,13 +154,18 @@
       const start = (page - 1) * PAGE_SIZE;
       const slice = files.slice(start, start + PAGE_SIZE);
 
+      if (slice.length === 0) {
+        grid.innerHTML = `<p class="text-gray-400 col-span-full p-4">No images to display.</p>`;
+        pager.innerHTML = '';
+        return;
+      }
+
       slice.forEach((name, i) => {
         const idx = start + i;
         const a = document.createElement('a');
         a.href = '#';
         a.className = 'block group rounded-xl overflow-hidden glass-effect hover:scale-[1.01] transition';
 
-        // Use a fixed aspect ratio so the grid stays tidy while images load
         a.innerHTML = `
           <div class="thumb w-full aspect-[3/4] md:aspect-[16/10] overflow-hidden">
             <img src="${BASE + encodeURIComponent(name)}"
@@ -158,7 +174,7 @@
                  class="w-full h-full object-cover"/>
           </div>
           <div class="p-3">
-            <h3 class="text-sm text-gray-300 line-clamp-1 group-hover:text-white">${captionFrom(name)}</h3>
+            <h3 class="text-sm text-gray-300 title-truncate group-hover:text-white">${captionFrom(name)}</h3>
           </div>`;
 
         a.addEventListener('click', (e)=>{ e.preventDefault(); openLightbox(idx); });
@@ -174,38 +190,71 @@
       if (pages <= 1) return;
       for (let p = 1; p <= pages; p++){
         const b = document.createElement('button');
+        b.type = 'button';
         b.textContent = p;
-        b.className = 'px-3 py-1 rounded-md border border-white/10 ' +
+        b.className = 'px-3 py-1 rounded-md border border-white/10 mx-[1px] ' +
                       (p === page ? 'bg-white/10 text-white' : 'text-gray-300 hover:text-white');
-        b.onclick = ()=>{ page = p; render(); };
+        b.addEventListener('click', ()=>{ page = p; render(); window.scrollTo({ top: document.getElementById('galleryGrid').offsetTop - 100, behavior: "smooth" }); });
         pager.appendChild(b);
       }
     }
 
     function openLightbox(idx){
-      currentIndex = idx;
-      const name = files[idx];
+      if (!files.length) return;
+      currentIndex = ((idx % files.length) + files.length) % files.length;
+      const name = files[currentIndex];
       lbImg.src = BASE + encodeURIComponent(name);
       lbImg.alt = captionFrom(name);
       lbCap.textContent = captionFrom(name);
       lightbox.classList.remove('hidden');
+      lightbox.setAttribute('aria-hidden', 'false');
+      document.body.classList.add('no-scroll');
+      // focus for keyboard users
+      lbClose.focus();
     }
-    function closeLightbox(){ lightbox.classList.add('hidden'); lbImg.src = ''; }
-    function next(){ currentIndex = (currentIndex + 1) % files.length; openLightbox(currentIndex); }
-    function prev(){ currentIndex = (currentIndex - 1 + files.length) % files.length; openLightbox(currentIndex); }
+    function closeLightbox(){
+      lightbox.classList.add('hidden');
+      lightbox.setAttribute('aria-hidden', 'true');
+      lbImg.src = '';
+      document.body.classList.remove('no-scroll');
+    }
+    function next(){
+      if (!files.length) return;
+      currentIndex = (currentIndex + 1) % files.length;
+      openLightbox(currentIndex);
+    }
+    function prev(){
+      if (!files.length) return;
+      currentIndex = (currentIndex - 1 + files.length) % files.length;
+      openLightbox(currentIndex);
+    }
 
-    document.getElementById('lbClose').onclick = closeLightbox;
-    document.getElementById('lbNext').onclick = next;
-    document.getElementById('lbPrev').onclick = prev;
-    window.addEventListener('keydown', (e)=>{
+    lbClose.addEventListener('click', closeLightbox);
+    lbNext.addEventListener('click', next);
+    lbPrev.addEventListener('click', prev);
+
+    // basic focus trap inside lightbox
+    lightbox.addEventListener('keydown', (e) => {
       if (lightbox.classList.contains('hidden')) return;
       if (e.key === 'Escape') closeLightbox();
       if (e.key === 'ArrowRight') next();
       if (e.key === 'ArrowLeft') prev();
+      if (e.key === 'Tab') {
+        const focusables = [lbPrev, lbNext, lbClose];
+        const i = focusables.indexOf(document.activeElement);
+        const dir = e.shiftKey ? -1 : 1;
+        const ni = (i + dir + focusables.length) % focusables.length;
+        e.preventDefault();
+        focusables[ni].focus();
+      }
     });
 
     // ===== Friendlier manifest loader (clear diagnostics) =====
-    const resolvedURL = location.origin + location.pathname.replace(/[^/]*$/, '') + MANIFEST_URL;
+    const isFileProtocol = location.protocol === 'file:';
+    const resolvedURL = isFileProtocol
+      ? MANIFEST_URL
+      : location.origin + location.pathname.replace(/[^/]*$/, '') + MANIFEST_URL;
+
     fetch(MANIFEST_URL, { cache: 'no-store' })
       .then(r => {
         if (!r.ok) throw new Error(`HTTP ${r.status} for ${resolvedURL}`);
