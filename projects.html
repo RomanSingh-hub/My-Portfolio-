@@ -6,6 +6,24 @@
   <title>Projects - RORO LAB</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="style.css" />
+  <!-- If you actually need a script, be sure the file exists as .js -->
+  <!-- <script defer src="script.js"></script> -->
+
+  <style>
+    /* Minimal fallbacks so this page works standalone */
+    .glass-effect{
+      background:rgba(255,255,255,.03);
+      backdrop-filter:blur(8px);
+      border:1px solid rgba(255,255,255,.08);
+      border-radius:16px;
+      box-shadow:0 10px 40px rgba(0,0,0,.35)
+    }
+    .neon-text{
+      text-shadow:0 0 6px rgba(34,211,238,.8),0 0 18px rgba(34,211,238,.35)
+    }
+    .work-card{transition:transform .25s ease}
+    .work-card:hover{transform:translateY(-2px)}
+  </style>
 </head>
 <body class="min-h-screen flex flex-col overflow-x-hidden bg-black text-white">
 
@@ -17,7 +35,8 @@
       </div>
       <div class="hidden md:flex space-x-12 pr-20">
         <a href="index.html#home" class="hover:text-cyan-400">HOME</a>
-        <a href="index.html#works" class="hover:text-cyan-400">WORKS</a>
+        <!-- Changed to in-page anchor -->
+        <a href="#projects" class="hover:text-cyan-400">WORKS</a>
       </div>
     </div>
   </nav>
@@ -31,7 +50,7 @@
   </section>
 
   <!-- Projects -->
-  <section class="max-w-5xl mx-auto px-6 space-y-16 pb-24">
+  <section id="projects" class="max-w-5xl mx-auto px-6 space-y-16 pb-24">
 
     <!-- Project 1 (Large) -->
     <div class="glass-effect rounded-2xl p-8 work-card">
@@ -80,16 +99,14 @@
 
       <!-- Insta Card (Project 3) -->
       <article class="rounded-2xl bg-white text-black shadow-lg overflow-hidden">
-        <!-- Header -->
         <div class="flex items-center justify-between px-4 py-3">
           <div class="flex items-center gap-3">
-            <div class="h-8 w-8 rounded-full bg-gray-200"></div>
+            <div class="h-8 w-8 rounded-full bg-gray-200" aria-hidden="true"></div>
             <div class="text-sm font-semibold">@rorolab</div>
-            <svg class="h-4 w-4 text-blue-500" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14l-1.1 1.9A8 8 0 1 0 20 12h-4l6-6 0 0 0 0 0 0 0 0z"/></svg>
+            <svg class="h-4 w-4 text-blue-500" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14l-1.1 1.9A8 8 0 1 0 20 12h-4l6-6z"/></svg>
           </div>
-          <div class="text-gray-500">•••</div>
+          <div class="text-gray-500" aria-hidden="true">•••</div>
         </div>
-        <!-- Media (9:16) -->
         <div class="relative w-full aspect-[9/16] bg-gray-100">
           <iframe
             class="absolute inset-0 w-full h-full"
@@ -100,20 +117,14 @@
             allowfullscreen
             loading="lazy"></iframe>
         </div>
-        <!-- Actions -->
         <div class="flex items-center justify-between px-4 py-3 text-gray-700">
           <div class="flex items-center gap-4">
-            <!-- heart -->
-            <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path stroke-width="2" d="M12 21s-7.5-4.35-9.33-8.58C1.61 8.64 3.87 6 6.76 6c1.73 0 3.07.83 3.99 2.01C11.17 6.83 12.51 6 14.24 6c2.89 0 5.15 2.64 4.09 6.42C19.5 16.65 12 21 12 21z"/></svg>
-            <!-- comment -->
-            <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path stroke-width="2" d="M21 15a4 4 0 0 1-4 4H8l-5 3V7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4v8z"/></svg>
-            <!-- share -->
-            <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path stroke-width="2" d="M3 12l18-9-9 18-2-7-7-2z"/></svg>
+            <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path stroke-width="2" d="M12 21s-7.5-4.35-9.33-8.58C1.61 8.64 3.87 6 6.76 6c1.73 0 3.07.83 3.99 2.01C11.17 6.83 12.51 6 14.24 6c2.89 0 5.15 2.64 4.09 6.42C19.5 16.65 12 21 12 21z"/></svg>
+            <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path stroke-width="2" d="M21 15a4 4 0 0 1-4 4H8l-5 3V7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4v8z"/></svg>
+            <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path stroke-width="2" d="M3 12l18-9-9 18-2-7-7-2z"/></svg>
           </div>
-          <!-- save -->
-          <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path stroke-width="2" d="M6 3h12v18l-6-4-6 4V3z"/></svg>
+          <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path stroke-width="2" d="M6 3h12v18l-6-4-6 4V3z"/></svg>
         </div>
-        <!-- Caption -->
         <div class="px-4 pb-4 text-sm text-gray-800">
           <span class="font-semibold">Time to Bloom</span>
           — This timelapse was captured in 2019 on a Samsung A9 and edited using TikTok’s tools.
@@ -124,14 +135,13 @@
       <article class="rounded-2xl bg-white text-black shadow-lg overflow-hidden">
         <div class="flex items-center justify-between px-4 py-3">
           <div class="flex items-center gap-3">
-            <div class="h-8 w-8 rounded-full bg-gray-200"></div>
+            <div class="h-8 w-8 rounded-full bg-gray-200" aria-hidden="true"></div>
             <div class="text-sm font-semibold">@brand_partner</div>
-            <div class="text-blue-500 text-xs font-bold">✔</div>
+            <div class="text-blue-500 text-xs font-bold" aria-hidden="true">✔</div>
           </div>
-          <div class="text-gray-500">•••</div>
+          <div class="text-gray-500" aria-hidden="true">•••</div>
         </div>
         <div class="relative w-full aspect-[9/16] bg-gray-100">
-          <!-- Instagram reel embed inside media area -->
           <iframe 
             class="absolute inset-0 w-full h-full"
             src="https://www.instagram.com/reel/DNj-WbCMT7_/embed"
@@ -140,11 +150,11 @@
         </div>
         <div class="flex items-center justify-between px-4 py-3 text-gray-700">
           <div class="flex items-center gap-4">
-            <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path stroke-width="2" d="M12 21s-7.5-4.35-9.33-8.58C1.61 8.64 3.87 6 6.76 6c1.73 0 3.07.83 3.99 2.01C11.17 6.83 12.51 6 14.24 6c2.89 0 5.15 2.64 4.09 6.42C19.5 16.65 12 21 12 21z"/></svg>
-            <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path stroke-width="2" d="M21 15a4 4 0 0 1-4 4H8l-5 3V7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4v8z"/></svg>
-            <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path stroke-width="2" d="M3 12l18-9-9 18-2-7-7-2z"/></svg>
+            <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path stroke-width="2" d="M12 21s-7.5-4.35-9.33-8.58C1.61 8.64 3.87 6 6.76 6c1.73 0 3.07.83 3.99 2.01C11.17 6.83 12.51 6 14.24 6c2.89 0 5.15 2.64 4.09 6.42C19.5 16.65 12 21 12 21z"/></svg>
+            <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path stroke-width="2" d="M21 15a4 4 0 0 1-4 4H8l-5 3V7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4v8z"/></svg>
+            <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path stroke-width="2" d="M3 12l18-9-9 18-2-7-7-2z"/></svg>
           </div>
-          <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path stroke-width="2" d="M6 3h12v18l-6-4-6 4V3z"/></svg>
+          <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path stroke-width="2" d="M6 3h12v18l-6-4-6 4V3z"/></svg>
         </div>
         <div class="px-4 pb-4 text-sm text-gray-800">
           <span class="font-semibold">Instagram Project</span>
@@ -156,11 +166,11 @@
       <article class="rounded-2xl bg-white text-black shadow-lg overflow-hidden">
         <div class="flex items-center justify-between px-4 py-3">
           <div class="flex items-center gap-3">
-            <div class="h-8 w-8 rounded-full bg-gray-200"></div>
+            <div class="h-8 w-8 rounded-full bg-gray-200" aria-hidden="true"></div>
             <div class="text-sm font-semibold">@rorolab</div>
-            <div class="text-blue-500 text-xs font-bold">✔</div>
+            <div class="text-blue-500 text-xs font-bold" aria-hidden="true">✔</div>
           </div>
-          <div class="text-gray-500">•••</div>
+          <div class="text-gray-500" aria-hidden="true">•••</div>
         </div>
         <div class="relative w-full aspect-[9/16] bg-gray-100">
           <iframe
@@ -174,11 +184,11 @@
         </div>
         <div class="flex items-center justify-between px-4 py-3 text-gray-700">
           <div class="flex items-center gap-4">
-            <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path stroke-width="2" d="M12 21s-7.5-4.35-9.33-8.58C1.61 8.64 3.87 6 6.76 6c1.73 0 3.07.83 3.99 2.01C11.17 6.83 12.51 6 14.24 6c2.89 0 5.15 2.64 4.09 6.42C19.5 16.65 12 21 12 21z"/></svg>
-            <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path stroke-width="2" d="M21 15a4 4 0 0 1-4 4H8l-5 3V7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4v8z"/></svg>
-            <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path stroke-width="2" d="M3 12l18-9-9 18-2-7-7-2z"/></svg>
+            <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path stroke-width="2" d="M12 21s-7.5-4.35-9.33-8.58C1.61 8.64 3.87 6 6.76 6c1.73 0 3.07.83 3.99 2.01C11.17 6.83 12.51 6 14.24 6c2.89 0 5.15 2.64 4.09 6.42C19.5 16.65 12 21 12 21z"/></svg>
+            <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path stroke-width="2" d="M21 15a4 4 0 0 1-4 4H8l-5 3V7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4v8z"/></svg>
+            <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path stroke-width="2" d="M3 12l18-9-9 18-2-7-7-2z"/></svg>
           </div>
-          <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path stroke-width="2" d="M6 3h12v18l-6-4-6 4V3z"/></svg>
+          <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path stroke-width="2" d="M6 3h12v18l-6-4-6 4V3z"/></svg>
         </div>
         <div class="px-4 pb-4 text-sm text-gray-800">
           <span class="font-semibold">Painting Timelapse</span>
