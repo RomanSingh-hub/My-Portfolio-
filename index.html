@@ -5,22 +5,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>RORO LAB — Creative Portfolio</title>
   <script src="https://cdn.tailwindcss.com"></script>
-
-  <!-- Minimal custom polish (keeps your neon/glass/typing from reference) -->
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap');
     :root{ --cy:#22d3ee; --pk:#f472b6; }
     html{ scroll-behavior:smooth }
     body{ font-family:'Poppins',sans-serif; background:#0a0a0a; color:#fff }
-
-    /* Subtle grid background */
     .grid-bg{
       background-image:
         linear-gradient(rgba(34,211,238,.08) 1px, transparent 1px),
         linear-gradient(90deg, rgba(34,211,238,.08) 1px, transparent 1px);
       background-size:48px 48px;
     }
-    /* Brand effects */
     .neon-text{ text-shadow:0 0 10px rgba(34,211,238,.75) }
     .glass-effect{ background:rgba(255,255,255,.05); backdrop-filter:blur(10px); border:1px solid rgba(255,255,255,.1) }
     .pulse-glow{ animation:pulseglow 2.6s ease-in-out infinite alternate }
@@ -28,10 +23,8 @@
     .typing-animation{ border-right:2px solid var(--cy); white-space:nowrap; overflow:hidden; animation:typing 3s steps(40,end), blink .75s step-end infinite }
     @keyframes typing{ from{width:0} to{width:100%} }
     @keyframes blink{ 50%{border-color:transparent} }
-    /* Work card lift */
     .work-card{ transition:transform .35s cubic-bezier(.2,.7,.2,1), box-shadow .35s }
     .work-card:hover{ transform:translateY(-8px); box-shadow:0 18px 40px rgba(0,0,0,.35) }
-    /* Mobile menu slide */
     .slide{ transition:max-height .35s ease }
   </style>
 </head>
@@ -50,6 +43,7 @@
       <!-- Desktop -->
       <div class="hidden md:flex items-center gap-10 text-sm">
         <a href="#home" class="hover:text-cyan-300/90">HOME</a>
+        <!-- FIXED: make it point to #works -->
         <a href="#works" class="hover:text-cyan-300/90">WORKS</a>
         <a href="assets/roman_singh.pdf" target="_blank" class="hover:text-cyan-300/90">RESUME</a>
       </div>
@@ -66,9 +60,11 @@
     <div id="mobile-nav" class="md:hidden overflow-hidden max-h-0 slide border-t border-white/10">
       <div class="px-6 py-3 flex flex-col gap-2 text-base">
         <a href="#home" class="py-2 hover:text-cyan-300/90">HOME</a>
-        <a href="#Showcase" class="py-2 hover:text-cyan-300/90">WORKS</a>
+        <!-- FIXED: use #works consistently -->
+        <a href="#works" class="py-2 hover:text-cyan-300/90">WORKS</a>
         <a href="assets/roman_singh.pdf" target="_blank" class="py-2 hover:text-cyan-300/90">RESUME</a>
-        a href="#Showcase" class="py-2 hover:text-cyan-300/90">EXPLORE WORKS</a>
+        <!-- FIXED: broken <a> tag -->
+        <a href="#works" class="py-2 hover:text-cyan-300/90">EXPLORE WORKS</a>
       </div>
     </div>
   </nav>
@@ -87,6 +83,7 @@
         </p>
 
         <div class="mt-8 flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center md:justify-start">
+          <!-- FIXED: this now targets #works -->
           <a href="#works" class="px-8 py-4 rounded-full font-semibold inline-block border-2 border-cyan-400 text-cyan-400 hover:bg-cyan-400 hover:text-black transition text-center">
             EXPLORE WORKS
           </a>
@@ -98,68 +95,61 @@
 
       <!-- Portrait -->
       <div class="flex justify-center md:justify-end">
-        <div class="relative rounded-full glass-effect border-4 border-cyan-400 p-2 pulse-glow"
-             style="max-width:22rem">
+        <div class="relative rounded-full glass-effect border-4 border-cyan-400 p-2 pulse-glow" style="max-width:22rem">
           <div class="absolute -inset-6 rounded-full bg-cyan-500/25 blur-2xl -z-10"></div>
-          <img src="assets/ROMAN_PAINTING.jpg" alt="Creative portrait of Roman"
-               class="rounded-full w-full h-full object-cover" />
+          <img src="assets/ROMAN_PAINTING.jpg" alt="Creative portrait of Roman" class="rounded-full w-full h-full object-cover" />
         </div>
       </div>
     </div>
   </section>
 
- <!-- ABOUT -->
-<section id="Showcase" class="py-20">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6">
-    <div class="text-center mb-14 max-w-2xl mx-auto">
-      <h2 class="text-3xl sm:text-4xl font-extrabold neon-text">Showcase</h2>
-      <p class="mt-4 text-white/70">
-      “A content creator transforming ideas into compelling visuals across both digital and traditional media.”
-      </p>
-    </div>
+  <!-- SHOWCASE / WORKS -->
+  <!-- FIXED: give section the id="works" so all links and JS scroll here -->
+  <section id="works" class="py-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+      <div class="text-center mb-14 max-w-2xl mx-auto">
+        <h2 class="text-3xl sm:text-4xl font-extrabold neon-text">Showcase</h2>
+        <p class="mt-4 text-white/70">
+          “A content creator transforming ideas into compelling visuals across both digital and traditional media.”
+        </p>
+      </div>
 
-    <!-- CLICKABLE CARDS -->
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
-      <!-- Digital Art -->
+      <!-- CLICKABLE CARDS -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
+        <!-- Digital Art -->
         <a href="artworks.html"
-         class="group block glass-effect rounded-2xl p-8 text-center work-card cursor-pointer focus-visible:ring-2 focus-visible:ring-cyan-400 focus:outline-none">
+           class="group block glass-effect rounded-2xl p-8 text-center work-card cursor-pointer focus-visible:ring-2 focus-visible:ring-cyan-400 focus:outline-none">
+          <div class="text-6xl mb-4 transition-transform duration-300 group-hover:scale-110">🎨</div>
+          <h3 class="text-xl font-bold mb-2 text-cyan-300">Dreamscapes</h3>
+          <p class="text-gray-300">Showcasing creative works in drawing, craft, and illustration.</p>
+        </a>
 
+        <!-- Photography (FIXED bad markup) -->
+        <a href="photography.html"
+           class="group block glass-effect rounded-2xl p-8 text-center work-card cursor-pointer focus-visible:ring-2 focus-visible:ring-cyan-400 focus:outline-none">
+          <div class="text-6xl mb-4 transition-transform duration-300 group-hover:scale-110">📸</div>
+          <h3 class="text-xl font-bold mb-2 text-pink-300">PHOTOGRAPHY</h3>
+          <p class="text-gray-300">Pictures that whisper stories.</p>
+        </a>
 
-        <!-- Blue glow triggered on hover -->
-        <div class="text-6xl mb-4 transition-transform duration-300 group-hover:scale-110">🎨</div>
-        <h3 class="text-xl font-bold mb-2 text-cyan-300">Dreamscapes</h3>
-        <p class="text-gray-300">Showcasing creative works in drawing, craft, and illustration..</p>
-      </a>
+        <!-- Content Writing -->
+        <a href="stories.html"
+           class="group block glass-effect rounded-2xl p-8 text-center work-card cursor-pointer focus-visible:ring-2 focus-visible:ring-cyan-400 focus:outline-none">
+          <div class="text-6xl mb-4 transition-transform duration-300 group-hover:scale-110">✍️</div>
+          <h3 class="text-xl font-bold mb-2 text-purple-300">CONTENT WRITING</h3>
+          <p class="text-gray-300">Where imagination finds its voice through writing.</p>
+        </a>
 
-      <!-- Photography -->
-      <a href="photography.html" 
-         <div 
-         <div 
-            class="group block glass-effect rounded-2xl p-8 text-center work-card cursor-pointer focus-visible:ring-2 focus-visible:ring-cyan-400 focus:outline-none">
-        <div class="text-6xl mb-4 transition-transform duration-300 group-hover:scale-110">📸</div>
-        <h3 class="text-xl font-bold mb-2 text-pink-300">PHOTOGRAPHY</h3>
-        <p class="text-gray-300">Pictures that whisper stories.</p>
-      </a>
-
-      <!-- Content Writing -->
-      <a href="stories.html"
-         class="group block glass-effect rounded-2xl p-8 text-center work-card cursor-pointer focus-visible:ring-2 focus-visible:ring-cyan-400 focus:outline-none">
-        <div class="text-6xl mb-4 transition-transform duration-300 group-hover:scale-110">✍️</div>
-        <h3 class="text-xl font-bold mb-2 text-purple-300">CONTENT WRITING</h3>
-        <p class="text-gray-300">Where imagination finds its voice through writing..</p>
-      </a>
-
-      <!-- Animation (point to Projects or your animation page) -->
-      <a href="projects.html"
-        class="group block glass-effect rounded-2xl p-8 text-center work-card cursor-pointer focus-visible:ring-2 focus-visible:ring-cyan-400 focus:outline-none">
-        <div class="text-6xl mb-4 transition-transform duration-300 group-hover:scale-110">🎬</div>
-        <h3 class="text-xl font-bold mb-2 text-green-300">Video/edit</h3>
-        <p class="text-gray-300">Every cut, every frame — shaping emotion through motion</p>
-      </a>
+        <!-- Video / Edit -->
+        <a href="projects.html"
+           class="group block glass-effect rounded-2xl p-8 text-center work-card cursor-pointer focus-visible:ring-2 focus-visible:ring-cyan-400 focus:outline-none">
+          <div class="text-6xl mb-4 transition-transform duration-300 group-hover:scale-110">🎬</div>
+          <h3 class="text-xl font-bold mb-2 text-green-300">VIDEO / EDIT</h3>
+          <p class="text-gray-300">Every cut, every frame — shaping emotion through motion.</p>
+        </a>
+      </div>
     </div>
-  </div>
-</section>
-
+  </section>
 
   <!-- FOOTER -->
   <footer class="mt-auto py-12 border-t border-white/10 text-center">
@@ -186,8 +176,8 @@
       );
     }
 
-    // Optional: highlight active nav while scrolling (desktop & mobile)
-    const sections = ['home','about','works'].map(id => document.getElementById(id));
+    // Active link highlighter (FIXED to track #home and #works)
+    const sections = ['home','works'].map(id => document.getElementById(id));
     const links = Array.from(document.querySelectorAll('nav a[href^="#"]'));
     const setActive = () => {
       let current = 'home';
